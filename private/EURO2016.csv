@@ -1,0 +1,51 @@
+20160610 20:00;FRA;ROM;Group A;Group A
+20160611 14:00;ALB;CHE;Group A;Group A
+20160615 17:00;ROM;CHE;Group A;Group A
+20160615 20:00;FRA;ALB;Group A;Group A
+20160619 20:00;ROM;ALB;Group A;Group A
+20160619 20:00;CHE;FRA;Group A;Group A
+20160611 17:00;WAL;SVK;Group B;Group B
+20160611 20:00;ENG;RUS;Group B;Group B
+20160615 14:00;RUS;SVK;Group B;Group B
+20160616 14:00;ENG;WAL;Group B;Group B
+20160620 20:00;RUS;WAL;Group B;Group B
+20160620 20:00;SVK;ENG;Group B;Group B
+20160612 17:00;POL;NIR;Group C;Group C
+20160612 20:00;DEU;UKR;Group C;Group C
+20160616 17:00;UKR;NIR;Group C;Group C
+20160616 20:00;DEU;POL;Group C;Group C
+20160621 17:00;UKR;POL;Group C;Group C
+20160621 17:00;NIR;DEU;Group C;Group C
+20160612 14:00;TUR;HRV;Group D;Group D
+20160613 14:00;ESP;CZE;Group D;Group D
+20160617 17:00;CZE;HRV;Group D;Group D
+20160617 20:00;ESP;TUR;Group D;Group D
+20160621 20:00;CZE;TUR;Group D;Group D
+20160621 20:00;HRV;ESP;Group D;Group D
+20160613 17:00;IRL;SWE;Group E;Group E
+20160613 20:00;BEL;ITA;Group E;Group E
+20160617 14:00;ITA;SWE;Group E;Group E
+20160618 14:00;BEL;IRL;Group E;Group E
+20160622 20:00;ITA;IRL;Group E;Group E
+20160622 20:00;SWE;BEL;Group E;Group E
+20160614 17:00;AUT;HUN;Group F;Group F
+20160614 20:00;PRT;ISL;Group F;Group F
+20160618 17:00;ISL;HUN;Group F;Group F
+20160618 20:00;PRT;AUT;Group F;Group F
+20160622 17:00;ISL;AUT;Group F;Group F
+20160622 17:00;HUN;PRT;Group F;Group F
+20160625 14:00;XYZ;XYZ;Pre-Quarter Finals;PQF1 - Runner-up Group A vs Runner-up C
+20160625 20:00;XYZ;XYZ;Pre-Quarter Finals;PQF2 - Winner D vs Third-place B/E/F
+20160625 17:00;XYZ;XYZ;Pre-Quarter Finals;PQF3 - Winner B vs Third-place A/C/D
+20160626 20:00;XYZ;XYZ;Pre-Quarter Finals;PQF4 - Winner F vs Runner-up E
+20160626 17:00;XYZ;XYZ;Pre-Quarter Finals;PQF5 - Winner C vs Third-place A/B/F
+20160626 14:00;XYZ;XYZ;Pre-Quarter Finals;PQF6 - Winner A vs Third-place C/D/E
+20160627 17:00;XYZ;XYZ;Pre-Quarter Finals;PQF7 - Winner E vs Runner-up D
+20160627 20:00;XYZ;XYZ;Pre-Quarter Finals;PQF8 - Runner-up B vs Runner-up F
+20160630 20:00;XYZ;XYZ;Quarter Finals;QF1 - Winner PQF1 vs Winner PQF2
+20160701 20:00;XYZ;XYZ;Quarter Finals;QF2 - Winner PQF3 vs Winner PQF4
+20160702 20:00;XYZ;XYZ;Quarter Finals;QF3 - Winner PQF5 vs Winner PQF6
+20160703 20:00;XYZ;XYZ;Quarter Finals;QF4 - Winner PQF7 vs Winner PQF8
+20160706 20:00;XYZ;XYZ;Semi Finals;SF1 - Winner QF1 vs Winner QF2
+20160707 20:00;XYZ;XYZ;Semi Finals;SF2 - Winner QF3 vs Winner QF4
+20160710 20:00;XYZ;XYZ;Final;Winner SF1 vs Winner SF2
