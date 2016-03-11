@@ -1,19 +1,19 @@
 Template.predictions.helpers({
     getQuestions: function () {
-        return questions.find({});
-    }
-});
-
-Template.question.helpers({
-    getPrediction: function (id, field) {
         var predictionsMap = predictions.find({}).fetch().reduce(function (map, obj) {
             map[obj._id] = obj;
             return map;
         }, {});
-        if (predictionsMap[id] && field in predictionsMap[id]) {
-            return predictionsMap[id][field];
-        }
-        return "";
+
+        var theQuestions = questions.find({}).fetch();
+        theQuestions.forEach(function (line) {
+            if (line._id in predictionsMap) {
+                line.home_score = predictionsMap[line._id].home_score;
+                line.away_score = predictionsMap[line._id].away_score;
+            }
+        });
+
+        return theQuestions;
     }
 });
 
