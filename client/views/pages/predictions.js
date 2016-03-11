@@ -1,9 +1,19 @@
 Template.predictions.helpers({
     getQuestions: function () {
         return questions.find({});
-    },
-    getPredictions: function () {
-        return predictions.find({});
+    }
+});
+
+Template.question.helpers({
+    getPrediction: function (id, field) {
+        var predictionsMap = predictions.find({}).fetch().reduce(function (map, obj) {
+            map[obj._id] = obj;
+            return map;
+        }, {});
+        if (predictionsMap[id] && field in predictionsMap[id]) {
+            return predictionsMap[id][field];
+        }
+        return "";
     }
 });
 
@@ -25,7 +35,6 @@ var inputUpdateScore = function (id, name, value) {
         _id: id
     });
     if (question) {
-        console.info(id + ' ' + name + ' ' + value);
         var prediction = predictions.findOne({
             _id: id
         });
@@ -46,7 +55,5 @@ var inputUpdateScore = function (id, name, value) {
                 obj
             );
         }
-
-        console.log("saved!");
     }
 }
