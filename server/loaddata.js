@@ -20,12 +20,14 @@ Meteor.startup(function () {
     euro2016Contents.forEach(function (entry) {
         var fields = entry.split(';');
 
+        var home_team_participant_id = 'CTRY_' + fields[2];
         var home_team_obj = participants.findOne({
-            _id: 'CTRY_' + fields[2]
+            _id: home_team_participant_id
         });
 
+        var away_team_participant_id = 'CTRY_' + fields[3];
         var away_team_obj = participants.findOne({
-            _id: 'CTRY_' + fields[3]
+            _id: away_team_participant_id
         });
 
         if (home_team_obj && away_team_obj) {
@@ -41,10 +43,10 @@ Meteor.startup(function () {
             });
         } else {
             if (!home_team_obj) {
-                console.error('could not find team: ' + fields[1]);
+                console.error('could not find participant: ' + home_team_participant_id);
             }
             if (!away_team_obj) {
-                console.error('could not find team: ' + fields[2]);
+                console.error('could not find participant: ' + away_team_participant_id);
             }
         }
     });

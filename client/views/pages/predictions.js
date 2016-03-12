@@ -31,29 +31,7 @@ Template.predictions.events({
 });
 
 var inputUpdateScore = function (id, name, value) {
-    var question = questions.findOne({
-        _id: id
+    Meteor.call('upsertPrediction', id, name, value, function () {
+        console.info('done!!!');
     });
-    if (question) {
-        var prediction = predictions.findOne({
-            _id: id
-        });
-
-        var obj = {};
-        obj[name] = value;
-        obj['date'] = new Date();
-        if (prediction) {
-            predictions.update({
-                _id: id
-            }, {
-                $set: obj
-
-            });
-        } else {
-            obj['_id'] = id;
-            predictions.insert(
-                obj
-            );
-        }
-    }
 }
