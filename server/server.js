@@ -6,6 +6,8 @@ Meteor.methods({
         obj['date'] = new Date();
         predictions.upsert({
             _id: id
-        }, obj);
+        }, {
+            $set: obj
+        });
     }
 });
