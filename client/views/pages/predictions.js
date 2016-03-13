@@ -23,18 +23,18 @@ Template.predictions.helpers({
 Template.predictions.events({
     "focusout": function (event) {
         if (event.target.value) {
-            inputUpdateScore(event.target.id, event.target.name, event.target.value);
+            inputUpsertPrediction(event.target.id, event.target.name, event.target.value);
         }
     },
     "keyup": function (event) {
         if (event.which == 13 && event.target.value) {
-            inputUpdateScore(event.target.id, event.target.name, event.target.value);
+            inputUpsertPrediction(event.target.id, event.target.name, event.target.value);
         }
     }
 });
 
-var inputUpdateScore = function (id, name, value) {
+var inputUpsertPrediction = function (id, name, value) {
     Meteor.call('upsertPrediction', id, name, value, function () {
-        console.info('update the GUI here!!!');
+        console.info('update the prediction GUI here!!!');
     });
 }

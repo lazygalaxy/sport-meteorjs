@@ -12,11 +12,13 @@ Router.route('/standings', function () {
     this.render('standings');
 });
 
-/*
-Router.route('/admin', function () {
-    this.render('admin');
+Router.route('/resultAdmin', function () {
+    this.render('resultAdmin');
 });
-*/
+
+Router.route('/userAdmin', function () {
+    this.render('userAdmin');
+});
 
 Router.route('/', function () {
     Router.go('predictions');
