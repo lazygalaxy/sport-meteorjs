@@ -2,7 +2,7 @@ Template.resultAdmin.helpers({
     getAnswers: function () {
         var theQuestions = questions.find({}).fetch();
         if (Meteor.user()) {
-            var answersMap = predictions.find({
+            var answersMap = answers.find({
                 user_id: Meteor.user()._id
             }).fetch().reduce(function (map, obj) {
                 map[obj.question_id] = obj;
