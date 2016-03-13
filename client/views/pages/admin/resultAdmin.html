@@ -4,13 +4,13 @@
     <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row" style="text-align:center;">
             <div class="col-lg-12">
-                {{#each getAnswers}} {{>answerRow}} {{/each}}
+                {{#each getAnswerItems}} {{>answerItemRow}} {{/each}}
             </div>
         </div>
     </div>
 </template>
 
-<template name="answerRow">
+<template name="answerItemRow">
     <div class="row">
         <div class="col-xs-4"><img src="{{this.home_team.image}}" style="max-width: 100%;float: right;" class="img-circle" />{{this.home_team.label}}</div>
         <div class="col-xs-4">

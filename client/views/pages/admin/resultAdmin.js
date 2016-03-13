@@ -1,40 +1,48 @@
 Template.resultAdmin.helpers({
-    getAnswers: function () {
-        var theQuestions = questions.find({}).fetch();
+    getAnswerItems: function () {
+        var matches = Matches.find({}, {
+            sort: {
+                date: -1
+            }
+        }).fetch();
         if (Meteor.user()) {
-            var answersMap = answers.find({
-                user_id: Meteor.user()._id
+            var resultsMap = Results.find({
+                userId: Meteor.user()._id
             }).fetch().reduce(function (map, obj) {
-                map[obj.question_id] = obj;
+                map[obj.itemId] = obj;
                 return map;
             }, {});
 
-            theQuestions.forEach(function (question) {
-                if (question._id in answersMap) {
-                    question.home_score = answersMap[question._id].home_score;
-                    question.away_score = answersMap[question._id].away_score;
+            matches.forEach(function (match) {
+                if (match._id in resultsMap) {
+                    match.homeScore = resultsMap[match._id].homeScore;
+                    match.awayScore = resultsMap[match._id].awayScore;
                 }
             });
         }
-        return theQuestions;
+        return matches;
     }
 });
 
 Template.resultAdmin.events({
     "focusout": function (event) {
         if (event.target.value) {
-            inputUpsertAnswer(event.target.id, event.target.name, event.target.value);
+            inputUpsertResult(event.target.id, event.target.name, event.target.value);
         }
     },
     "keyup": function (event) {
         if (event.which == 13 && event.target.value) {
-            inputUpsertAnswer(event.target.id, event.target.name, event.target.value);
+            inputUpsertResult(event.target.id, event.target.name, event.target.value);
         }
     }
 });
 
-var inputUpsertAnswer = function (id, name, value) {
-    Meteor.call('upsertAnswer', id, name, value, function () {
-        console.info('update the admin GUI here!!!');
+var inputUpsertResult = function (id, name, value) {
+    Meteor.call('upsertResult', id, name, value, function (error, result) {
+        if (error) {
+            console.error(error);
+        } else {
+            console.info("updtae the results GUI here!!!");
+        }
     });
 }

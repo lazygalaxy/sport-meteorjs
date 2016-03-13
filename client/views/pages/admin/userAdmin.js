@@ -1,6 +1,6 @@
 Template.userAdmin.helpers({
     getUsers: function () {
-        var users = predictions.find({});
+        var users = Predictions.find({});
         return users;
         /*
         var theQuestions = questions.find({}).fetch();
