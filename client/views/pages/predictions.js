@@ -16,7 +16,6 @@ Template.predictions.helpers({
                 }
             });
         }
-        console.log(theQuestions);
         return theQuestions;
     }
 });
