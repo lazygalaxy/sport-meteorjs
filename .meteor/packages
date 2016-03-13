@@ -27,3 +27,5 @@ random
 ejson
 spacebars
 check
+accounts-password
+accounts-ui
