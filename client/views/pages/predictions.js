@@ -1,22 +1,34 @@
 Template.predictions.helpers({
-    getQuestions: function () {
-        var theQuestions = questions.find({}).fetch();
+    getPredictionItems: function () {
+        //TODO: get the matches for the competition
+        var matches = Matches.find({}, {
+            sort: {
+                date: 1
+            }
+        }).fetch();
         if (Meteor.user()) {
-            var predictionsMap = predictions.find({
-                user_id: Meteor.user()._id
+            //TODO: get the user predictions
+            var predictionsMap = Predictions.find({
+                userId: Meteor.user()._id
             }).fetch().reduce(function (map, obj) {
-                map[obj.question_id] = obj;
+                map[obj.itemId] = obj;
                 return map;
             }, {});
 
-            theQuestions.forEach(function (question) {
-                if (question._id in predictionsMap) {
-                    question.home_score = predictionsMap[question._id].home_score;
-                    question.away_score = predictionsMap[question._id].away_score;
+            matches.forEach(function (match) {
+                if (match._id in predictionsMap) {
+                    match.homeScore = predictionsMap[match._id].homeScore;
+                    match.awayScore = predictionsMap[match._id].awayScore;
                 }
             });
         }
-        return theQuestions;
+        return matches;
+    }
+});
+
+Template.predictionItemRow.helpers({
+    prettyDate: function (date) {
+        return moment(date);
     }
 });
 
@@ -34,7 +46,11 @@ Template.predictions.events({
 });
 
 var inputUpsertPrediction = function (id, name, value) {
-    Meteor.call('upsertPrediction', id, name, value, function () {
-        console.info('update the prediction GUI here!!!');
+    Meteor.call('upsertPrediction', id, name, value, function (error, result) {
+        if (error) {
+            console.error(error);
+        } else {
+            console.info("updtae the predictions GUI here!!!");
+        }
     });
 }

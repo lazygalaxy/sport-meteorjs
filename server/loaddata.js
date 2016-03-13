@@ -1,52 +1,52 @@
 Meteor.startup(function () {
-    var participantContents = Assets.getText('countries.csv').split(/\r\n|\n/);
-    console.log('updating countries: ' + participantContents.length);
-    participantContents.forEach(function (entry) {
-        var fields = entry.split(',');
-        participants.upsert({
+    var countryContents = Assets.getText('countries.csv').split(/\r\n|\n/);
+    console.log('updating countries: ' + countryContents.length);
+    countryContents.forEach(function (entry) {
+        var fields = entry.split(';');
+        Actors.upsert({
             _id: 'CTRY_' + fields[2],
         }, {
-            type: 'COUNTRY',
+            type: 'CTRY',
             label: fields[0],
             iso2: fields[1],
             iso3: fields[2],
-            iso_code: fields[3],
+            isoCode: fields[3],
             image: 'flags/' + fields[2] + '.png'
         });
     });
 
-    var euro2016Contents = Assets.getText('EURO2016.csv').split(/\r\n|\n/);
-    console.log('updating euro2016 questions: ' + euro2016Contents.length);
+    var euro2016Contents = Assets.getText('EURO2016_matches.csv').split(/\r\n|\n/);
+    console.log('updating euro2016 matches: ' + euro2016Contents.length);
     euro2016Contents.forEach(function (entry) {
         var fields = entry.split(';');
 
-        var home_team_participant_id = 'CTRY_' + fields[2];
-        var home_team_obj = participants.findOne({
-            _id: home_team_participant_id
+        var homeTeamId = 'CTRY_' + fields[2];
+        var homeTeamObj = Actors.findOne({
+            _id: homeTeamId
         });
 
-        var away_team_participant_id = 'CTRY_' + fields[3];
-        var away_team_obj = participants.findOne({
-            _id: away_team_participant_id
+        var awayTeamId = 'CTRY_' + fields[3];
+        var awayTeamObj = Actors.findOne({
+            _id: awayTeamId
         });
 
-        if (home_team_obj && away_team_obj) {
-            questions.upsert({
+        if (homeTeamObj && awayTeamObj) {
+            Matches.upsert({
                 _id: fields[0]
             }, {
                 competition: 'EURO2016',
-                date: fields[1],
-                home_team: home_team_obj,
-                away_team: away_team_obj,
+                date: moment(fields[1] + ' +0000', "YYYYMMDD HH:mm Z").toDate(),
+                homeTeam: homeTeamObj,
+                awayTeam: awayTeamObj,
                 round: fields[4],
                 description: fields[5],
             });
         } else {
-            if (!home_team_obj) {
-                console.error('could not find participant: ' + home_team_participant_id);
+            if (!homeTeamObj) {
+                console.error('could not find team: ' + homeTeamId);
             }
-            if (!away_team_obj) {
-                console.error('could not find participant: ' + away_team_participant_id);
+            if (!awayTeamObj) {
+                console.error('could not find team: ' + awayTeamId);
             }
         }
     });

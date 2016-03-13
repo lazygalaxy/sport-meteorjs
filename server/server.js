@@ -1,28 +1,29 @@
 //methods
 Meteor.methods({
-    'upsertPrediction': function (question_id, name, value) {
+    'upsertPrediction': function (itemId, name, value) {
+
         if (Meteor.user()) {
             var obj = {};
             obj[name] = value;
             obj['date'] = new Date();
-            obj['question_id'] = question_id;
-            obj['user_id'] = Meteor.user()._id;
-            predictions.upsert({
-                _id: question_id + '_' + Meteor.user()._id
+            obj['itemId'] = itemId;
+            obj['userId'] = Meteor.user()._id;
+            Predictions.upsert({
+                _id: itemId + '_' + Meteor.user()._id
             }, {
                 $set: obj
             });
         }
     },
-    'upsertAnswer': function (question_id, name, value) {
+    'upsertResult': function (itemId, name, value) {
         if (Meteor.user()) {
             var obj = {};
             obj[name] = value;
             obj['date'] = new Date();
-            obj['question_id'] = question_id;
-            obj['user_id'] = Meteor.user()._id;
-            answers.upsert({
-                _id: question_id + '_' + Meteor.user()._id
+            obj['itemId'] = itemId;
+            obj['userId'] = Meteor.user()._id;
+            Results.upsert({
+                _id: itemId + '_' + Meteor.user()._id
             }, {
                 $set: obj
             });

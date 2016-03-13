@@ -1,9 +1,11 @@
-participants = new Meteor.Collection('participants');
-questions = new Meteor.Collection('questions');
-predictions = new Meteor.Collection('predictions');
-answers = new Meteor.Collection('answers');
+UserInfo = new Mongo.Collection('userinfo');
+Actors = new Mongo.Collection('actors');
+Matches = new Mongo.Collection('matches');
+Questions = new Mongo.Collection('questions');
+Results = new Mongo.Collection('results');
+Predictions = new Mongo.Collection('predictions');
 
-//predictions.allow({
+//Predictions.allow({
 //    update: function (userId, doc) {
 //        return true;
 //    },
