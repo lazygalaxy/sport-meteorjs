@@ -32,9 +32,7 @@
         <td>{{username}}</td>
         <td>{{emails.[0].address}}</td>
         <td>
-            {{#if paid}}
-            <input id={{_id}} name="paid" type="checkbox" checked=""> {{else}}
-            <input id={{_id}} name="paid" type="checkbox"> {{/if}}
+            <input id={{_id}} name="paid" type="checkbox" checked="{{paid}}">&nbsp;{{#if paid}}Yes{{else}}No{{/if}}
         </td>
     </tr>
 </template>
