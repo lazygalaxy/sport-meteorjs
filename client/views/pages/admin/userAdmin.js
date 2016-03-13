@@ -1,31 +1,29 @@
+Template.userRow.events({
+    "change": function (event) {
+        inputUpsertUserInfo(event.target.id, event.target.name, event.target.checked);
+    }
+});
+
 Template.userAdmin.helpers({
     getUsers: function () {
-        var users = Predictions.find({});
-        return users;
-        /*
-        var theQuestions = questions.find({}).fetch();
-        if (Meteor.user()) {
-            var predictionsMap = predictions.find({
-                user_id: Meteor.user()._id
-            }).fetch().reduce(function (map, obj) {
-                map[obj.question_id] = obj;
-                return map;
-            }, {});
+        var users = Meteor.users.find({}).fetch();
 
-            theQuestions.forEach(function (question) {
-                if (question._id in predictionsMap) {
-                    question.home_score = predictionsMap[question._id].home_score;
-                    question.away_score = predictionsMap[question._id].away_score;
-                }
-            });
-        }
-        return theQuestions;
-        */
+        var userInfoMap = UserInfo.find().fetch().reduce(function (map, obj) {
+            map[obj._id] = obj;
+            return map;
+        }, {});
+
+        users.forEach(function (user) {
+            if (user._id in userInfoMap) {
+                user.paid = userInfoMap[user._id].paid;
+            }
+        });
+
+        return users;
     }
 });
 
 Template.userAdmin.rendered = function () {
-
     // Initialize dataTables
     $('.dataTables-example').DataTable({
         dom: '<"html5buttons"B>lTfgitp',
@@ -61,3 +59,13 @@ Template.userAdmin.rendered = function () {
     });
 
 };
+
+var inputUpsertUserInfo = function (userId, name, value) {
+    Meteor.call('upsertUserInfo', userId, name, value, function (error, result) {
+        if (error) {
+            console.error(error);
+        } else {
+            console.info("update the user GUI here!!!");
+        }
+    });
+}

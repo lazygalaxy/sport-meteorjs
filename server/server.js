@@ -1,3 +1,9 @@
+Meteor.startup(function () {
+    Meteor.publish("allUsers", function () {
+        return Meteor.users.find();
+    });
+});
+
 //methods
 Meteor.methods({
     'upsertPrediction': function (itemId, name, value) {
@@ -28,5 +34,14 @@ Meteor.methods({
                 $set: obj
             });
         }
+    },
+    'upsertUserInfo': function (userId, name, value) {
+        var obj = {};
+        obj[name] = value;
+        UserInfo.upsert({
+            _id: userId
+        }, {
+            $set: obj
+        });
     }
 });

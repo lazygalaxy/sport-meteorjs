@@ -10,9 +10,9 @@
                             <table class="table table-striped table-bordered table-hover dataTables-example">
                                 <thead>
                                     <tr>
-                                        <th>username</th>
-                                        <th>e-mail</th>
-                                        <th>money</th>
+                                        <th>Username</th>
+                                        <th>E-Mail</th>
+                                        <th>Paid</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -29,8 +29,12 @@
 
 <template name="userRow">
     <tr>
-        <td>4</td>
-        <td>4</td>
-        <td>X</td>
+        <td>{{username}}</td>
+        <td>{{emails.[0].address}}</td>
+        <td>
+            {{#if paid}}
+            <input id={{_id}} name="paid" type="checkbox" checked=""> {{else}}
+            <input id={{_id}} name="paid" type="checkbox"> {{/if}}
+        </td>
     </tr>
 </template>
