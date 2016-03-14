@@ -2,35 +2,42 @@ Meteor.startup(function () {
     const EURO2016 = 'EURO2016';
     const EURO2016TEST = 'EURO2016TEST';
 
+    var vangosUser = Accounts.findUserByEmail('vangos@test.com');
+    var andreasUser = Accounts.findUserByEmail('andreas@test.com');
+
     Groups.upsert({
         _id: 'GLOBAL',
     }, {
         label: 'Global',
-        image: 'logos/gome.png',
+        image: 'logos/GOME.png',
         domains: [],
-        admins: ['vangos@test.com']
+        admins: []
     });
 
-    Groups.upsert({
-        _id: 'AXPO',
-    }, {
-        label: 'Axpo Group',
-        image: 'logos/axpo.png',
-        domains: ['test.com'],
-        admins: ['andreas@test.com']
-    });
+    if (andreasUser && vangosUser) {
+        Groups.upsert({
+            _id: 'AXPO',
+        }, {
+            label: 'Axpo Group',
+            image: 'logos/AXPO.png',
+            domains: ['test.com'],
+            admins: [andreasUser._id, vangosUser._id]
+        });
 
-    Competitions.upsert({
-        _id: EURO2016,
-    }, {
-        image: 'logos/euro2016.png'
-    });
+        Competitions.upsert({
+            _id: EURO2016,
+        }, {
+            image: 'logos/EURO2016.png',
+            admins: [andreasUser._id, vangosUser._id]
+        });
 
-    Competitions.upsert({
-        _id: EURO2016TEST,
-    }, {
-        image: 'logos/euro2016Test.png'
-    });
+        Competitions.upsert({
+            _id: EURO2016TEST,
+        }, {
+            image: 'logos/EURO2016TEST.png',
+            admins: [andreasUser._id, vangosUser._id]
+        });
+    }
 
     var countryContents = Assets.getText('countries.csv').split(/\r\n|\n/);
     console.log('updating countries: ' + countryContents.length);
@@ -53,7 +60,7 @@ Meteor.startup(function () {
 });
 
 var loadMatches = function (competitionLabel) {
-    var euro2016MatchContents = Assets.getText('EURO2016_matches.csv').split(/\r\n|\n/);
+    var euro2016MatchContents = Assets.getText(competitionLabel + '_matches.csv').split(/\r\n|\n/);
     console.log('updating ' + competitionLabel + ' matches: ' + euro2016MatchContents.length);
     euro2016MatchContents.forEach(function (entry) {
         var fields = entry.split(';');
@@ -70,7 +77,7 @@ var loadMatches = function (competitionLabel) {
 
         if (homeTeamObj && awayTeamObj) {
             Matches.upsert({
-                _id: fields[0]
+                _id: competitionLabel + fields[0]
             }, {
                 competition: competitionLabel,
                 date: moment(fields[1] + ' +0000', "YYYYMMDD HH:mm Z").toDate(),
@@ -89,12 +96,12 @@ var loadMatches = function (competitionLabel) {
         }
     });
 
-    var euro2016QuestionContents = Assets.getText('EURO2016_questions.csv').split(/\r\n|\n/);
-    console.log('updating euro2016 questions: ' + euro2016QuestionContents.length);
+    var euro2016QuestionContents = Assets.getText(competitionLabel + '_questions.csv').split(/\r\n|\n/);
+    console.log('updating ' + competitionLabel + ' questions: ' + euro2016QuestionContents.length);
     euro2016QuestionContents.forEach(function (entry) {
         var fields = entry.split(';');
         Questions.upsert({
-            _id: fields[0]
+            _id: competitionLabel + fields[0]
         }, {
             competition: competitionLabel,
             date: moment(fields[1] + ' +0000', "YYYYMMDD HH:mm Z").toDate(),

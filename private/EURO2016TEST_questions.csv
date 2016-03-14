@@ -1,0 +1,4 @@
+_Q1;20160325 19:00;Which team will win the EURO2016 competition?;10;A,B,C,D,E
+_Q2;20160325 19:00;Which team will score the first goal?;5;A,B,C,D,E
+_Q3;20160325 19:00;How many goal in total will be scored?;5;INTEGER
+_Q4;20160325 19:00;How many red cards will be shown?;5;INTEGER
