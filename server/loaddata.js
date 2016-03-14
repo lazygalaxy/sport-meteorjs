@@ -1,4 +1,37 @@
 Meteor.startup(function () {
+    const EURO2016 = 'EURO2016';
+    const EURO2016TEST = 'EURO2016TEST';
+
+    Groups.upsert({
+        _id: 'GLOBAL',
+    }, {
+        label: 'Global',
+        image: 'logos/gome.png',
+        domains: [],
+        admins: ['vangos@test.com']
+    });
+
+    Groups.upsert({
+        _id: 'AXPO',
+    }, {
+        label: 'Axpo Group',
+        image: 'logos/axpo.png',
+        domains: ['test.com'],
+        admins: ['andreas@test.com']
+    });
+
+    Competitions.upsert({
+        _id: EURO2016,
+    }, {
+        image: 'logos/euro2016.png'
+    });
+
+    Competitions.upsert({
+        _id: EURO2016TEST,
+    }, {
+        image: 'logos/euro2016Test.png'
+    });
+
     var countryContents = Assets.getText('countries.csv').split(/\r\n|\n/);
     console.log('updating countries: ' + countryContents.length);
     countryContents.forEach(function (entry) {
@@ -15,8 +48,13 @@ Meteor.startup(function () {
         });
     });
 
+    loadMatches(EURO2016);
+    loadMatches(EURO2016TEST);
+});
+
+var loadMatches = function (competitionLabel) {
     var euro2016MatchContents = Assets.getText('EURO2016_matches.csv').split(/\r\n|\n/);
-    console.log('updating euro2016 matches: ' + euro2016MatchContents.length);
+    console.log('updating ' + competitionLabel + ' matches: ' + euro2016MatchContents.length);
     euro2016MatchContents.forEach(function (entry) {
         var fields = entry.split(';');
 
@@ -34,7 +72,7 @@ Meteor.startup(function () {
             Matches.upsert({
                 _id: fields[0]
             }, {
-                competition: 'EURO2016',
+                competition: competitionLabel,
                 date: moment(fields[1] + ' +0000', "YYYYMMDD HH:mm Z").toDate(),
                 homeTeam: homeTeamObj,
                 awayTeam: awayTeamObj,
@@ -58,11 +96,11 @@ Meteor.startup(function () {
         Questions.upsert({
             _id: fields[0]
         }, {
-            competition: 'EURO2016',
+            competition: competitionLabel,
             date: moment(fields[1] + ' +0000', "YYYYMMDD HH:mm Z").toDate(),
             description: fields[2],
             points: fields[3],
             options: fields[4]
         });
     });
-});
+}
