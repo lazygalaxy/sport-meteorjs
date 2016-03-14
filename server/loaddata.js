@@ -15,9 +15,9 @@ Meteor.startup(function () {
         });
     });
 
-    var euro2016Contents = Assets.getText('EURO2016_matches.csv').split(/\r\n|\n/);
-    console.log('updating euro2016 matches: ' + euro2016Contents.length);
-    euro2016Contents.forEach(function (entry) {
+    var euro2016MatchContents = Assets.getText('EURO2016_matches.csv').split(/\r\n|\n/);
+    console.log('updating euro2016 matches: ' + euro2016MatchContents.length);
+    euro2016MatchContents.forEach(function (entry) {
         var fields = entry.split(';');
 
         var homeTeamId = 'CTRY_' + fields[2];
@@ -49,5 +49,20 @@ Meteor.startup(function () {
                 console.error('could not find team: ' + awayTeamId);
             }
         }
+    });
+
+    var euro2016QuestionContents = Assets.getText('EURO2016_questions.csv').split(/\r\n|\n/);
+    console.log('updating euro2016 questions: ' + euro2016QuestionContents.length);
+    euro2016QuestionContents.forEach(function (entry) {
+        var fields = entry.split(';');
+        Questions.upsert({
+            _id: fields[0]
+        }, {
+            competition: 'EURO2016',
+            date: moment(fields[1] + ' +0000', "YYYYMMDD HH:mm Z").toDate(),
+            description: fields[2],
+            points: fields[3],
+            options: fields[4]
+        });
     });
 });
