@@ -5,28 +5,18 @@ Template.userRow.events({
 });
 
 Template.userAdmin.helpers({
-    getUsers: function () {
-        //        var groups = Groups.find({
-        //            admins: Meteor.userId()
-        //        }).fetch();
-        //
-        //        var users = [];
-        //        groups.forEach(function (group) {
-        //            var someUsers = Meteor.users.find({}).fetch();
-        //        });
-        var users = CustomUsers.find({});
+    getUsers: function (groupId) {
+        var group = Groups.findOne({
+            _id: groupId
+        });
 
-        //        var userInfoMap = UserInfo.find().fetch().reduce(function (map, obj) {
-        //            map[obj._id] = obj;
-        //            return map;
-        //        }, {});
-        //
-        //        users.forEach(function (user) {
-        //            if (user._id in userInfoMap) {
-        //                user.paid = userInfoMap[user._id].paid;
+        //        var users = CustomUsers.find({
+        //            _id: {
+        //                $in: group.users
         //            }
         //        });
-        return users;
+
+        return CustomUsers.find({});
     }
 });
 

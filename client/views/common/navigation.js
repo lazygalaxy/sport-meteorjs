@@ -1,6 +1,4 @@
-Template.navigation.rendered = function(){
-
+Template.navigation.rendered = function () {
     // Initialize metisMenu
     $('#side-menu').metisMenu();
-
 };

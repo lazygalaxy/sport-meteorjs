@@ -8,8 +8,8 @@ Meteor.startup(function () {
             _id: vangosUser._id
         }, {
             $set: {
-                AXPOGroupAdmin: true,
-                EURO2016CompetitionAdmin: true
+                groupAdmin: ['AXPO'],
+                competitionAdmin: ['EURO2016']
             }
         });
     }
@@ -20,12 +20,11 @@ Meteor.startup(function () {
             _id: andreasUser._id
         }, {
             $set: {
-                AXPOGroupAdmin: true,
-                EURO2016CompetitionAdmin: true
+                groupAdmin: ['AXPO'],
+                competitionAdmin: ['EURO2016,EURO2016TEST']
             }
         });
     }
-
 
     Groups.upsert({
         _id: 'GLOBAL',
@@ -33,8 +32,7 @@ Meteor.startup(function () {
         label: 'Global',
         image: 'logos/GOME.png',
         domains: [],
-        admins: [],
-        users: []
+        admins: []
     });
 
     if (andreasUser && vangosUser) {
@@ -44,8 +42,7 @@ Meteor.startup(function () {
             label: 'Axpo Group AG',
             image: 'logos/AXPO.png',
             domains: ['test.com'],
-            admins: [andreasUser._id, vangosUser._id],
-            users: []
+            admins: [andreasUser._id, vangosUser._id]
         });
 
         Competitions.upsert({
@@ -62,6 +59,9 @@ Meteor.startup(function () {
             admins: [andreasUser._id, vangosUser._id]
         });
     }
+
+
+
 
     var countryContents = Assets.getText('countries.csv').split(/\r\n|\n/);
     console.log('updating countries: ' + countryContents.length);
