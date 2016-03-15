@@ -2,6 +2,15 @@
     {{> pageHeading title='Users Admin' }}
 
     <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="btn-group">
+            <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">{{getSelectedGroup}} <span class="caret"></span></button>
+            <ul class="dropdown-menu group-selection">
+                {{#each getCurrentUser.groupAdmin}}
+                <li><a href="#">{{this}}</a></li>
+                {{/each}}
+            </ul>
+        </div>
+
         <div class="row">
             <div class="col-lg-12">
                 <div class="ibox float-e-margins">
@@ -16,7 +25,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {{#each getUsers 'AXPO'}} {{>userRow}} {{/each}}
+                                    {{#each getUsers}} {{>userRow}} {{/each}}
                                 </tbody>
                             </table>
                         </div>

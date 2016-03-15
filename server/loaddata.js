@@ -8,8 +8,8 @@ Meteor.startup(function () {
             _id: vangosUser._id
         }, {
             $set: {
-                groupAdmin: ['AXPO'],
-                competitionAdmin: ['EURO2016']
+                groupAdmin: ['AXPO', 'VONTOBEL'],
+                competitionAdmin: [EURO2016]
             }
         });
     }
@@ -21,7 +21,7 @@ Meteor.startup(function () {
         }, {
             $set: {
                 groupAdmin: ['AXPO'],
-                competitionAdmin: ['EURO2016,EURO2016TEST']
+                competitionAdmin: [EURO2016, EURO2016TEST]
             }
         });
     }

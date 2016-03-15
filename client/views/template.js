@@ -1,7 +1,9 @@
-Template.registerHelper('getCurrentUser', function () {
-    var user = CustomUsers.findOne({
+getCurrentUser = function () {
+    return CustomUsers.findOne({
         _id: Meteor.userId()
     });
-    console.log(user);
-    return user;
+}
+
+Template.registerHelper('getCurrentUser', function () {
+    return getCurrentUser();
 });

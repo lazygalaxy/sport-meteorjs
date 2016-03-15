@@ -1,7 +1,6 @@
 Router.configure({
     layoutTemplate: 'mainLayout',
     notFoundTemplate: 'notFound'
-
 });
 
 Router.route('/predictions', function () {
