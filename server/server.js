@@ -1,4 +1,5 @@
 Meteor.startup(function () {
+    //publishers
     Meteor.publish("customusers", function () {
         var self = this;
         var handler = UserInfo.find({}).observeChanges({

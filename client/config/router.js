@@ -15,8 +15,14 @@ Router.route('/resultAdmin', function () {
     this.render('resultAdmin');
 });
 
-Router.route('/userAdmin', function () {
-    this.render('userAdmin');
+Router.route('/userAdmin', {
+    waitOn: function () {
+        return Meteor.subscribe("customusers");
+    },
+    action: function () {
+        Session.set('selectedGroup', getCurrentUser().groupAdmin[0]);
+        this.render('userAdmin');
+    }
 });
 
 Router.route('/', function () {

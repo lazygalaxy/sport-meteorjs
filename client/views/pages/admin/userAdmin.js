@@ -1,13 +1,11 @@
 Template.userRow.events({
     "change": function (event) {
-        console.log("change triggered");
         inputUpsertUser(event.target.id, event.target.name, event.target.checked);
     }
 });
 
 Template.userAdmin.events({
     "click .group-selection li a": function (event) {
-        console.log(event.target.text);
         Session.set('selectedGroup', event.target.text);
     }
 });
@@ -27,9 +25,6 @@ Template.userAdmin.helpers({
         return CustomUsers.find({});
     },
     getSelectedGroup: function () {
-        if (~Session.get('selectedGroup')) {
-            Session.set('selectedGroup', getCurrentUser().groupAdmin[0]);
-        }
         return Session.get('selectedGroup');
     }
 });
