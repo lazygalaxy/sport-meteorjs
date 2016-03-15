@@ -1,11 +1,20 @@
 Template.userRow.events({
     "change": function (event) {
-        inputUpsertUserInfo(event.target.id, event.target.name, event.target.checked);
+        inputUpsertUser(event.target.id, event.target.name, event.target.checked);
     }
 });
 
 Template.userAdmin.helpers({
     getUsers: function () {
+        var groups = Groups.find({
+            admins: Meteor.userId()
+        }).fetch();
+
+        var users = [];
+        groups.forEach(function (group) {
+            var someUsers = Meteor.users.find({}).fetch();
+        });
+
         var users = Meteor.users.find({}).fetch();
 
         var userInfoMap = UserInfo.find().fetch().reduce(function (map, obj) {
@@ -60,8 +69,8 @@ Template.userAdmin.rendered = function () {
 
 };
 
-var inputUpsertUserInfo = function (userId, name, value) {
-    Meteor.call('upsertUserInfo', userId, name, value, function (error, result) {
+var inputUpsertUser = function (userId, name, value) {
+    Meteor.call('upsertUser', userId, name, value, function (error, result) {
         if (error) {
             console.error(error);
         } else {
