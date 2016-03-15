@@ -1,21 +1,34 @@
 Meteor.startup(function () {
-    Meteor.publish("allUsers", function () {
-        var users = Meteor.users.find({});
+    Meteor.publish("customusers", function () {
+        var self = this;
+        var handler = UserInfo.find({}).observeChanges({
+            added: function (id, doc) {
+                self.added('customusers', id, doc);
+            },
+            changed: function (id, doc) {
+                self.changed('customusers', id, doc);
+            },
+            removed: function (id) {
+                self.removed('customusers', id);
+            }
+        });
 
-        //        var userInfoMap = UserInfo.find({}).fetch().reduce(function (map, obj) {
-        //            map[obj._id] = obj;
-        //            return map;
-        //        }, {});
-        //
-        //        users.forEach(function (user) {
-        //            if (user._id in userInfoMap) {
-        //                for (var attrname in userInfoMap[user._id]) {
-        //                    user[attrname] = userInfoMap[user._id][attrname];
-        //                }
-        //            }
-        //        });
+        var userInfoMap = UserInfo.find({}).fetch().reduce(function (map, obj) {
+            map[obj._id] = obj;
+            return map;
+        }, {});
+        Meteor.users.find({}).forEach(function (user) {
+            for (var attrname in userInfoMap[user._id]) {
+                user[attrname] = userInfoMap[user._id][attrname];
+            }
+            self.added('customusers', user._id, user);
+        });
 
-        return users;
+        self.ready();
+
+        self.onStop(function () {
+            if (handler) handler.stop();
+        });
     });
 
     //methods

@@ -1,5 +1,8 @@
+//client mongodbs
+CustomUsers = new Mongo.Collection('customusers');
+
 //subscriptions
-Meteor.subscribe("allUsers");
+Meteor.subscribe("customusers");
 
 //accounts
 Accounts.ui.config({
