@@ -11,18 +11,16 @@ Template.userAdmin.events({
 });
 
 Template.userAdmin.helpers({
-    getUsers: function (groupId) {
+    getUsers: function () {
         var group = Groups.findOne({
-            _id: groupId
+            _id: Session.get('selectedGroup')
         });
 
-        //        var users = CustomUsers.find({
-        //            _id: {
-        //                $in: group.users
-        //            }
-        //        });
-
-        return CustomUsers.find({});
+        return CustomUsers.find({
+            _id: {
+                $in: group.users
+            }
+        });
     },
     getSelectedGroup: function () {
         return Session.get('selectedGroup');

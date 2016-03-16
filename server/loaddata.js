@@ -32,7 +32,8 @@ Meteor.startup(function () {
         label: 'Global',
         image: 'logos/GOME.png',
         domains: [],
-        admins: []
+        admins: [],
+        users: []
     });
 
     if (andreasUser && vangosUser) {
@@ -42,8 +43,20 @@ Meteor.startup(function () {
             label: 'Axpo Group AG',
             image: 'logos/AXPO.png',
             domains: ['test.com'],
-            admins: [andreasUser._id, vangosUser._id]
+            admins: [andreasUser._id, vangosUser._id],
+            users: [andreasUser._id]
         });
+
+        Groups.upsert({
+            _id: 'VONTOBEL',
+        }, {
+            label: 'Bank Vontobel',
+            image: 'logos/VONTOBEL.png',
+            domains: ['test2.com'],
+            admins: [vangosUser._id],
+            users: []
+        });
+
 
         Competitions.upsert({
             _id: EURO2016,
