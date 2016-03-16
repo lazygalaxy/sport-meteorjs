@@ -11,8 +11,16 @@ Router.route('/standings', function () {
     this.render('standings');
 });
 
-Router.route('/resultAdmin', function () {
-    this.render('resultAdmin');
+Router.route('/resultAdmin', {
+    waitOn: function () {
+        return Meteor.subscribe("customusers");
+    },
+    action: function () {
+        //TODO: not entirely sure this is the best way to handle this
+        if (getCurrentUser()) {
+            this.render('resultAdmin');
+        }
+    }
 });
 
 Router.route('/userAdmin', {

@@ -1,6 +1,12 @@
 Template.resultAdmin.helpers({
     getAnswerItems: function () {
-        var matches = Matches.find({}, {
+        var currentUser = getCurrentUser();
+
+        var matches = Matches.find({
+            competition: {
+                $in: currentUser.competitionAdmin
+            }
+        }, {
             sort: {
                 date: 1
             }
