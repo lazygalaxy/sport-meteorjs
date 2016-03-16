@@ -68,6 +68,7 @@ Meteor.startup(function () {
                 obj[name] = value;
                 obj['date'] = new Date();
                 obj['itemId'] = itemId;
+                obj['competitionId'] = itemId.split('_')[0];
                 obj['userId'] = Meteor.user()._id;
                 Predictions.upsert({
                     _id: itemId + '_' + Meteor.user()._id
@@ -82,6 +83,7 @@ Meteor.startup(function () {
                 obj[name] = value;
                 obj['date'] = new Date();
                 obj['itemId'] = itemId;
+                obj['competitionId'] = itemId.split('_')[0];
                 obj['userId'] = Meteor.user()._id;
                 Results.upsert({
                     _id: itemId + '_' + Meteor.user()._id
