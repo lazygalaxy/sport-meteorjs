@@ -6,7 +6,7 @@ Meteor.startup(function () {
             //TODO: must be a better way to do this
             var groups = Groups.find({});
             groups.forEach(function (group) {
-                var found = false;
+                var found = (group._id == 'GLOBAL');
                 group.domains.forEach(function (domain) {
                     doc.emails.forEach(function (email) {
                         if (email.address.endsWith(domain)) {
