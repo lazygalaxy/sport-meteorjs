@@ -7,3 +7,7 @@ getCurrentUser = function () {
 Template.registerHelper('getCurrentUser', function () {
     return getCurrentUser();
 });
+
+Template.registerHelper('prettyDate', function (date) {
+    return moment(date);
+});

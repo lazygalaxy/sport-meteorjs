@@ -26,12 +26,6 @@ Template.predictions.helpers({
     }
 });
 
-Template.predictionItemRow.helpers({
-    prettyDate: function (date) {
-        return moment(date);
-    }
-});
-
 Template.predictions.events({
     "focusout": function (event) {
         if (event.target.value) {

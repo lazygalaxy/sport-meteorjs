@@ -1,6 +1,10 @@
 Template.resultAdmin.helpers({
     getAnswerItems: function () {
-        var matches = Matches.find({}).fetch();
+        var matches = Matches.find({}, {
+            sort: {
+                date: 1
+            }
+        }).fetch();
         if (Meteor.user()) {
             var resultsMap = Results.find({
                 userId: Meteor.user()._id

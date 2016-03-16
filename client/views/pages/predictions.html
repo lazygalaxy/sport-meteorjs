@@ -2,40 +2,6 @@
     {{> pageHeading title='Predictions' }}
 
     <div class="text-center wrapper wrapper-content animated fadeInRight">
-        {{#each getPredictionItems}} {{>predictionItemRow}} {{/each}}
-    </div>
-</template>
-
-<template name="predictionItemRow">
-    <div class="row">
-        <div class="col-xs-3 col-sm-4 col-lg-5">
-            <img src="{{this.homeTeam.image}}" style="max-width: 100%;float: right;" />
-        </div>
-        <div class="col-xs-6 col-sm-4 col-lg-2">
-            <div class="row">
-                <div class="col-xs-12">{{prettyDate this.date}}
-                </div>
-                <div class="col-xs-6">
-                    <input id="{{this._id}}" name="homeScore" value="{{this.homeScore}}" class="form-control">
-                </div>
-                <div class="col-xs-6">
-                    <input id="{{this._id}}" name="awayScore" value="{{this.awayScore}}" class="form-control">
-                </div>
-                <div class="col-xs-6">
-                    {{this.homeTeam.label}}
-                </div>
-                <div class="col-xs-6">
-                    {{this.awayTeam.label}}
-                </div>
-                <div class="col-xs-12"> {{this.competition}} {{this.description}}
-                </div>
-                <div class="col-xs-12">
-                    <img src="logos/{{competition}}.png" style="max-width: 100%;" />
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-3 col-sm-4 col-lg-5">
-            <img src="{{this.awayTeam.image}}" style="max-width: 100%;float: left;">
-        </div>
+        {{#each getPredictionItems}} {{>itemRow}} {{/each}}
     </div>
 </template>

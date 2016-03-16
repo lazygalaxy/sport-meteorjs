@@ -1,34 +1,7 @@
 <template name="resultAdmin">
     {{> pageHeading title='Results Admin' }}
 
-    <div class="wrapper wrapper-content animated fadeInRight">
-        <div class="row" style="text-align:center;">
-            <div class="col-lg-12">
-                {{#each getAnswerItems}} {{>answerItemRow}} {{/each}}
-            </div>
-        </div>
-    </div>
-</template>
-
-<template name="answerItemRow">
-    <div class="row">
-        <div class="col-xs-4"><img src="{{this.homeTeam.image}}" style="max-width: 100%;float: right;" class="img-circle" />{{this.homeTeam.label}}</div>
-        <div class="col-xs-4">
-            <div class="row">
-                {{this.date}}
-            </div>
-            <div class="row">
-                <div class="col-xs-6 form-group">
-                    <input id="{{this._id}}" name="homeScore" value="{{this.homeScore}}" class="form-control">
-                </div>
-                <div class="col-xs-6 form-group">
-                    <input id="{{this._id}}" name="awayScore" value="{{this.awayScore}}" class="form-control">
-                </div>
-            </div>
-            <div class="row">
-                {{this.description}}
-            </div>
-        </div>
-        <div class=" col-xs-4 "><img src="{{this.awayTeam.image}}" style="max-width: 100%;float: left;" class="img-circle" />{{this.awayTeam.label}}</div>
+    <div class="text-center wrapper wrapper-content animated fadeInRight">
+        {{#each getAnswerItems}} {{>itemRow}} {{/each}}
     </div>
 </template>
