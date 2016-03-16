@@ -1,18 +1,43 @@
 Meteor.startup(function () {
+    //listeners
+    Meteor.users.find({}).observeChanges({
+        added: function (id, doc) {
+            console.log("adding " + doc.username);
+            //TODO: must be a better way to do this
+            var groups = Groups.find({});
+            groups.forEach(function (group) {
+                var found = false;
+                group.domains.forEach(function (domain) {
+                    doc.emails.forEach(function (email) {
+                        if (email.address.endsWith(domain)) {
+                            found = true;
+                        }
+                    });
+                });
+                if (found) {
+                    Groups.upsert({
+                        _id: group._id,
+                    }, {
+                        $addToSet: {
+                            users: id
+                        }
+                    });
+                }
+            });
+        }
+    });
+
     //publishers
     Meteor.publish("customusers", function () {
         var self = this;
         var handler = UserInfo.find({}).observeChanges({
             added: function (id, doc) {
-                console.info('user added');
                 self.added('customusers', id, doc);
             },
             changed: function (id, doc) {
-                console.info('user changed');
                 self.changed('customusers', id, doc);
             },
             removed: function (id) {
-                console.info('user removed');
                 self.removed('customusers', id);
             }
         });

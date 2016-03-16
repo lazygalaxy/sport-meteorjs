@@ -27,7 +27,7 @@ Meteor.startup(function () {
         $set: {
             label: 'Axpo Group AG',
             image: 'logos/AXPO.png',
-            domains: ['test.com']
+            domains: ['axpo.com', 'axpo.ch']
         },
         $setOnInsert: {
             admins: [],
@@ -41,7 +41,7 @@ Meteor.startup(function () {
         $set: {
             label: 'Bank Vontobel',
             image: 'logos/VONTOBEL.png',
-            domains: ['test2.com']
+            domains: ['vontobel.com', 'vontobel.ch']
         },
         $setOnInsert: {
             admins: [],
@@ -49,7 +49,7 @@ Meteor.startup(function () {
         }
     });
 
-    var vangosUser = Accounts.findUserByEmail('vangos@test.com');
+    var vangosUser = Accounts.findUserByEmail('vangos@lazygalaxy.com');
     if (vangosUser) {
         UserInfo.upsert({
             _id: vangosUser._id
@@ -78,7 +78,7 @@ Meteor.startup(function () {
 
     }
 
-    var andreasUser = Accounts.findUserByEmail('andreas@test.com');
+    var andreasUser = Accounts.findUserByEmail('andreas@axpo.com');
     if (andreasUser) {
         UserInfo.upsert({
             _id: andreasUser._id
