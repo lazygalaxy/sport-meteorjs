@@ -27,6 +27,24 @@ Template.userAdmin.helpers({
     }
 });
 
+Template.userRow.helpers({
+    getPaidSelectedGroup: function () {
+        return "paid" + Session.get('selectedGroup');
+    },getPaidSelectedGroupBool: function (id) {
+        return CustomUsers.findOne({_id:id})["paid" + Session.get('selectedGroup')];
+    }
+});
+
+var inputUpsertUser = function (userId, name, value) {
+    Meteor.call('upsertUser', userId, name, value, function (error, result) {
+        if (error) {
+            console.error(error);
+        } else {
+            console.info("update the user GUI here!!!");
+        }
+    });
+}
+
 Template.userAdmin.rendered = function () {
     // Initialize dataTables
     $('.dataTables-example').DataTable({
@@ -63,13 +81,3 @@ Template.userAdmin.rendered = function () {
     });
 
 };
-
-var inputUpsertUser = function (userId, name, value) {
-    Meteor.call('upsertUser', userId, name, value, function (error, result) {
-        if (error) {
-            console.error(error);
-        } else {
-            console.info("update the user GUI here!!!");
-        }
-    });
-}

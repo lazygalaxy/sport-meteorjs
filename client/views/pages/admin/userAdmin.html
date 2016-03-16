@@ -41,7 +41,7 @@
         <td>{{username}}</td>
         <td>{{emails.[0].address}}</td>
         <td>
-            <input id={{_id}} name="paid" type="checkbox" checked="{{paid}}">&nbsp;{{#if paid}}Yes{{else}}No{{/if}}
+            <input id={{_id}} name="{{getPaidSelectedGroup}}" type="checkbox" checked="{{getPaidSelectedGroupBool _id}}">&nbsp;{{#if getPaidSelectedGroupBool _id}}Yes{{else}}No{{/if}}
         </td>
     </tr>
 </template>
