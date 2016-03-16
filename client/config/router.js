@@ -20,8 +20,11 @@ Router.route('/userAdmin', {
         return Meteor.subscribe("customusers");
     },
     action: function () {
-        Session.set('selectedGroup', getCurrentUser().groupAdmin[0]);
-        this.render('userAdmin');
+        //TODO: not entirely sure this is the best way to handle this
+        if (getCurrentUser()) {
+            Session.set('selectedGroup', getCurrentUser().groupAdmin[0]);
+            this.render('userAdmin');
+        }
     }
 });
 

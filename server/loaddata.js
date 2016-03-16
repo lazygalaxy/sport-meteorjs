@@ -1,6 +1,53 @@
 Meteor.startup(function () {
+    const GLOBAL = 'GLOBAL';
+    const AXPO = 'AXPO';
+    const VONTOBEL = 'VONTOBEL';
+
     const EURO2016 = 'EURO2016';
     const EURO2016TEST = 'EURO2016TEST';
+
+    //TODO: these group upserts could form part of a .csv file
+    Groups.upsert({
+        _id: GLOBAL,
+    }, {
+        $set: {
+            label: 'Global',
+            image: 'logos/GOME.png',
+            domains: []
+        },
+        $setOnInsert: {
+            admins: [],
+            users: []
+        }
+    });
+
+    Groups.upsert({
+        _id: AXPO,
+    }, {
+        $set: {
+            label: 'Axpo Group AG',
+            image: 'logos/AXPO.png',
+            domains: ['test.com']
+        },
+        $setOnInsert: {
+            admins: [],
+            users: []
+        }
+    });
+
+    Groups.upsert({
+        _id: VONTOBEL,
+    }, {
+        $set: {
+            label: 'Bank Vontobel',
+            image: 'logos/VONTOBEL.png',
+            domains: ['test2.com']
+        },
+        $setOnInsert: {
+            admins: [],
+            users: []
+        }
+    });
 
     var vangosUser = Accounts.findUserByEmail('vangos@test.com');
     if (vangosUser) {
@@ -8,10 +55,27 @@ Meteor.startup(function () {
             _id: vangosUser._id
         }, {
             $set: {
-                groupAdmin: ['AXPO', 'VONTOBEL'],
+                groupAdmin: [AXPO, VONTOBEL],
                 competitionAdmin: [EURO2016]
             }
         });
+
+        Groups.upsert({
+            _id: VONTOBEL,
+        }, {
+            $addToSet: {
+                admins: vangosUser._id
+            }
+        });
+
+        Groups.upsert({
+            _id: AXPO,
+        }, {
+            $addToSet: {
+                admins: vangosUser._id
+            }
+        });
+
     }
 
     var andreasUser = Accounts.findUserByEmail('andreas@test.com');
@@ -20,61 +84,35 @@ Meteor.startup(function () {
             _id: andreasUser._id
         }, {
             $set: {
-                groupAdmin: ['AXPO'],
+                groupAdmin: [AXPO],
                 competitionAdmin: [EURO2016, EURO2016TEST]
+            }
+        });
+
+        Groups.upsert({
+            _id: AXPO,
+        }, {
+            $addToSet: {
+                admins: andreasUser._id
             }
         });
     }
 
-    Groups.upsert({
-        _id: 'GLOBAL',
-    }, {
-        label: 'Global',
-        image: 'logos/GOME.png',
-        domains: [],
-        admins: [],
-        users: []
-    });
-
-    if (andreasUser && vangosUser) {
-        Groups.upsert({
-            _id: 'AXPO',
-        }, {
-            label: 'Axpo Group AG',
-            image: 'logos/AXPO.png',
-            domains: ['test.com'],
-            admins: [andreasUser._id, vangosUser._id],
-            users: [andreasUser._id]
-        });
-
-        Groups.upsert({
-            _id: 'VONTOBEL',
-        }, {
-            label: 'Bank Vontobel',
-            image: 'logos/VONTOBEL.png',
-            domains: ['test2.com'],
-            admins: [vangosUser._id],
-            users: []
-        });
-
-
-        Competitions.upsert({
-            _id: EURO2016,
-        }, {
-            image: 'logos/EURO2016.png',
-            admins: [andreasUser._id, vangosUser._id]
-        });
-
-        Competitions.upsert({
-            _id: EURO2016TEST,
-        }, {
-            image: 'logos/EURO2016TEST.png',
-            admins: [andreasUser._id, vangosUser._id]
-        });
-    }
-
-
-
+    //    if (andreasUser && vangosUser) {
+    //        Competitions.upsert({
+    //            _id: EURO2016,
+    //        }, {
+    //            image: 'logos/EURO2016.png',
+    //            admins: [andreasUser._id, vangosUser._id]
+    //        });
+    //
+    //        Competitions.upsert({
+    //            _id: EURO2016TEST,
+    //        }, {
+    //            image: 'logos/EURO2016TEST.png',
+    //            admins: [andreasUser._id, vangosUser._id]
+    //        });
+    //    }
 
     var countryContents = Assets.getText('countries.csv').split(/\r\n|\n/);
     console.log('updating countries: ' + countryContents.length);

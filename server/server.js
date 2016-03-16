@@ -4,12 +4,15 @@ Meteor.startup(function () {
         var self = this;
         var handler = UserInfo.find({}).observeChanges({
             added: function (id, doc) {
+                console.info('user added');
                 self.added('customusers', id, doc);
             },
             changed: function (id, doc) {
+                console.info('user changed');
                 self.changed('customusers', id, doc);
             },
             removed: function (id) {
+                console.info('user removed');
                 self.removed('customusers', id);
             }
         });
