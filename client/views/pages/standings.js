@@ -35,6 +35,10 @@ Template.standings.helpers({
                 if (resultMap[prediction.itemId]) {
                     var result = resultMap[prediction.itemId];
                     if (result && prediction) {
+                        if (!user.date || user.date < prediction.date) {
+                            user.date = prediction.date;
+                        }
+
                         //console.log("calculating " + prediction.itemId);
                         if (result.homeScore == prediction.homeScore && result.awayScore == prediction.awayScore) {
                             user.points += 3;
@@ -49,6 +53,32 @@ Template.standings.helpers({
 
             users.push(user);
         });
+
+
+        users.sort(function (a, b) {
+            if (a.points < b.points)
+                return 1;
+            else if (a.points > b.points)
+                return -1;
+            else if (a.date < b.date)
+                return -1;
+            else if (a.date > b.date)
+                return 1;
+            else
+                return 0;
+        });
+
+        var rank = 1;
+        var points = Number.POSITIVE_INFINITY;
+        users.forEach(function (user) {
+            if (user.points == points) {
+                user.rank = '-';
+            } else {
+                user.rank = rank++;
+                points = user.points;
+            }
+        });
+
 
         return users;
     }

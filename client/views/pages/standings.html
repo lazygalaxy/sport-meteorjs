@@ -12,8 +12,9 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th>#</th>
+                                    <th>Rank</th>
                                     <th>User</th>
+                                    <th>Date</th>
                                     <th>Points</th>
                                 </tr>
                             </thead>
@@ -30,8 +31,9 @@
 
 <template name="standingsRow">
     <tr>
-        <td>{{position}}</td>
+        <td>{{rank}}</td>
         <td>{{username}}</td>
+        <td>{{prettyDate date}}</td>
         <td>{{points}}</td>
     </tr>
 </template>
