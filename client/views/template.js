@@ -14,10 +14,14 @@ Template.registerHelper('getCurrentUser', function () {
 });
 
 Template.registerHelper('hasPaid', function (id) {
-    return CustomUsers.findOne({
+    var user = CustomUsers.findOne({
         _id: id
-    })[getPaidAttribute()];
-
+    });
+    if (user.hasOwnProperty(getPaidAttribute())) {
+        return user[getPaidAttribute()];
+    } else {
+        return false;
+    }
 });
 
 getPaidAttribute = function () {

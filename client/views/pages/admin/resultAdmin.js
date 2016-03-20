@@ -51,7 +51,7 @@ var inputUpsertResult = function (id, name, value) {
         if (error) {
             console.error(error);
         } else {
-            console.info("updtae the results GUI here!!!");
+            console.info("update the results GUI here!!!");
         }
     });
 }

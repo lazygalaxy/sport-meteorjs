@@ -37,7 +37,7 @@
         <td>{{rank}}</td>
         <td>{{username}}</td>
         <td>{{prettyDate date}}</td>
-        <td>Yes</td>
+        <td>{{#if hasPaid _id}}<i class="fa fa-dollar"></i>&nbsp;Yes{{/if}}</td>
         <td>{{points}}</td>
     </tr>
 </template>
