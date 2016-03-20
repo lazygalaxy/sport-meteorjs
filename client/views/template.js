@@ -47,6 +47,8 @@ Template.registerHelper('getSelectedAdminGroup', function () {
     return Session.get('selectedAdminGroup');
 });
 
+
+
 //TODO: this needs to be more generic
 Template.userAdmin.events({
     "click .admin-group-selection li a": function (event) {
