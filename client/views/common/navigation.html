@@ -32,11 +32,11 @@
                     <a href="{{pathFor route='standings'}}"><i class="fa fa-trophy"></i> <span class="nav-label">Standings</span> </a>
                 </li>
 
-                {{#if getCurrentUser.competitionAdmin}}
+                {{#if getCurrentUser.adminCompetitions}}
                 <li class="{{isActiveRoute regex='resultAdmin'}}">
                     <a href="{{pathFor route='resultAdmin'}}"><i class="fa fa-pencil"></i> <span class="nav-label">Result Admin</span> </a>
                 </li>
-                {{/if}} {{#if getCurrentUser.groupAdmin}}
+                {{/if}} {{#if getCurrentUser.adminGroups}}
                 <li class="{{isActiveRoute regex='userAdmin'}}">
                     <a href="{{pathFor route='userAdmin'}}"><i class="fa fa-users"></i> <span class="nav-label">User Admin</span> </a>
                 </li>

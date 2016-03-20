@@ -4,31 +4,22 @@ Template.userRow.events({
     }
 });
 
-Template.userAdmin.events({
-    "click .group-selection li a": function (event) {
-        Session.set('selectedGroup', event.target.text);
-    }
-});
-
 Template.userAdmin.helpers({
     getUsers: function () {
         return CustomUsers.find({
-            groups: Session.get('selectedGroup')
+            groups: Session.get('selectedAdminGroup')
         });
-    },
-    getSelectedGroup: function () {
-        return Session.get('selectedGroup');
     }
 });
 
 Template.userRow.helpers({
     getPaidSelectedGroup: function () {
-        return "paid" + Session.get('selectedGroup');
+        return "paid" + Session.get('selectedAdminGroup');
     },
     getPaidSelectedGroupBool: function (id) {
         return CustomUsers.findOne({
             _id: id
-        })["paid" + Session.get('selectedGroup')];
+        })["paid" + Session.get('selectedAdminGroup')];
     }
 });
 

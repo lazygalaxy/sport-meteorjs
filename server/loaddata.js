@@ -37,14 +37,32 @@ Meteor.startup(function () {
         }
     });
 
+    Competitions.upsert({
+        _id: EURO2016,
+    }, {
+        $set: {
+            label: 'Euro2016 Test',
+            image: 'logos/EURO2016.png'
+        }
+    });
+
+    Competitions.upsert({
+        _id: EURO2016TEST,
+    }, {
+        $set: {
+            label: 'Euro2016 Test',
+            image: 'logos/EURO2016TEST.png'
+        }
+    });
+
     var vangosUser = Accounts.findUserByEmail('vangos@lazygalaxy.com');
     if (vangosUser) {
         UserInfo.upsert({
             _id: vangosUser._id
         }, {
             $set: {
-                groupAdmin: [AXPO, VONTOBEL],
-                competitionAdmin: [EURO2016]
+                adminGroups: [AXPO, VONTOBEL],
+                adminCompetitions: [EURO2016]
             }
         });
     }
@@ -55,8 +73,8 @@ Meteor.startup(function () {
             _id: andreasUser._id
         }, {
             $set: {
-                groupAdmin: [AXPO],
-                competitionAdmin: [EURO2016, EURO2016TEST]
+                adminGroups: [AXPO],
+                adminCompetitions: [EURO2016, EURO2016TEST]
             }
         });
     }

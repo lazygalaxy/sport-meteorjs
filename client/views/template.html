@@ -1,3 +1,25 @@
+<template name="adminGroupSelection">
+    <div class="btn-group">
+        <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">{{getSelectedAdminGroup}} <span class="caret"></span></button>
+        <ul class="dropdown-menu admin-group-selection">
+            {{#each getAdminGroups}}
+            <li><a href="#">{{this}}</a></li>
+            {{/each}}
+        </ul>
+    </div>
+</template>
+
+<template name="competitionSelection">
+    <div class="btn-group">
+        <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">{{getSelectedCompetition}} <span class="caret"></span></button>
+        <ul class="dropdown-menu competition-selection">
+            {{#each getCompetitions}}
+            <li><a href="#">{{this._id}}</a></li>
+            {{/each}}
+        </ul>
+    </div>
+</template>
+
 <template name="itemRow">
     <div class="row">
         <div class="col-xs-3 col-sm-4 col-lg-5">
