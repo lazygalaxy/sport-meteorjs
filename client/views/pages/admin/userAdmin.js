@@ -12,17 +12,6 @@ Template.userAdmin.helpers({
     }
 });
 
-Template.userRow.helpers({
-    getPaidAttribute: function () {
-        return "paid" + Session.get('selectedAdminGroup') + Session.get('selectedCompetition');
-    },
-    getPaidValue: function (id) {
-        return CustomUsers.findOne({
-            _id: id
-        })["paid" + Session.get('selectedAdminGroup') + Session.get('selectedCompetition')];
-    }
-});
-
 var inputUpsertUser = function (userId, name, value) {
     Meteor.call('upsertUser', userId, name, value, function (error, result) {
         if (error) {

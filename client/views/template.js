@@ -13,6 +13,22 @@ Template.registerHelper('getCurrentUser', function () {
     return getCurrentUser();
 });
 
+Template.registerHelper('hasPaid', function (id) {
+    return CustomUsers.findOne({
+        _id: id
+    })[getPaidAttribute()];
+
+});
+
+getPaidAttribute = function () {
+    return "paid" + Session.get('selectedAdminGroup') + Session.get('selectedCompetition');
+}
+
+Template.registerHelper('getPaidAttribute', function () {
+    return getPaidAttribute();
+});
+
+
 //competitions
 getCompetitions = function () {
     return Competitions.find({});

@@ -14,6 +14,8 @@
                                     <tr>
                                         <th>Username</th>
                                         <th>E-Mail</th>
+                                        <th>Group</th>
+                                        <th>Competition</th>
                                         <th>Paid</th>
                                     </tr>
                                 </thead>
@@ -33,8 +35,10 @@
     <tr>
         <td>{{username}}</td>
         <td>{{emails.[0].address}}</td>
+        <td>{{getSelectedAdminGroup}}</td>
+        <td>{{getSelectedCompetition}}</td>
         <td>
-            <input id={{_id}} name="{{getPaidAttribute}}" type="checkbox" checked="{{getPaidValue _id}}">&nbsp;{{#if getPaidValue _id}}Yes{{else}}No{{/if}}
+            <input id={{_id}} name="{{getPaidAttribute}}" type="checkbox" checked="{{hasPaid _id}}">&nbsp;{{#if hasPaid _id}}Yes{{else}}No{{/if}}
         </td>
     </tr>
 </template>
