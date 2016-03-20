@@ -12,14 +12,8 @@ Template.userAdmin.events({
 
 Template.userAdmin.helpers({
     getUsers: function () {
-        var group = Groups.findOne({
-            _id: Session.get('selectedGroup')
-        });
-
         return CustomUsers.find({
-            _id: {
-                $in: group.users
-            }
+            groups: Session.get('selectedGroup')
         });
     },
     getSelectedGroup: function () {
@@ -30,8 +24,11 @@ Template.userAdmin.helpers({
 Template.userRow.helpers({
     getPaidSelectedGroup: function () {
         return "paid" + Session.get('selectedGroup');
-    },getPaidSelectedGroupBool: function (id) {
-        return CustomUsers.findOne({_id:id})["paid" + Session.get('selectedGroup')];
+    },
+    getPaidSelectedGroupBool: function (id) {
+        return CustomUsers.findOne({
+            _id: id
+        })["paid" + Session.get('selectedGroup')];
     }
 });
 

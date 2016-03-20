@@ -14,9 +14,6 @@ Meteor.startup(function () {
             label: 'Global',
             image: 'logos/GOME.png',
             domains: []
-        },
-        $setOnInsert: {
-            users: []
         }
     });
 
@@ -27,9 +24,6 @@ Meteor.startup(function () {
             label: 'Axpo Group AG',
             image: 'logos/AXPO.png',
             domains: ['axpo.com', 'axpo.ch']
-        },
-        $setOnInsert: {
-            users: []
         }
     });
 
@@ -40,33 +34,8 @@ Meteor.startup(function () {
             label: 'Bank Vontobel',
             image: 'logos/VONTOBEL.png',
             domains: ['vontobel.com', 'vontobel.ch']
-        },
-        $setOnInsert: {
-            users: []
         }
     });
-
-    //    Competitions.upsert({
-    //        _id: EURO2016,
-    //    }, {
-    //        $set: {
-    //            image: 'logos/EURO2016.png'
-    //        },
-    //        $setOnInsert: {
-    //            admins: []
-    //        }
-    //    });
-    //
-    //    Competitions.upsert({
-    //        _id: EURO2016TEST,
-    //    }, {
-    //        $set: {
-    //            image: 'logos/EURO2016TEST.png'
-    //        },
-    //        $setOnInsert: {
-    //            admins: []
-    //        }
-    //    });
 
     var vangosUser = Accounts.findUserByEmail('vangos@lazygalaxy.com');
     if (vangosUser) {
@@ -78,31 +47,6 @@ Meteor.startup(function () {
                 competitionAdmin: [EURO2016]
             }
         });
-
-        //        Groups.upsert({
-        //            _id: VONTOBEL,
-        //        }, {
-        //            $addToSet: {
-        //                admins: vangosUser._id
-        //            }
-        //        });
-        //
-        //        Groups.upsert({
-        //            _id: AXPO,
-        //        }, {
-        //            $addToSet: {
-        //                admins: vangosUser._id
-        //            }
-        //        });
-
-        //        Competitions.upsert({
-        //            _id: EURO2016,
-        //        }, {
-        //            $addToSet: {
-        //                admins: vangosUser._id
-        //            }
-        //        });
-
     }
 
     var andreasUser = Accounts.findUserByEmail('andreas@axpo.com');
@@ -115,30 +59,6 @@ Meteor.startup(function () {
                 competitionAdmin: [EURO2016, EURO2016TEST]
             }
         });
-
-        //        Groups.upsert({
-        //            _id: AXPO,
-        //        }, {
-        //            $addToSet: {
-        //                admins: andreasUser._id
-        //            }
-        //        });
-
-        //        Competitions.upsert({
-        //            _id: EURO2016,
-        //        }, {
-        //            $addToSet: {
-        //                admins: andreasUser._id
-        //            }
-        //        });
-        //
-        //        Competitions.upsert({
-        //            _id: EURO2016TEST,
-        //        }, {
-        //            $addToSet: {
-        //                admins: andreasUser._id
-        //            }
-        //        });
     }
 
     var countryContents = Assets.getText('countries.csv').split(/\r\n|\n/);

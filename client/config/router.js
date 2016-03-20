@@ -13,7 +13,11 @@ Router.route('/standings', {
     },
     action: function () {
         //TODO: not entirely sure this is the best way to handle this
-        this.render('standings');
+        if (getCurrentUser()) {
+            Session.set('selectedGroup', getCurrentUser().groupAdmin[0]);
+            Session.set('selectedCompetition', getCurrentUser().competitionAdmin[0]);
+            this.render('standings');
+        }
     }
 });
 

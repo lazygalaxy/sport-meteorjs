@@ -1,5 +1,5 @@
 UserInfo = new Mongo.Collection('userinfo');
-Competitions = new Mongo.Collection('competitions');
+//Competitions = new Mongo.Collection('competitions');
 Groups = new Mongo.Collection('groups');
 Actors = new Mongo.Collection('actors');
 Matches = new Mongo.Collection('matches');

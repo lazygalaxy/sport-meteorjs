@@ -15,11 +15,21 @@ Meteor.startup(function () {
                     });
                 });
                 if (found) {
+                    // add the user to the group
                     Groups.upsert({
                         _id: group._id,
                     }, {
                         $addToSet: {
                             users: id
+                        }
+                    });
+
+                    // add the group to the user
+                    UserInfo.upsert({
+                        _id: id,
+                    }, {
+                        $addToSet: {
+                            groups: group._id
                         }
                     });
                 }

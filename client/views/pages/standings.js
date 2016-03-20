@@ -1,6 +1,6 @@
 Template.standings.helpers({
     getUsers: function () {
-        var competitionId = "EURO2016TEST";
+        var competitionId = Session.get('selectedCompetition');
         //var users = CustomUsers.find({});
 
         var predictionMap = Predictions.find({
