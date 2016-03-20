@@ -17,7 +17,6 @@ Template.registerHelper('hasPaid', function (id) {
     var user = CustomUsers.findOne({
         _id: id
     });
-    console.info(getPaidAttribute());
     if (user && user.hasOwnProperty(getPaidAttribute())) {
         return user[getPaidAttribute()];
     } else {

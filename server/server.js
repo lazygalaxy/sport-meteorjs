@@ -56,7 +56,9 @@ Meteor.startup(function () {
         self.ready();
 
         self.onStop(function () {
-            if (handler) handler.stop();
+            if (handler) {
+                handler.stop();
+            }
         });
     });
 
