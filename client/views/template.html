@@ -9,6 +9,17 @@
     </div>
 </template>
 
+<template name="groupSelection">
+    <div class="btn-group">
+        <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">{{getSelectedGroup}} <span class="caret"></span></button>
+        <ul class="dropdown-menu group-selection">
+            {{#each getGroups}}
+            <li><a href="#">{{this}}</a></li>
+            {{/each}}
+        </ul>
+    </div>
+</template>
+
 <template name="competitionSelection">
     <div class="btn-group">
         <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">{{getSelectedCompetition}} <span class="caret"></span></button>

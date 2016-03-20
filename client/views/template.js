@@ -31,6 +31,14 @@ Template.registerHelper('getAdminCompetitions', function () {
 });
 
 //groups
+Template.registerHelper('getGroups', function () {
+    return getCurrentUser().groups;
+});
+
+Template.registerHelper('getSelectedGroup', function () {
+    return Session.get('selectedGroup');
+});
+
 Template.registerHelper('getAdminGroups', function () {
     return getCurrentUser().adminGroups;
 });
@@ -43,6 +51,15 @@ Template.registerHelper('getSelectedAdminGroup', function () {
 Template.userAdmin.events({
     "click .admin-group-selection li a": function (event) {
         Session.set('selectedAdminGroup', event.target.text);
+    },
+    "click .competition-selection li a": function (event) {
+        Session.set('selectedCompetition', event.target.text);
+    }
+});
+
+Template.standings.events({
+    "click .group-selection li a": function (event) {
+        Session.set('selectedGroup', event.target.text);
     },
     "click .competition-selection li a": function (event) {
         Session.set('selectedCompetition', event.target.text);
