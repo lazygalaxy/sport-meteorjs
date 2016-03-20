@@ -7,7 +7,7 @@ Template.userRow.events({
 Template.userAdmin.helpers({
     getUsers: function () {
         return CustomUsers.find({
-            groups: Session.get('selectedAdminGroup')
+            groups: Session.get('selectedGroup')
         });
     }
 });

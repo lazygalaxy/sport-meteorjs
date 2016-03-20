@@ -17,7 +17,8 @@ Template.registerHelper('hasPaid', function (id) {
     var user = CustomUsers.findOne({
         _id: id
     });
-    if (user.hasOwnProperty(getPaidAttribute())) {
+    console.info(getPaidAttribute());
+    if (user && user.hasOwnProperty(getPaidAttribute())) {
         return user[getPaidAttribute()];
     } else {
         return false;
@@ -25,7 +26,7 @@ Template.registerHelper('hasPaid', function (id) {
 });
 
 getPaidAttribute = function () {
-    return "paid" + Session.get('selectedAdminGroup') + Session.get('selectedCompetition');
+    return "paid" + Session.get('selectedGroup') + Session.get('selectedCompetition');
 }
 
 Template.registerHelper('getPaidAttribute', function () {
@@ -63,16 +64,10 @@ Template.registerHelper('getAdminGroups', function () {
     return getCurrentUser().adminGroups;
 });
 
-Template.registerHelper('getSelectedAdminGroup', function () {
-    return Session.get('selectedAdminGroup');
-});
-
-
-
 //TODO: this needs to be more generic
 Template.userAdmin.events({
-    "click .admin-group-selection li a": function (event) {
-        Session.set('selectedAdminGroup', event.target.text);
+    "click .group-selection li a": function (event) {
+        Session.set('selectedGroup', event.target.text);
     },
     "click .competition-selection li a": function (event) {
         Session.set('selectedCompetition', event.target.text);

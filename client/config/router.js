@@ -39,7 +39,7 @@ Router.route('/userAdmin', {
         //TODO: not entirely sure this is the best way to handle this
         if (getCurrentUser()) {
             Session.set('selectedCompetition', "EURO2016TEST");
-            Session.set('selectedAdminGroup', getCurrentUser().groupAdmin[0]);
+            Session.set('selectedGroup', getCurrentUser().groupAdmin[0]);
             this.render('userAdmin');
         }
     }
