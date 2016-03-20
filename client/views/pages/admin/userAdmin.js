@@ -13,13 +13,13 @@ Template.userAdmin.helpers({
 });
 
 Template.userRow.helpers({
-    getPaidSelectedGroup: function () {
-        return "paid" + Session.get('selectedAdminGroup');
+    getPaidAttribute: function () {
+        return "paid" + Session.get('selectedAdminGroup') + Session.get('selectedCompetition');
     },
-    getPaidSelectedGroupBool: function (id) {
+    getPaidValue: function (id) {
         return CustomUsers.findOne({
             _id: id
-        })["paid" + Session.get('selectedAdminGroup')];
+        })["paid" + Session.get('selectedAdminGroup') + Session.get('selectedCompetition')];
     }
 });
 
