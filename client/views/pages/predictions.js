@@ -1,7 +1,11 @@
 Template.predictions.helpers({
     getPredictionItems: function () {
         //TODO: get the matches for the competition
-        var matches = Matches.find({}, {
+        var matches = Matches.find({
+            date: {
+                $gt: new Date()
+            }
+        }, {
             sort: {
                 date: 1
             }

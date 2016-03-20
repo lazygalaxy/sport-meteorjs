@@ -3,12 +3,15 @@ Template.resultAdmin.helpers({
         var currentUser = getCurrentUser();
 
         var matches = Matches.find({
+            date: {
+                $lt: new Date()
+            },
             competition: {
                 $in: currentUser.competitionAdmin
             }
         }, {
             sort: {
-                date: 1
+                date: -1
             }
         }).fetch();
         if (Meteor.user()) {
