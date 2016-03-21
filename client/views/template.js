@@ -2,6 +2,23 @@ Template.registerHelper('prettyDate', function (date) {
     return moment(date);
 });
 
+Template.registerHelper('equals', function (a, b) {
+    return a === b;
+});
+
+Template.registerHelper('getActors', function (value, tokenizer, prefix) {
+    var values = value.split(tokenizer);
+    for (var i = 0; i < values.length; i++) {
+        values[i] = prefix + '_' + values[i];
+    }
+    var actors = Actors.find({
+        _id: {
+            $in: values
+        }
+    });
+    return actors;
+});
+
 //users
 getCurrentUser = function () {
     return CustomUsers.findOne({
@@ -63,7 +80,16 @@ Template.registerHelper('getAdminGroups', function () {
     return getCurrentUser().adminGroups;
 });
 
-//TODO: this needs to be more generic
+inputUpsertPrediction = function (id, name, value) {
+    Meteor.call('upsertPrediction', id, name, value, function (error, result) {
+        if (error) {
+            console.error(error);
+        } else {
+            console.info("update the predictions GUI here!!!");
+        }
+    });
+}
+
 Template.userAdmin.events({
     "click .group-selection li a": function (event) {
         Session.set('selectedGroup', event.target.text);
@@ -79,5 +105,14 @@ Template.standings.events({
     },
     "click .competition-selection li a": function (event) {
         Session.set('selectedCompetition', event.target.text);
+    }
+});
+
+Template.questionRow.events({
+    "click .answer-selection li a": function (event) {
+        var itemId = event.target.parentNode.id;
+        var answer = event.target.id;
+        console.log(answer + ' ' + itemId);
+        inputUpsertPrediction(itemId, 'answer', answer);
     }
 });

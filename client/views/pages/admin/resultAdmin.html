@@ -2,6 +2,6 @@
     {{> pageHeading title='Results Admin' }}
 
     <div class="text-center wrapper wrapper-content animated fadeInRight">
-        {{#each getAnswerItems}} {{>itemRow}} {{/each}}
+        {{#each getAnswerItems}} {{#if equals this.type 'match'}} {{>matchRow}} {{/if}} {{#if equals this.type 'question'}} {{>questionRow}} {{/if}} {{/each}}
     </div>
 </template>

@@ -1,15 +1,17 @@
 Template.predictions.helpers({
     getPredictionItems: function () {
-        //TODO: get the matches for the competition
+        var questions = Questions.find({
+            date: {
+                $gt: new Date()
+            }
+        }).fetch();
+
         var matches = Matches.find({
             date: {
                 $gt: new Date()
             }
-        }, {
-            sort: {
-                date: 1
-            }
         }).fetch();
+
         if (Meteor.user()) {
             //TODO: get the user predictions
             var predictionsMap = Predictions.find({
@@ -20,13 +22,41 @@ Template.predictions.helpers({
             }, {});
 
             matches.forEach(function (match) {
+                match.type = 'match';
                 if (match._id in predictionsMap) {
                     match.homeScore = predictionsMap[match._id].homeScore;
                     match.awayScore = predictionsMap[match._id].awayScore;
                 }
             });
+
+            questions.forEach(function (question) {
+                question.type = 'question';
+                if (question._id in predictionsMap) {
+                    question.answer = predictionsMap[question._id].answer;
+                }
+            });
         }
-        return matches;
+
+        var predictionItems = questions.concat(matches);
+
+        predictionItems.sort(function (a, b) {
+            if (a.date < b.date)
+                return -1;
+            else if (a.date > b.date)
+                return 1;
+            else if (a.type > b.type)
+                return -1;
+            else if (a.type < b.type)
+                return 1;
+            else if (a._id < b._id)
+                return -1;
+            else if (a._id > b._id)
+                return 1;
+            else
+                return 0;
+        });
+
+        return predictionItems;
     }
 });
 
@@ -42,13 +72,3 @@ Template.predictions.events({
         }
     }
 });
-
-var inputUpsertPrediction = function (id, name, value) {
-    Meteor.call('upsertPrediction', id, name, value, function (error, result) {
-        if (error) {
-            console.error(error);
-        } else {
-            console.info("updtae the predictions GUI here!!!");
-        }
-    });
-}

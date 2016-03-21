@@ -9,11 +9,17 @@ Template.resultAdmin.helpers({
             competition: {
                 $in: currentUser.competitionAdmin
             }
-        }, {
-            sort: {
-                date: -1
+        }).fetch();
+
+        var questions = Questions.find({
+            date: {
+                $lt: new Date()
+            },
+            competition: {
+                $in: currentUser.competitionAdmin
             }
         }).fetch();
+
         if (Meteor.user()) {
             var resultsMap = Results.find({
                 userId: Meteor.user()._id
@@ -23,13 +29,40 @@ Template.resultAdmin.helpers({
             }, {});
 
             matches.forEach(function (match) {
+                match.type = 'match';
                 if (match._id in resultsMap) {
                     match.homeScore = resultsMap[match._id].homeScore;
                     match.awayScore = resultsMap[match._id].awayScore;
                 }
             });
+
+            questions.forEach(function (question) {
+                question.type = 'question';
+                if (question._id in resultsMap) {
+                    question.answer = resultsMap[question._id].answer;
+                }
+            });
         }
-        return matches;
+
+        var answerItems = questions.concat(matches);
+        answerItems.sort(function (a, b) {
+            if (a.date < b.date)
+                return -1;
+            else if (a.date > b.date)
+                return 1;
+            else if (a.type > b.type)
+                return -1;
+            else if (a.type < b.type)
+                return 1;
+            else if (a._id < b._id)
+                return -1;
+            else if (a._id > b._id)
+                return 1;
+            else
+                return 0;
+        });
+
+        return answerItems;
     }
 });
 

@@ -2,6 +2,6 @@
     {{> pageHeading title='Predictions' }}
 
     <div class="text-center wrapper wrapper-content animated fadeInRight">
-        {{#each getPredictionItems}} {{>itemRow}} {{/each}}
+        {{#each getPredictionItems}} {{#if equals this.type 'match'}} {{>matchRow}} {{/if}} {{#if equals this.type 'question'}} {{>questionRow}} {{/if}} {{/each}}
     </div>
 </template>

@@ -31,7 +31,7 @@
     </div>
 </template>
 
-<template name="itemRow">
+<template name="matchRow">
     <div class="row">
         <div class="col-xs-3 col-sm-4 col-lg-5">
             <img src="{{this.homeTeam.image}}" style="max-width: 100%;float: right;" />
@@ -61,4 +61,34 @@
             <img src="{{this.awayTeam.image}}" style="max-width: 100%;float: left;">
         </div>
     </div>
+</template>
+
+<template name="questionRow">
+    <div class="row">
+        <div class="col-xs-12">
+            {{prettyDate this.date}}
+        </div>
+        <div class="col-xs-12">
+            {{this.description}}
+        </div>
+        <div class="col-xs-4 col-sm-5">
+        </div>
+        <div class="col-xs-4 col-sm-2">
+            {{#if equals this.options 'INTEGER'}}
+            <input id="{{this._id}}" name="answer" value="{{this.answer}}" class="form-control"> {{else}}
+            <div class="btn-group">
+                <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">{{this.answer}} <span class="caret"></span></button>
+                <ul class="dropdown-menu scrollable-menu answer-selection">
+                    <li id="{{this._id}}">
+                        {{#each getActors this.options ',' 'CTRY'}} {{> dropdownAnswer}} {{/each}}
+                    </li>
+                </ul>
+            </div>
+            {{/if}}
+        </div>
+    </div>
+</template>
+
+<template name="dropdownAnswer">
+    <a id="{{this._id}}" href="#"><img src="flags/{{this.iso3}}.png" height="25px">&nbsp;{{this.label}}</a>
 </template>
