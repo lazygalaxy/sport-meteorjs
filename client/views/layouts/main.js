@@ -1,4 +1,4 @@
-Template.mainLayout.rendered = function(){
+Template.mainLayout.rendered = function () {
 
     // Minimalize menu when screen is less than 768px
     $(window).bind("resize load", function () {
@@ -10,18 +10,18 @@ Template.mainLayout.rendered = function(){
     });
 
     // Fix height of layout when resize, scroll and load
-    $(window).bind("load resize scroll", function() {
-        if(!$("body").hasClass('body-small')) {
+    $(window).bind("load resize scroll", function () {
+        if (!$("body").hasClass('body-small')) {
 
             var navbarHeigh = $('nav.navbar-default').height();
             var wrapperHeigh = $('#page-wrapper').height();
 
-            if(navbarHeigh > wrapperHeigh){
+            if (navbarHeigh > wrapperHeigh) {
                 $('#page-wrapper').css("min-height", navbarHeigh + "px");
             }
 
-            if(navbarHeigh < wrapperHeigh){
-                $('#page-wrapper').css("min-height", $(window).height()  + "px");
+            if (navbarHeigh < wrapperHeigh) {
+                $('#page-wrapper').css("min-height", $(window).height() + "px");
             }
 
             if ($('body').hasClass('fixed-nav')) {
@@ -38,7 +38,7 @@ Template.mainLayout.rendered = function(){
     // SKIN OPTIONS
     // Uncomment this if you want to have different skin option:
     // Available skin: (skin-1 or skin-3, skin-2 deprecated)
-    // $('body').addClass('skin-1');
+    $('body').addClass('skin-1');
 
     // FIXED-SIDEBAR
     // Uncomment this if you want to have fixed left navigation
@@ -50,7 +50,7 @@ Template.mainLayout.rendered = function(){
 
     // BOXED LAYOUT
     // Uncomment this if you want to have boxed layout
-    // $('body').addClass('boxed-layout');
+    $('body').addClass('boxed-layout');
 
 
 };
