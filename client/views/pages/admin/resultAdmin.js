@@ -76,15 +76,11 @@ Template.resultAdmin.events({
         if (event.which == 13 && event.target.value) {
             inputUpsertResult(event.target.id, event.target.name, event.target.value);
         }
+    },
+    "click .answer-selection li a": function (event) {
+        var itemId = event.target.parentNode.id;
+        var answer = event.target.id;
+        console.log(itemId + ' - ' + answer);
+        inputUpsertResult(itemId, 'answer', answer);
     }
 });
-
-var inputUpsertResult = function (id, name, value) {
-    Meteor.call('upsertResult', id, name, value, function (error, result) {
-        if (error) {
-            console.error(error);
-        } else {
-            console.info("update the results GUI here!!!");
-        }
-    });
-}

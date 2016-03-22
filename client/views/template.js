@@ -19,6 +19,19 @@ Template.registerHelper('getActors', function (value, tokenizer, prefix) {
     return actors;
 });
 
+Template.registerHelper('getActor', function (id) {
+    var actor = Actors.findOne({
+        _id: id
+    });
+    if (actor) {
+        return actor;
+    } else {
+        return Actors.findOne({
+            _id: 'CTRY_XYZ'
+        });
+    }
+});
+
 //users
 getCurrentUser = function () {
     return CustomUsers.findOne({
@@ -90,6 +103,16 @@ inputUpsertPrediction = function (id, name, value) {
     });
 }
 
+inputUpsertResult = function (id, name, value) {
+    Meteor.call('upsertResult', id, name, value, function (error, result) {
+        if (error) {
+            console.error(error);
+        } else {
+            console.info("update the results GUI here!!!");
+        }
+    });
+}
+
 Template.userAdmin.events({
     "click .group-selection li a": function (event) {
         Session.set('selectedGroup', event.target.text);
@@ -105,14 +128,5 @@ Template.standings.events({
     },
     "click .competition-selection li a": function (event) {
         Session.set('selectedCompetition', event.target.text);
-    }
-});
-
-Template.questionRow.events({
-    "click .answer-selection li a": function (event) {
-        var itemId = event.target.parentNode.id;
-        var answer = event.target.id;
-        console.log(answer + ' ' + itemId);
-        inputUpsertPrediction(itemId, 'answer', answer);
     }
 });

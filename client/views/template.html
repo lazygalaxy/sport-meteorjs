@@ -77,7 +77,7 @@
             {{#if equals this.options 'INTEGER'}}
             <input id="{{this._id}}" name="answer" value="{{this.answer}}" class="form-control"> {{else}}
             <div class="btn-group">
-                <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">{{this.answer}} <span class="caret"></span></button>
+                <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">{{> displayCountry getActor this.answer}}<span class="caret"></span></button>
                 <ul class="dropdown-menu scrollable-menu answer-selection">
                     <li id="{{this._id}}">
                         {{#each getActors this.options ',' 'CTRY'}} {{> dropdownAnswer}} {{/each}}
@@ -90,5 +90,9 @@
 </template>
 
 <template name="dropdownAnswer">
-    <a id="{{this._id}}" href="#"><img src="flags/{{this.iso3}}.png" height="25px">&nbsp;{{this.label}}</a>
+    <a id="{{this._id}}" href="#">{{> displayCountry}}</a>
+</template>
+
+<template name="displayCountry">
+    <img src="flags/{{this.iso3}}.png" height="25px">&nbsp;{{this.label}}
 </template>

@@ -70,5 +70,11 @@ Template.predictions.events({
         if (event.which == 13 && event.target.value) {
             inputUpsertPrediction(event.target.id, event.target.name, event.target.value);
         }
+    },
+    "click .answer-selection li a": function (event) {
+        var itemId = event.target.parentNode.id;
+        var answer = event.target.id;
+        console.log(itemId + ' - ' + answer);
+        inputUpsertPrediction(itemId, 'answer', answer);
     }
 });
