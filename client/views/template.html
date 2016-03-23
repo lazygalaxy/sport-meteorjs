@@ -66,25 +66,31 @@
 <template name="questionRow">
     <div class="row">
         <div class="col-xs-12">
-            {{prettyDate this.date}}
-        </div>
-        <div class="col-xs-12">
-            {{this.description}}
-        </div>
-        <div class="col-xs-4 col-sm-5">
-        </div>
-        <div class="col-xs-4 col-sm-2">
-            {{#if equals this.options 'INTEGER'}}
-            <input id="{{this._id}}" name="answer" value="{{this.answer}}" class="form-control"> {{else}}
-            <div class="btn-group">
-                <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">{{> displayCountry getActor this.answer}}<span class="caret"></span></button>
-                <ul class="dropdown-menu scrollable-menu answer-selection">
-                    <li id="{{this._id}}">
-                        {{#each getActors this.options ',' 'CTRY'}} {{> dropdownAnswer}} {{/each}}
-                    </li>
-                </ul>
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>{{prettyDate this.date}}</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-xs-2">
+                            <img src="logos/{{this.competition}}.png" style="width: 100%;" />
+                        </div>
+                        <div class="col-xs-10">
+                            <p>{{this.description}}</p> {{#if equals this.options 'INTEGER'}}
+                            <input id="{{this._id}}" name="answer" value="{{this.answer}}" class="form-control" style="margin: 0 auto;width: 200px;text-align: center;"> {{else}}
+                            <div class="btn-group">
+                                <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle" style="width: 200px;">{{> displayCountry getActor this.answer}}<span class="caret"></span></button>
+                                <ul class="dropdown-menu scrollable-menu answer-selection">
+                                    <li id="{{this._id}}">
+                                        {{#each getActors this.options ',' 'CTRY'}} {{> dropdownAnswer}} {{/each}}
+                                    </li>
+                                </ul>
+                            </div>
+                            {{/if}}
+                        </div>
+                    </div>
+                </div>
             </div>
-            {{/if}}
         </div>
     </div>
 </template>
