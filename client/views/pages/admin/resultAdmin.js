@@ -7,7 +7,7 @@ Template.resultAdmin.helpers({
                 $lt: new Date()
             },
             competition: {
-                $in: currentUser.competitionAdmin
+                $in: currentUser.adminCompetitions
             }
         }).fetch();
 
@@ -16,7 +16,7 @@ Template.resultAdmin.helpers({
                 $lt: new Date()
             },
             competition: {
-                $in: currentUser.competitionAdmin
+                $in: currentUser.adminCompetitions
             }
         }).fetch();
 

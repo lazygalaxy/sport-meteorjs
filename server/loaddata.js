@@ -3,6 +3,7 @@ Meteor.startup(function () {
     const AXPO = 'AXPO';
     const VONTOBEL = 'VONTOBEL';
 
+
     const EURO2016 = 'EURO2016';
     const EURO2016TEST = 'EURO2016TEST';
 
@@ -67,10 +68,10 @@ Meteor.startup(function () {
         });
     }
 
-    var andreasUser = Accounts.findUserByEmail('andreas@axpo.com');
-    if (andreasUser) {
+    var olafUser = Accounts.findUserByEmail('olaf@axpo.com');
+    if (olafUser) {
         UserInfo.upsert({
-            _id: andreasUser._id
+            _id: olafUser._id
         }, {
             $set: {
                 adminGroups: [AXPO],

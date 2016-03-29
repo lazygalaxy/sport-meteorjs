@@ -14,7 +14,6 @@ jquery
 okgrow:router-autoscroll
 
 
-standard-minifiers
 meteor-base
 mobile-experience
 mongo
@@ -30,3 +29,5 @@ check
 accounts-password
 accounts-ui
 momentjs:moment
+standard-minifier-css
+standard-minifier-js
