@@ -47,13 +47,12 @@ Template.mainLayout.rendered = function () {
     //    height: '100%',
     //    railOpacity: 0.9
     //});
-    $('body').addClass('canvas-menu');
+    // CANVAS-MENU
+    //$('body').addClass('canvas-menu');
 
 
 
     // BOXED LAYOUT
     // Uncomment this if you want to have boxed layout
     $('body').addClass('boxed-layout');
-
-
 };

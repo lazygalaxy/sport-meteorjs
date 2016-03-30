@@ -1,6 +1,29 @@
-Router.configure({
-    layoutTemplate: 'mainLayout',
-    notFoundTemplate: 'notFound'
+Router.onBeforeAction(function () {
+    if (!Meteor.userId()) {
+        Router.configure({
+            layoutTemplate: 'blankLayout'
+        });
+        this.render(Router.current().route.getName());
+    } else {
+        Router.configure({
+            layoutTemplate: 'mainLayout',
+            notFoundTemplate: 'notFound',
+            //loadingTemplate: 'loading'
+        });
+        this.next();
+    }
+});
+
+Router.route('/login', function () {
+    this.render('login');
+});
+
+Router.route('/register', function () {
+    this.render('register');
+});
+
+Router.route('/forgotPassword', function () {
+    this.render('forgotPassword');
 });
 
 Router.route('/predictions', function () {
