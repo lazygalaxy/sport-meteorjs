@@ -3,8 +3,12 @@ Template.login.events({
         event.preventDefault();
         var username = $('[name=username]').val();
         var password = $('[name=password]').val();
-        Meteor.loginWithPassword(username, password);
-
-        Router.go('home');
+        Meteor.loginWithPassword(username, password, function (error) {
+            if (error) {
+                toastr.error(error.reason, 'Login Denied')
+            } else {
+                Router.go("home");
+            }
+        });
     }
 });
