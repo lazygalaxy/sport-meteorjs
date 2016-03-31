@@ -1,7 +1,7 @@
 Router.configure({
     layoutTemplate: 'blankLayout',
     notFoundTemplate: 'notFound',
-    //loadingTemplate: 'loading'
+    loadingTemplate: 'loading'
 });
 
 //TODO: try to generalize using onBeforeAction
@@ -46,6 +46,10 @@ Router.route('/forgotPassword', function () {
     }
 });
 
+Router.route('/loading', function () {
+    this.render('loading');
+});
+
 Router.route('/predictions', function () {
     if (Meteor.userId()) {
         this.render('predictions');
@@ -53,6 +57,8 @@ Router.route('/predictions', function () {
         this.render('login');
     }
 });
+
+
 
 
 
