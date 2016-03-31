@@ -12,20 +12,16 @@
                 <li class="nav-header">
                     <div class="dropdown profile-element">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">Example user</strong>
-                             </span> <span class="text-muted text-xs block">user <b class="caret"></b></span> </span>
+                            <img alt="image" class="img-circle" src="logos/gome.png" style="width:48px;" />
+                            <span class="block m-t-xs">
+                                    <strong class="font-bold">{{getCurrentUser.username}}<b class="caret"></b></strong>
+                            </span>
                         </a>
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                            <li><a href="#">Item</a></li>
-                            <li><a href="#">Item</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">Item</a></li>
+                            <li><a href="{{pathFor route='profile'}}">Change Password</a></li>
+                            <li><a href="#" class="logout">Logout</a></li>
                         </ul>
                     </div>
-                    <div class="logo-element">
-                        IN+
-                    </div>
-                    {{> loginButtons}}
                 </li>
 
                 <li class="{{isActiveRoute regex='predictions'}}">

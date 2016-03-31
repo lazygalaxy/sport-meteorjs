@@ -27,7 +27,6 @@ ejson
 spacebars
 check
 accounts-password
-accounts-ui
 momentjs:moment
 standard-minifier-css
 standard-minifier-js
