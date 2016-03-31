@@ -8,6 +8,7 @@
             <!-- End offCanvas menu toggle -->
 
             <ul class="nav" id="side-menu">
+                {{#if getCurrentUser}}
                 <li class="nav-header">
                     <div class="dropdown profile-element">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
@@ -24,7 +25,9 @@
                     <div class="logo-element">
                         IN+
                     </div>
+                    {{> loginButtons}}
                 </li>
+
                 <li class="{{isActiveRoute regex='predictions'}}">
                     <a href="{{pathFor route='predictions'}}"><i class="fa fa-magic"></i> <span class="nav-label">Predictions</span> </a>
                 </li>
@@ -40,7 +43,19 @@
                 <li class="{{isActiveRoute regex='userAdmin'}}">
                     <a href="{{pathFor route='userAdmin'}}"><i class="fa fa-users"></i> <span class="nav-label">User Admin</span> </a>
                 </li>
+                {{/if}} {{else}}
+                <li class="{{isActiveRoute regex='login'}}">
+                    <a href="{{pathFor route='login'}}"><i class="fa fa-user"></i> <span class="nav-label">Login</span> </a>
+                </li>
+                <li class="{{isActiveRoute regex='register'}}">
+                    <a href="{{pathFor route='register'}}"><i class="fa fa-pencil"></i> <span class="nav-label">Register</span> </a>
+                </li>
+                <li class="{{isActiveRoute regex='passwordRecovery'}}">
+                    <a href="{{pathFor route='passwordRecovery'}}"><i class="fa fa-wrench"></i> <span class="nav-label">Password Recovery</span> </a>
+                </li>
                 {{/if}}
+
+
             </ul>
 
         </div>

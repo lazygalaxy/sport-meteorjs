@@ -26,7 +26,7 @@ Router.route('/login', function () {
     if (!Meteor.userId()) {
         this.render('login');
     } else {
-        this.render('predictions');
+        Router.go('home');
     }
 });
 
@@ -34,18 +34,19 @@ Router.route('/register', function () {
     if (!Meteor.userId()) {
         this.render('register');
     } else {
-        this.render('predictions');
+        Router.go('home');
     }
 });
 
-Router.route('/forgotPassword', function () {
+Router.route('/passwordRecovery', function () {
     if (!Meteor.userId()) {
-        this.render('forgotPassword');
+        this.render('passwordRecovery');
     } else {
-        this.render('predictions');
+        Router.go('home');
     }
 });
 
+//TODO: remove this once loading looks good
 Router.route('/loading', function () {
     this.render('loading');
 });
@@ -54,7 +55,7 @@ Router.route('/predictions', function () {
     if (Meteor.userId()) {
         this.render('predictions');
     } else {
-        this.render('login');
+        Router.go('login');
     }
 });
 
@@ -102,6 +103,6 @@ Router.route('/userAdmin', {
     }
 });
 
-Router.route('/', function () {
+Router.route('/home', function () {
     Router.go('predictions');
 });

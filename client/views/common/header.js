@@ -1,4 +1,4 @@
-Template.topNavbar.rendered = function () {
+Template.header.rendered = function () {
 
     // FIXED TOP NAVBAR OPTION
     // Uncomment this if you want to have fixed top navbar
@@ -7,7 +7,7 @@ Template.topNavbar.rendered = function () {
 
 };
 
-Template.topNavbar.events({
+Template.header.events({
 
     // Toggle left navigation
     'click #navbar-minimalize': function (event) {
