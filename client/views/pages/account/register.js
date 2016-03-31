@@ -11,6 +11,6 @@ Template.register.events({
             password: password
         });
 
-        Router.go('predictions');
+        Router.go('home');
     }
 });

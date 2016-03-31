@@ -4,5 +4,7 @@ Template.login.events({
         var username = $('[name=username]').val();
         var password = $('[name=password]').val();
         Meteor.loginWithPassword(username, password);
+
+        Router.go('home');
     }
 });
