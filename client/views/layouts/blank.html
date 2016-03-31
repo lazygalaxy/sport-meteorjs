@@ -1,18 +1,17 @@
 <template name="blankLayout">
-
-    <!-- Wrapper-->
-    <div id="wrapper">
-
-        <!-- Page wraper -->
-        <div id="page-wrapper" class="gray-bg">
-
-            <!-- Main view  -->
-            {{> yield}}
-
+    <div class="middle-box text-center animated fadeInDown">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox-content">
+                    <div>
+                        <h1 class="logo-name">IN+</h1>
+                    </div>
+                    <!-- Main view  -->
+                    {{> yield}}
+                </div>
+            </div>
         </div>
-        <!-- End page wrapper-->
-
     </div>
-    <!-- End wrapper-->
-
+    <!-- Footer -->
+    {{> footer }}
 </template>

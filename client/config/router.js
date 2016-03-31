@@ -1,34 +1,62 @@
-Router.onBeforeAction(function () {
+Router.configure({
+    layoutTemplate: 'blankLayout',
+    notFoundTemplate: 'notFound',
+    //loadingTemplate: 'loading'
+});
+
+//TODO: try to generalize using onBeforeAction
+//Router.onBeforeAction(function () {
+//    if (!Meteor.userId()) {
+//        Router.configure({
+//            layoutTemplate: 'blankLayout'
+//        });
+//        //Router.current().route.getName();
+//        this.render('login');
+//    } else {
+//        Router.configure({
+//            layoutTemplate: 'mainLayout',
+//            notFoundTemplate: 'notFound',
+//            //loadingTemplate: 'loading'
+//        });
+//        this.next();
+//    }
+//});
+
+Router.route('/login', function () {
     if (!Meteor.userId()) {
-        Router.configure({
-            layoutTemplate: 'blankLayout'
-        });
-        this.render(Router.current().route.getName());
+        this.render('login');
     } else {
-        Router.configure({
-            layoutTemplate: 'mainLayout',
-            notFoundTemplate: 'notFound',
-            //loadingTemplate: 'loading'
-        });
-        this.next();
+        this.render('predictions');
     }
 });
 
-Router.route('/login', function () {
-    this.render('login');
-});
-
 Router.route('/register', function () {
-    this.render('register');
+    if (!Meteor.userId()) {
+        this.render('register');
+    } else {
+        this.render('predictions');
+    }
 });
 
 Router.route('/forgotPassword', function () {
-    this.render('forgotPassword');
+    if (!Meteor.userId()) {
+        this.render('forgotPassword');
+    } else {
+        this.render('predictions');
+    }
 });
 
 Router.route('/predictions', function () {
-    this.render('predictions');
+    if (Meteor.userId()) {
+        this.render('predictions');
+    } else {
+        this.render('login');
+    }
 });
+
+
+
+
 
 Router.route('/standings', {
     waitOn: function () {
