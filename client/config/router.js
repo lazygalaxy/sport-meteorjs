@@ -1,49 +1,39 @@
+var ALLOW_ROUTES = ['login', 'register', 'passwordRecovery'];
+
 Router.configure({
     layoutTemplate: 'mainLayout',
     notFoundTemplate: 'notFound',
     loadingTemplate: 'loading'
 });
 
-//TODO: try to generalize using onBeforeAction
-//Router.onBeforeAction(function () {
-//    if (!Meteor.userId()) {
-//        Router.configure({
-//            layoutTemplate: 'blankLayout'
-//        });
-//        //Router.current().route.getName();
-//        this.render('login');
-//    } else {
-//        Router.configure({
-//            layoutTemplate: 'mainLayout',
-//            notFoundTemplate: 'notFound',
-//            //loadingTemplate: 'loading'
-//        });
-//        this.next();
-//    }
-//});
+Router.onBeforeAction(function () {
+    var routeName = Router.current().route.getName();
+
+    if (!Meteor.userId()) {
+        if (ALLOW_ROUTES.indexOf(routeName) > -1) {
+            this.render(routeName);
+        } else {
+            Router.go('login');
+        }
+    } else {
+        if (ALLOW_ROUTES.indexOf(routeName) == -1) {
+            this.next();
+        } else {
+            Router.go('home');
+        }
+    }
+});
 
 Router.route('/login', function () {
-    if (!Meteor.userId()) {
-        this.render('login');
-    } else {
-        Router.go('home');
-    }
+    this.render('login');
 });
 
 Router.route('/register', function () {
-    if (!Meteor.userId()) {
-        this.render('register');
-    } else {
-        Router.go('home');
-    }
+    this.render('register');
 });
 
 Router.route('/passwordRecovery', function () {
-    if (!Meteor.userId()) {
-        this.render('passwordRecovery');
-    } else {
-        Router.go('home');
-    }
+    this.render('passwordRecovery');
 });
 
 //TODO: remove this once loading looks good
@@ -51,19 +41,17 @@ Router.route('/loading', function () {
     this.render('loading');
 });
 
-Router.route('/predictions', function () {
-    if (Meteor.userId()) {
-        this.render('predictions');
-    } else {
-        Router.go('login');
-    }
+Router.route('/', function () {
+    Router.go('predictions');
 });
 
+Router.route('/home', function () {
+    Router.go('predictions');
+});
 
-
-
-
-
+Router.route('/predictions', function () {
+    this.render('predictions');
+});
 
 Router.route('/standings', {
     waitOn: function () {
@@ -101,8 +89,4 @@ Router.route('/userAdmin', {
             this.render('userAdmin');
         }
     }
-});
-
-Router.route('/home', function () {
-    Router.go('predictions');
 });
