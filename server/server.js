@@ -102,6 +102,9 @@ Meteor.startup(function () {
             }, {
                 $set: obj
             });
+        },
+        'changeUsername': function (username) {
+            Accounts.setUsername(Meteor.user()._id, username);
         }
     });
 });
