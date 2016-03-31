@@ -1,7 +1,7 @@
 <template name="navigation">
+    {{#if getCurrentUser}} {{> changePassword}} {{/if}}
     <nav class="navbar-default navbar-static-side" role="navigation">
         <div class="sidebar-collapse">
-
             <!-- Close canvas menu used only on OffCanvas page -->
             <!-- You can remove this tag if you dont use offCanvas menu -->
             <!--a class="close-canvas-menu"><i class="fa fa-times"></i></a-->
@@ -11,40 +11,16 @@
                 {{#if getCurrentUser}}
                 <li class="nav-header">
                     <div class="dropdown profile-element">
+                        <img alt="image" class="img-circle" src="logos/gome.png" style="width:48px;" />
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <img alt="image" class="img-circle" src="logos/gome.png" style="width:48px;" />
                             <span class="block m-t-xs">
                                     <strong class="font-bold">{{getCurrentUser.username}}<b class="caret"></b></strong>
                             </span>
                         </a>
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                            <li><a data-toggle="modal" href="#changePassword">Change Password</a></li>
+                            <li><a data-toggle="modal" data-target="#changePassword">Change Password</a></li>
                             <li><a href="#" class="logout">Logout</a></li>
                         </ul>
-                    </div>
-
-                    <div class="modal inmodal" id="changePassword" tabindex="-1" role="dialog" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content animated bounceInRight">
-                                <div class="modal-header">
-                                    <i class="fa fa-wrench modal-icon"></i>
-                                    <h4 class="modal-title">Change Password</h4>
-                                    <small class="font-bold">Please supply your current password together with the new one you would like to update it to.</small>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="form-group">
-                                        <input type="password" name="current" placeholder="Current Password" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="password" name="new" placeholder="New Password" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Change Password</button>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </li>
 
@@ -71,7 +47,7 @@
                     <a href="{{pathFor route='register'}}"><i class="fa fa-pencil"></i> <span class="nav-label">Register</span> </a>
                 </li>
                 <li class="{{isActiveRoute regex='passwordRecovery'}}">
-                    <a href="{{pathFor route='passwordRecovery'}}"><i class="fa fa-wrench"></i> <span class="nav-label">Password Recovery</span> </a>
+                    <a href="{{pathFor route='forgotPassword'}}"><i class="fa fa-wrench"></i> <span class="nav-label">Password Recovery</span> </a>
                 </li>
                 {{/if}}
 

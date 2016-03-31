@@ -1,4 +1,4 @@
-Template.passwordRecovery.events({
+Template.forgotPassword.events({
     'submit form': function (event) {
         event.preventDefault();
         var email = $('[name=email]').val();

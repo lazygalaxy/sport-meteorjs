@@ -1,4 +1,4 @@
-var ALLOW_ROUTES = ['login', 'register', 'passwordRecovery'];
+var ALLOW_ROUTES = ['login', 'register', 'forgotPassword'];
 
 Router.configure({
     layoutTemplate: 'mainLayout',
@@ -32,8 +32,8 @@ Router.route('/register', function () {
     this.render('register');
 });
 
-Router.route('/passwordRecovery', function () {
-    this.render('passwordRecovery');
+Router.route('/forgotPassword', function () {
+    this.render('forgotPassword');
 });
 
 //TODO: remove this once loading looks good
