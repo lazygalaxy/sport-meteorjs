@@ -65,6 +65,7 @@ Meteor.startup(function () {
             self.added('customusers', user._id, user);
         });
 
+        //alert subscribers publisher is ready
         self.ready();
 
         self.onStop(function () {

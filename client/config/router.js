@@ -60,8 +60,9 @@ Router.route('/standings', {
     action: function () {
         //TODO: not entirely sure this is the best way to handle this
         if (getCurrentUser()) {
-            Session.set('selectedGroup', getCurrentUser().groups[0]);
-            Session.set('selectedCompetition', "EURO2016TEST");
+            var groupLength = getCurrentUser().groups.length;
+            Session.set('selectedGroup', getCurrentUser().groups[groupLength - 1]);
+            Session.set('selectedCompetition', "EURO2016");
             this.render('standings');
         }
     }
@@ -84,8 +85,9 @@ Router.route('/userAdmin', {
     action: function () {
         //TODO: not entirely sure this is the best way to handle this
         if (getCurrentUser()) {
-            Session.set('selectedCompetition', "EURO2016TEST");
-            Session.set('selectedGroup', getCurrentUser().adminGroups[0]);
+            var groupLength = getCurrentUser().groups.length;
+            Session.set('selectedCompetition', "EURO2016");
+            Session.set('selectedGroup', getCurrentUser().adminGroups[groupLength - 1]);
             this.render('userAdmin');
         }
     }
