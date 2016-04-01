@@ -47,17 +47,17 @@ Template.resultAdmin.helpers({
         var answerItems = questions.concat(matches);
         answerItems.sort(function (a, b) {
             if (a.date < b.date)
-                return -1;
+                return 1;
             else if (a.date > b.date)
-                return 1;
+                return -1;
             else if (a.type > b.type)
-                return -1;
+                return 1;
             else if (a.type < b.type)
-                return 1;
-            else if (a._id < b._id)
                 return -1;
-            else if (a._id > b._id)
+            else if (a._id < b._id)
                 return 1;
+            else if (a._id > b._id)
+                return -1;
             else
                 return 0;
         });

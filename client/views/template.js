@@ -65,7 +65,22 @@ Template.registerHelper('getPaidAttribute', function () {
 
 //competitions
 getCompetitions = function () {
-    return Competitions.find({});
+    var competitions = [];
+    var nowDate = new Date();
+
+    Competitions.find({}).forEach(function (entry) {
+        if (entry.endDate > nowDate || Predictions.findOne({
+                userId: getCurrentUser()._id,
+                competitionId: entry._id
+            }) || Questions.findOne({
+                userId: getCurrentUser()._id,
+                competitionId: entry._id
+            })) {
+            competitions.push(entry);
+        }
+    });
+
+    return competitions;
 }
 
 Template.registerHelper('getCompetitions', function () {

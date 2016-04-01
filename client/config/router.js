@@ -55,14 +55,14 @@ Router.route('/predictions', function () {
 
 Router.route('/standings', {
     waitOn: function () {
-        return Meteor.subscribe("customusers");
+        return [Meteor.subscribe("customusers")];
     },
     action: function () {
         //TODO: not entirely sure this is the best way to handle this
         if (getCurrentUser()) {
             var groupLength = getCurrentUser().groups.length;
             Session.set('selectedGroup', getCurrentUser().groups[groupLength - 1]);
-            Session.set('selectedCompetition', "EURO2016");
+            Session.set('selectedCompetition', 'EURO2016');
             this.render('standings');
         }
     }
@@ -86,7 +86,7 @@ Router.route('/userAdmin', {
         //TODO: not entirely sure this is the best way to handle this
         if (getCurrentUser()) {
             var groupLength = getCurrentUser().groups.length;
-            Session.set('selectedCompetition', "EURO2016");
+            Session.set('selectedCompetition', 'EURO2016');
             Session.set('selectedGroup', getCurrentUser().adminGroups[groupLength - 1]);
             this.render('userAdmin');
         }
