@@ -68,7 +68,7 @@ Meteor.startup(function () {
         });
     }
 
-    var olafUser = Accounts.findUserByEmail('olaf@axpo.com');
+    var olafUser = Accounts.findUserByEmail('olaf.stehr@axpo.com');
     if (olafUser) {
         UserInfo.upsert({
             _id: olafUser._id

@@ -3,7 +3,7 @@ Meteor.startup(function () {
     Meteor.users.find({}).observeChanges({
         added: function (id, doc) {
             console.log("adding " + doc.username);
-            //TODO: must be a better way to do this
+            //TODO: find a better way to add users to groups
             var groups = Groups.find({});
             groups.forEach(function (group) {
                 var found = (group._id == 'GLOBAL');
@@ -30,7 +30,19 @@ Meteor.startup(function () {
     //publishers
     Meteor.publish("customusers", function () {
         var self = this;
-        var handler = UserInfo.find({}).observeChanges({
+        var userInfoHandler = UserInfo.find({}).observeChanges({
+            added: function (id, doc) {
+                self.added('customusers', id, doc);
+            },
+            changed: function (id, doc) {
+                self.changed('customusers', id, doc);
+            },
+            removed: function (id) {
+                self.removed('customusers', id);
+            }
+        });
+
+        var meteorUserHandler = Meteor.users.find({}).observeChanges({
             added: function (id, doc) {
                 self.added('customusers', id, doc);
             },
@@ -56,8 +68,12 @@ Meteor.startup(function () {
         self.ready();
 
         self.onStop(function () {
-            if (handler) {
-                handler.stop();
+            if (userInfoHandler) {
+                userInfoHandler.stop();
+            }
+
+            if (meteorUserHandler) {
+                meteorUserHandler.stop();
             }
         });
     });
