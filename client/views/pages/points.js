@@ -4,14 +4,14 @@ Template.points.helpers({
         var user = Session.get('selectedUser');
 
         var matches = Matches.find({
-            competition: competition,
+            competitionId: competition,
             date: {
                 $lt: new Date()
             }
         });
 
         var questions = Questions.find({
-            competition: competition,
+            competitionId: competition,
             date: {
                 $lt: new Date()
             }

@@ -11,10 +11,12 @@
 
 <template name="groupSelection">
     <div class="btn-group">
-        <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">{{getSelectedGroup}} <span class="caret"></span></button>
+        <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">{{#with getSelectedGroup}}<img src="logos/{{_id}}.png" height="25px">&nbsp;{{label}}{{/with}} <span class="caret"></span></button>
         <ul class="dropdown-menu group-selection">
             {{#each getGroups}}
-            <li><a href="#">{{this}}</a></li>
+            <li>
+                <a id="{{_id}}" href="#"><img src="logos/{{_id}}.png" height="25px">&nbsp;{{label}}</a>
+            </li>
             {{/each}}
         </ul>
     </div>
@@ -33,10 +35,12 @@
 
 <template name="competitionSelection">
     <div class="btn-group">
-        <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">{{getSelectedCompetition false}} <span class="caret"></span></button>
+        <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">{{#with getSelectedCompetition false}}<img src="logos/{{_id}}.png" height="25px">&nbsp;{{label}}{{/with}} <span class="caret"></span></button>
         <ul class="dropdown-menu competition-selection">
             {{#each getCompetitions}}
-            <li><a href="#">{{this._id}}</a></li>
+            <li>
+                <a id="{{_id}}" href="#"><img src="logos/{{_id}}.png" height="25px">&nbsp;{{label}}</a>
+            </li>
             {{/each}}
         </ul>
     </div>
@@ -59,7 +63,7 @@
                 <div class="ibox-content">
                     <div class="row">
                         <div class="col-xs-3 col-sm-4">
-                            <img src="{{this.homeTeam.image}}" style="max-width: 100%;float: right;" />
+                            <img src="/flags/{{this.homeTeam.iso3}}.png" style="max-width: 100%;float: right;" />
                         </div>
                         <div class="col-xs-6 col-sm-4">
                             <div class="row">
@@ -81,7 +85,7 @@
                             </div>
                         </div>
                         <div class="col-xs-3 col-sm-4">
-                            <img src="{{this.awayTeam.image}}" style="max-width: 100%;float: left;">
+                            <img src="/flags/{{this.awayTeam.iso3}}.png" style="max-width: 100%;float: left;">
                         </div>
                     </div>
                 </div>

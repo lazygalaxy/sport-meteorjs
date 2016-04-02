@@ -4,7 +4,7 @@ Template.standings.helpers({
         var group = Session.get('selectedGroup');
 
         var predictionMap = Predictions.find({
-            competitionId: competition
+            competitionId: competition._id
         }).fetch().reduce(function (map, obj) {
             if (!map[obj.userId]) {
                 map[obj.userId] = {}
@@ -14,7 +14,7 @@ Template.standings.helpers({
         }, {});
 
         var resultMap = Results.find({
-            competitionId: competition
+            competitionId: competition._id
         }).fetch().reduce(function (map, obj) {
             //TODO: consider the highest weighted here if multiple exists
             map[obj.itemId] = obj;
@@ -28,7 +28,7 @@ Template.standings.helpers({
             });
 
             //if the user belongs to the selected group
-            if (user.groups.indexOf(group) >= 0) {
+            if (user.groups.indexOf(group._id) >= 0) {
                 user.points = 0;
                 Object.keys(predictionMap[userId]).forEach(function (predictionId) {
                     var prediction = predictionMap[userId][predictionId];
@@ -54,7 +54,6 @@ Template.standings.helpers({
                             //calculate the actual points
                             if (result.homeScore == prediction.homeScore && result.awayScore == prediction.awayScore) {
                                 user.points += 3;
-                                console.info(user.username + '  ' + user.points + ' ' + prediction.itemId);
                             } else if ((result.homeScore - result.awayScore) == (prediction.homeScore - prediction.awayScore)) {
                                 user.points += 2;
                             } else if ((result.homeScore > result.awayScore && prediction.awayScore > prediction.awayScore) || (result.homeScore < result.awayScore && prediction.awayScore < prediction.awayScore)) {

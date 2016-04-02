@@ -11,15 +11,13 @@ Meteor.startup(function () {
         _id: GLOBAL,
     }, {
         label: 'Global',
-        image: 'logos/GOME.png',
         domains: []
     });
 
     Groups.upsert({
         _id: AXPO,
     }, {
-        label: 'Axpo Group AG',
-        image: 'logos/AXPO.png',
+        label: 'Axpo Group',
         domains: ['axpo.com', 'axpo.ch']
     });
 
@@ -27,8 +25,19 @@ Meteor.startup(function () {
         _id: VONTOBEL,
     }, {
         label: 'Bank Vontobel',
-        image: 'logos/VONTOBEL.png',
         domains: ['vontobel.com', 'vontobel.ch']
+    });
+
+    Competitions.upsert({
+        _id: EURO2016,
+    }, {
+        label: 'Euro2016'
+    });
+
+    Competitions.upsert({
+        _id: EURO2016TEST,
+    }, {
+        label: 'Euro2016 (Test)'
     });
 
     var countryContents = Assets.getText('countries.csv').split(/\r\n|\n/);
@@ -42,8 +51,7 @@ Meteor.startup(function () {
             label: fields[0],
             iso2: fields[1],
             iso3: fields[2],
-            isoCode: fields[3],
-            image: 'flags/' + fields[2] + '.png'
+            isoCode: fields[3]
         });
     });
 
@@ -111,7 +119,7 @@ var loadMatches = function (competitionLabel) {
             Matches.upsert({
                 _id: competitionLabel + fields[0]
             }, {
-                competition: competitionLabel,
+                competitionId: competitionLabel,
                 date: theMoment.toDate(),
                 homeTeam: homeTeamObj,
                 awayTeam: awayTeamObj,
@@ -137,7 +145,7 @@ var loadMatches = function (competitionLabel) {
         Questions.upsert({
             _id: competitionLabel + fields[0]
         }, {
-            competition: competitionLabel,
+            competitionId: competitionLabel,
             date: theDate,
             description: fields[2],
             points: fields[3],
@@ -149,9 +157,9 @@ var loadMatches = function (competitionLabel) {
     Competitions.upsert({
         _id: competitionLabel,
     }, {
-        label: competitionLabel,
-        image: 'logos/' + competitionLabel + '.png',
-        startDate: startMoment.toDate(),
-        endDate: endMoment.toDate()
+        $set: {
+            startDate: startMoment.toDate(),
+            endDate: endMoment.toDate()
+        }
     });
 }

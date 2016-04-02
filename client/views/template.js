@@ -1,5 +1,5 @@
 prettyDate = function (date) {
-    return moment(date).format('YYYY-MM-DD hh:mm:ss');
+    return moment(date).format('YYYY-MM-DD HH:mm:ss');
 }
 Template.registerHelper('prettyDate', function (date) {
     return prettyDate(date);
@@ -110,7 +110,11 @@ Template.registerHelper('getAdminCompetitions', function () {
 //groups
 Template.registerHelper('getGroups', function () {
     //TODO: should maybe also include groups that the user is an admin for
-    return getCurrentUser().groups;
+    return Groups.find({
+        _id: {
+            $in: getCurrentUser().groups
+        }
+    });
 });
 
 Template.registerHelper('getSelectedGroup', function (checkAdmin) {
@@ -159,10 +163,14 @@ Template.userAdmin.events({
 
 Template.standings.events({
     "click .group-selection li a": function (event) {
-        Session.set('selectedGroup', event.target.text);
+        Session.set('selectedGroup', Groups.findOne({
+            _id: event.target.id
+        }));
     },
     "click .competition-selection li a": function (event) {
-        Session.set('selectedCompetition', event.target.text);
+        Session.set('selectedCompetition', Competitions.findOne({
+            _id: event.target.id
+        }));
     }
 });
 
