@@ -53,7 +53,8 @@ Router.route('/predictions', function () {
     this.render('predictions');
 });
 
-Router.route('/points', function () {
+Router.route('/points/:_id', function () {
+    setUser(this.params._id);
     this.render('points');
 });
 

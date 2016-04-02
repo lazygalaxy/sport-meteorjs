@@ -33,10 +33,18 @@ Template.registerHelper('getActor', function (id) {
 });
 
 //users
-getCurrentUser = function () {
+Template.registerHelper('getUsers', function () {
+    return CustomUsers.find({});
+});
+
+getUser = function (id) {
     return CustomUsers.findOne({
-        _id: Meteor.userId()
+        _id: id
     });
+}
+
+getCurrentUser = function () {
+    return getUser(Meteor.userId());
 }
 
 Template.registerHelper('getCurrentUser', function () {
@@ -111,6 +119,11 @@ Template.registerHelper('getAdminGroups', function () {
     return getCurrentUser().adminGroups;
 });
 
+Template.registerHelper('getSelectedUser', function () {
+    setUser();
+    return Session.get('selectedUser');
+});
+
 inputUpsertPrediction = function (id, name, value) {
     Meteor.call('upsertPrediction', id, name, value, function (error, result) {
         if (error) {
@@ -131,6 +144,7 @@ inputUpsertResult = function (id, name, value) {
     });
 }
 
+//TODO: this repetition of events should be avoided
 Template.userAdmin.events({
     "click .group-selection li a": function (event) {
         Session.set('selectedGroup', event.target.text);
@@ -146,6 +160,15 @@ Template.standings.events({
     },
     "click .competition-selection li a": function (event) {
         Session.set('selectedCompetition', event.target.text);
+    }
+});
+
+Template.points.events({
+    "click .competition-selection li a": function (event) {
+        Session.set('selectedCompetition', event.target.text);
+    },
+    "click .user-selection li a": function (event) {
+        Session.set('selectedUser', getUser(event.target.id));
     }
 });
 
@@ -174,5 +197,16 @@ var setGroup = function (checkAdmin) {
     if (checkAdmin && getCurrentUser().adminGroups.indexOf(Session.get('selectedGroup')) == -1) {
         var groupLength = getCurrentUser().adminGroups.length;
         Session.set('selectedGroup', getCurrentUser().adminGroups[groupLength - 1]);
+    }
+}
+
+setUser = function (id) {
+    //ensure that a user is set
+    if (!Session.get('selectedUser')) {
+        Session.set('selectedUser', getCurrentUser());
+    }
+
+    if (id) {
+        Session.set('selectedUser', getUser(id));
     }
 }

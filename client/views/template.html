@@ -11,10 +11,21 @@
 
 <template name="groupSelection">
     <div class="btn-group">
-        <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">{{getSelectedGroup false}} <span class="caret"></span></button>
+        <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">{{getSelectedGroup}} <span class="caret"></span></button>
         <ul class="dropdown-menu group-selection">
             {{#each getGroups}}
             <li><a href="#">{{this}}</a></li>
+            {{/each}}
+        </ul>
+    </div>
+</template>
+
+<template name="userSelection">
+    <div class="btn-group">
+        <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">{{#with getSelectedUser}}{{username}}{{/with}} <span class="caret"></span></button>
+        <ul class="dropdown-menu scrollable-menu user-selection">
+            {{#each getUsers}}
+            <li><a id="{{_id}}" href="#">{{username}}</a></li>
             {{/each}}
         </ul>
     </div>
