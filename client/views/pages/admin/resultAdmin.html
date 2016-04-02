@@ -2,6 +2,22 @@
     {{> pageHeading title='Results Admin' }}
 
     <div class="text-center wrapper wrapper-content animated fadeInRight">
-        {{#each getAnswerItems}} {{#if equals this.type 'match'}} {{>matchRow}} {{/if}} {{#if equals this.type 'question'}} {{>questionRow}} {{/if}} {{/each}}
+        {{#if getAnswerItems}} {{#each getAnswerItems}} {{#if equals this.type 'match'}} {{>matchRow}} {{/if}} {{#if equals this.type 'question'}} {{>questionRow}} {{/if}} {{/each}} {{else}} {{>noResultsAdmin}}{{/if}}
+    </div>
+</template>
+
+
+<template name="noResultsAdmin">
+    <div class="wrapper wrapper-content animated fadeInRight">
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        No result administration required.
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>

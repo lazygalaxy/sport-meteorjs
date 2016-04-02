@@ -53,6 +53,10 @@ Router.route('/predictions', function () {
     this.render('predictions');
 });
 
+Router.route('/points', function () {
+    this.render('points');
+});
+
 Router.route('/standings', {
     waitOn: function () {
         return [Meteor.subscribe("customusers")];
@@ -61,10 +65,9 @@ Router.route('/standings', {
         //TODO: not entirely sure this is the best way to handle this
         if (getCurrentUser()) {
             var groupLength = getCurrentUser().groups.length;
-            Session.set('selectedGroup', getCurrentUser().groups[groupLength - 1]);
-            console.info(getCurrentUser().groups[groupLength - 1]);
             //TODO: should not be hardcoded to EURO2016
             Session.set('selectedCompetition', 'EURO2016');
+            Session.set('selectedGroup', getCurrentUser().groups[groupLength - 1]);
             this.render('standings');
         }
     }
