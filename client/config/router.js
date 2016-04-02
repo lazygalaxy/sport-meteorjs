@@ -62,6 +62,8 @@ Router.route('/standings', {
         if (getCurrentUser()) {
             var groupLength = getCurrentUser().groups.length;
             Session.set('selectedGroup', getCurrentUser().groups[groupLength - 1]);
+            console.info(getCurrentUser().groups[groupLength - 1]);
+            //TODO: should not be hardcoded to EURO2016
             Session.set('selectedCompetition', 'EURO2016');
             this.render('standings');
         }
@@ -85,7 +87,8 @@ Router.route('/userAdmin', {
     action: function () {
         //TODO: not entirely sure this is the best way to handle this
         if (getCurrentUser()) {
-            var groupLength = getCurrentUser().groups.length;
+            var groupLength = getCurrentUser().adminGroups.length;
+            //TODO: should not be hardcoded to EURO2016
             Session.set('selectedCompetition', 'EURO2016');
             Session.set('selectedGroup', getCurrentUser().adminGroups[groupLength - 1]);
             this.render('userAdmin');

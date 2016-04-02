@@ -26,34 +26,31 @@ Template.standings.helpers({
             var user = CustomUsers.findOne({
                 _id: userId
             });
-            if (user.groups.indexOf(group) >= 0) {
-                user.points = 0;
 
-                //console.info("calculating user " + user.username);
-                Object.keys(predictionMap[userId]).forEach(function (predictionId) {
-                    var prediction = predictionMap[userId][predictionId];
-                    //console.info("calculating prediction " + JSON.stringify(prediction));
-                    if (resultMap[prediction.itemId]) {
-                        var result = resultMap[prediction.itemId];
-                        if (result && prediction) {
-                            if (!user.date || user.date < prediction.date) {
-                                user.date = prediction.date;
-                            }
+            user.points = 0;
 
-                            //console.log("calculating " + prediction.itemId);
-                            if (result.homeScore == prediction.homeScore && result.awayScore == prediction.awayScore) {
-                                user.points += 3;
-                            } else if ((result.homeScore - result.awayScore) == (prediction.homeScore - prediction.awayScore)) {
-                                user.points += 2;
-                            } else if ((result.homeScore > result.awayScore && prediction.awayScore > prediction.awayScore) || (result.homeScore < result.awayScore && prediction.awayScore < prediction.awayScore)) {
-                                user.points += 1;
-                            }
-                        }
+            Object.keys(predictionMap[userId]).forEach(function (predictionId) {
+                var prediction = predictionMap[userId][predictionId];
+                if (!user.date || user.date < prediction.date) {
+                    user.date = prediction.date;
+                }
+
+                //if there is an actual result then calculate the points accordingly
+                if (resultMap[prediction.itemId]) {
+                    var result = resultMap[prediction.itemId];
+
+                    //calculate the actual points
+                    if (result.homeScore == prediction.homeScore && result.awayScore == prediction.awayScore) {
+                        user.points += 3;
+                    } else if ((result.homeScore - result.awayScore) == (prediction.homeScore - prediction.awayScore)) {
+                        user.points += 2;
+                    } else if ((result.homeScore > result.awayScore && prediction.awayScore > prediction.awayScore) || (result.homeScore < result.awayScore && prediction.awayScore < prediction.awayScore)) {
+                        user.points += 1;
                     }
-                });
+                }
+            });
 
-                users.push(user);
-            }
+            users.push(user);
         });
 
 

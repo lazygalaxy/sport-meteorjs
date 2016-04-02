@@ -2,7 +2,6 @@ Meteor.startup(function () {
     //listeners
     Meteor.users.find({}).observeChanges({
         added: function (id, doc) {
-            console.log("adding " + doc.username);
             //TODO: find a better way to add users to groups
             var groups = Groups.find({});
             groups.forEach(function (group) {
