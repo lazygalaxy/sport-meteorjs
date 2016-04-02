@@ -87,7 +87,8 @@ Template.registerHelper('getCompetitions', function () {
     return getCompetitions();
 });
 
-Template.registerHelper('getSelectedCompetition', function () {
+Template.registerHelper('getSelectedCompetition', function (checkAdmin) {
+    setCompetition(checkAdmin);
     return Session.get('selectedCompetition');
 });
 
@@ -97,10 +98,12 @@ Template.registerHelper('getAdminCompetitions', function () {
 
 //groups
 Template.registerHelper('getGroups', function () {
+    //TODO: should maybe also include groups that the user is an admin for
     return getCurrentUser().groups;
 });
 
-Template.registerHelper('getSelectedGroup', function () {
+Template.registerHelper('getSelectedGroup', function (checkAdmin) {
+    setGroup(checkAdmin);
     return Session.get('selectedGroup');
 });
 
@@ -145,3 +148,31 @@ Template.standings.events({
         Session.set('selectedCompetition', event.target.text);
     }
 });
+
+var setCompetition = function (checkAdmin) {
+    //ensure that a competition is set
+    if (!Session.get('selectedCompetition')) {
+        //TODO: should not be hardcoded to EURO2016
+        Session.set('selectedCompetition', 'EURO2016');
+    }
+
+    //if it is required ensure it is an admin group
+    if (checkAdmin && getCurrentUser().adminCompetitions.indexOf(Session.get('selectedCompetition')) == -1) {
+        var competitionLength = getCurrentUser().adminCompetitions.length;
+        Session.set('selectedCompetition', getCurrentUser().adminCompetitions[0]);
+    }
+}
+
+var setGroup = function (checkAdmin) {
+    //ensure that a group is set
+    if (!Session.get('selectedGroup')) {
+        var groupLength = getCurrentUser().groups.length;
+        Session.set('selectedGroup', getCurrentUser().groups[groupLength - 1]);
+    }
+
+    //if it is required ensure it is an admin group
+    if (checkAdmin && getCurrentUser().adminGroups.indexOf(Session.get('selectedGroup')) == -1) {
+        var groupLength = getCurrentUser().adminGroups.length;
+        Session.set('selectedGroup', getCurrentUser().adminGroups[groupLength - 1]);
+    }
+}

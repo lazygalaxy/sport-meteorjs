@@ -1,6 +1,6 @@
 <template name="adminGroupSelection">
     <div class="btn-group">
-        <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">{{getSelectedGroup}} <span class="caret"></span></button>
+        <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">{{getSelectedGroup true}} <span class="caret"></span></button>
         <ul class="dropdown-menu group-selection">
             {{#each getAdminGroups}}
             <li><a href="#">{{this}}</a></li>
@@ -11,7 +11,7 @@
 
 <template name="groupSelection">
     <div class="btn-group">
-        <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">{{getSelectedGroup}} <span class="caret"></span></button>
+        <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">{{getSelectedGroup false}} <span class="caret"></span></button>
         <ul class="dropdown-menu group-selection">
             {{#each getGroups}}
             <li><a href="#">{{this}}</a></li>
@@ -22,7 +22,7 @@
 
 <template name="competitionSelection">
     <div class="btn-group">
-        <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">{{getSelectedCompetition}} <span class="caret"></span></button>
+        <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">{{getSelectedCompetition false}} <span class="caret"></span></button>
         <ul class="dropdown-menu competition-selection">
             {{#each getCompetitions}}
             <li><a href="#">{{this._id}}</a></li>
