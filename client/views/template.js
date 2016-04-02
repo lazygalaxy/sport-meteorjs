@@ -1,5 +1,5 @@
 prettyDate = function (date) {
-    return moment(date).format('Do MMM YYYY @ h:mm:ss a');
+    return moment(date).format('YYYY-MM-DD hh:mm:ss');
 }
 Template.registerHelper('prettyDate', function (date) {
     return prettyDate(date);

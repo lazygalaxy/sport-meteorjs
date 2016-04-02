@@ -4,11 +4,17 @@ Template.points.helpers({
         var user = Session.get('selectedUser');
 
         var matches = Matches.find({
-            competition: competition
+            competition: competition,
+            date: {
+                $lt: new Date()
+            }
         });
 
         var questions = Questions.find({
-            competition: competition
+            competition: competition,
+            date: {
+                $lt: new Date()
+            }
         });
 
         var predictionMap = Predictions.find({
@@ -45,7 +51,7 @@ Template.points.helpers({
 
             if (prediction) {
                 info.predictDate = prettyDate(prediction.date);
-                info.prediction = prediction.homeScore + ' - ' + prediction.awayScore;
+                info.prediction = prediction.homeScore + ' - ' + prediction.awayScore + ' (' + prettyDate(prediction.date) + ')';
             } else {
                 info.predictDate = 'N/A';
                 info.prediction = 'N/A';
@@ -94,7 +100,6 @@ Template.points.helpers({
 
             if (prediction && result) {
                 if (question.options == 'INTEGER') {
-                    console.info(result.answer - prediction.answer);
                     if (Math.abs(result.answer - prediction.answer) <= question.threshold) {
                         info.points = question.points;
                     } else {

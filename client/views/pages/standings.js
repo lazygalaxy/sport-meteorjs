@@ -27,10 +27,9 @@ Template.standings.helpers({
                 _id: userId
             });
 
+            //if the user belongs to the selected group
             if (user.groups.indexOf(group) >= 0) {
-
                 user.points = 0;
-
                 Object.keys(predictionMap[userId]).forEach(function (predictionId) {
                     var prediction = predictionMap[userId][predictionId];
                     if (!user.date || user.date < prediction.date) {
@@ -40,14 +39,27 @@ Template.standings.helpers({
                     //if there is an actual result then calculate the points accordingly
                     if (resultMap[prediction.itemId]) {
                         var result = resultMap[prediction.itemId];
-
-                        //calculate the actual points
-                        if (result.homeScore == prediction.homeScore && result.awayScore == prediction.awayScore) {
-                            user.points += 3;
-                        } else if ((result.homeScore - result.awayScore) == (prediction.homeScore - prediction.awayScore)) {
-                            user.points += 2;
-                        } else if ((result.homeScore > result.awayScore && prediction.awayScore > prediction.awayScore) || (result.homeScore < result.awayScore && prediction.awayScore < prediction.awayScore)) {
-                            user.points += 1;
+                        if (result.answer) {
+                            var question = Questions.findOne({
+                                _id: prediction.itemId
+                            });
+                            if (question.options == 'INTEGER') {
+                                if (Math.abs(result.answer - prediction.answer) <= question.threshold) {
+                                    user.points += parseInt(question.points);
+                                }
+                            } else if (result.answer == prediction.answer) {
+                                user.points += parseInt(question.points);
+                            }
+                        } else {
+                            //calculate the actual points
+                            if (result.homeScore == prediction.homeScore && result.awayScore == prediction.awayScore) {
+                                user.points += 3;
+                                console.info(user.username + '  ' + user.points + ' ' + prediction.itemId);
+                            } else if ((result.homeScore - result.awayScore) == (prediction.homeScore - prediction.awayScore)) {
+                                user.points += 2;
+                            } else if ((result.homeScore > result.awayScore && prediction.awayScore > prediction.awayScore) || (result.homeScore < result.awayScore && prediction.awayScore < prediction.awayScore)) {
+                                user.points += 1;
+                            }
                         }
                     }
                 });
