@@ -53,9 +53,14 @@ Router.route('/predictions', function () {
     this.render('predictions');
 });
 
-Router.route('/points/:_id', function () {
-    setUser(this.params._id);
-    this.render('points');
+Router.route('/points/:_id', {
+    waitOn: function () {
+        return Meteor.subscribe("customusers");
+    },
+    action: function () {
+        setUser(this.params._id);
+        this.render('points');
+    }
 });
 
 Router.route('/standings', {

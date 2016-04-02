@@ -141,7 +141,8 @@ var loadMatches = function (competitionLabel) {
             date: theDate,
             description: fields[2],
             points: fields[3],
-            options: fields[4]
+            threshold: fields[4],
+            options: fields[5]
         });
     });
 

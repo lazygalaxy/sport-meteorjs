@@ -12,12 +12,14 @@
                                 <thead>
                                     <tr>
                                         <th>Date</th>
-                                        <th>Info</th>
+                                        <th>Match/Question</th>
+                                        <th>Result</th>
+                                        <th>Prediction</th>
                                         <th>Points</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {{#each getUserPointsInfo}} {{>userPointsInfo}} {{/each}}
+                                    {{#each getUserPoints}} {{>userPoints}} {{/each}}
                                 </tbody>
                             </table>
                         </div>
@@ -28,10 +30,12 @@
     </div>
 </template>
 
-<template name="userPointsInfo">
+<template name="userPoints">
     <tr>
-        <td>{{date}}</td>
-        <td>{{info}}</td>
+        <td>{{prettyDate endDate}}</td>
+        <td>{{matchOrQuestion}}</td>
+        <td>{{result}}</td>
+        <td>{{prediction}}</td>
         <td>{{points}}</td>
     </tr>
 </template>
