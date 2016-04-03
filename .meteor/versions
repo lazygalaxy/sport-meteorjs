@@ -51,7 +51,6 @@ localstorage@1.0.7
 logging@1.0.10
 meteor@1.1.12
 meteor-base@1.0.2
-minifier-css@1.1.9
 minifier-js@1.1.9
 minimongo@1.0.12
 mobile-experience@1.0.2
@@ -80,8 +79,6 @@ sha@1.0.5
 spacebars@1.0.9
 spacebars-compiler@1.0.9
 srp@1.0.6
-standard-minifier-css@1.0.4
-standard-minifier-js@1.0.4
 templating@1.1.7
 templating-tools@1.0.2
 tracker@1.0.11

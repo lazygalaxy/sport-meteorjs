@@ -28,5 +28,3 @@ spacebars
 check
 accounts-password
 momentjs:moment
-standard-minifier-css
-standard-minifier-js
