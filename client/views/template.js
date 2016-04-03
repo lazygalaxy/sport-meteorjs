@@ -180,21 +180,36 @@ Template.registerHelper('getAdminGroups', function () {
 });
 
 var setSelectedGroup = function (checkAdmin, id = null) {
-    if (id) {
-        Session.set('selectedGroup', getGroup(id));
+    var oldGroupId;
+    if (Session.get('selectedGroup')) {
+        oldGroupId = Session.get('selectedGroup')._id;
+    }
+
+    var newGroupId = oldGroupId;
+    if (getGroup(id)) {
+        newGroupId = getGroup(id)._id;
     }
 
     var currentUser = getCurrentUser();
-    //ensure that a group is set
-    if (!Session.get('selectedGroup')) {
-        var groupLength = currentUser.groups.length;
-        Session.set('selectedGroup', getGroup(currentUser.groups[groupLength - 1]));
+    //if it is required ensure it is an admin group
+    if (checkAdmin && currentUser.adminGroups.indexOf(newGroupId) == -1) {
+        var groupLength = currentUser.adminGroups.length;
+        newGroupId = currentUser.adminGroups[groupLength - 1];
     }
 
-    //if it is required ensure it is an admin group
-    if (checkAdmin && currentUser.adminGroups.indexOf(Session.get('selectedGroup')) == -1) {
-        var groupLength = currentUser.adminGroups.length;
-        Session.set('selectedGroup', getGroup(currentUser.adminGroups[groupLength - 1]));
+    console.info(oldGroupId + ' ' + newGroupId);
+    if (newGroupId != oldGroupId) {
+        if (newGroupId) {
+            Session.set('selectedGroup', getGroup(newGroupId));
+            console.info('set ' + newGroupId);
+        } else {
+            // there is no new or old group ids, a default needs to be set
+            var groupLength = currentUser.groups.length;
+            Session.set('selectedGroup', getGroup(currentUser.groups[groupLength - 1]));
+            console.info('set default group');
+        }
+    } else {
+        console.info('set no group');
     }
 }
 
