@@ -20,7 +20,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {{#each getUsers}} {{>userRow}} {{/each}}
+                                    {{#each getGroupUsers}} {{>userRow}} {{/each}}
                                 </tbody>
                             </table>
                         </div>
@@ -35,8 +35,8 @@
     <tr>
         <td>{{username}}</td>
         <td>{{emails.[0].address}}</td>
-        <td>{{getSelectedGroup}}</td>
-        <td>{{getSelectedCompetition}}</td>
+        <td>{{#with getSelectedGroup}}{{label}}{{/with}}</td>
+        <td>{{#with getSelectedCompetition}}{{label}}{{/with}}</td>
         <td>
             <input id={{_id}} name="{{getPaidAttribute}}" type="checkbox" checked="{{hasPaid _id}}">&nbsp;{{#if hasPaid _id}}Yes{{else}}No{{/if}}
         </td>

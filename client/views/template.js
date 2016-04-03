@@ -75,9 +75,7 @@ Template.registerHelper('getSelectedUser', function () {
 });
 
 Template.registerHelper('hasPaid', function (id) {
-    var user = CustomUsers.findOne({
-        _id: id
-    });
+    var user = getUser(id);
     if (user && user.hasOwnProperty(getPaidAttribute())) {
         return user[getPaidAttribute()];
     } else {
@@ -86,7 +84,7 @@ Template.registerHelper('hasPaid', function (id) {
 });
 
 getPaidAttribute = function () {
-    return "paid" + Session.get('selectedGroup') + Session.get('selectedCompetition');
+    return "paid" + Session.get('selectedGroup')._id + Session.get('selectedCompetition')._id;
 }
 
 Template.registerHelper('getPaidAttribute', function () {
@@ -174,7 +172,11 @@ Template.registerHelper('getSelectedGroup', function (checkAdmin) {
 });
 
 Template.registerHelper('getAdminGroups', function () {
-    return getCurrentUser().adminGroups;
+    return Groups.find({
+        _id: {
+            $in: getCurrentUser().adminGroups
+        }
+    });
 });
 
 var setSelectedGroup = function (checkAdmin, id = null) {
