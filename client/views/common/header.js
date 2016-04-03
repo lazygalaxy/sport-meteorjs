@@ -1,16 +1,16 @@
 Template.header.rendered = function () {
-
     // FIXED TOP NAVBAR OPTION
     // Uncomment this if you want to have fixed top navbar
-    $('body').addClass('fixed-nav');
-    $(".navbar-static-top").removeClass('navbar-static-top').addClass('navbar-fixed-top');
-
+    // $('body').addClass('fixed-nav');
+    // $(".navbar-static-top").removeClass('navbar-static-top').addClass('navbar-fixed-top');
 };
 
 Template.header.events({
-
+    'click .back-button': function (event) {
+        history.back();
+    },
     // Toggle left navigation
-    'click #navbar-minimalize': function (event) {
+    'click .menu-button': function (event) {
 
         event.preventDefault();
 

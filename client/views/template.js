@@ -167,6 +167,7 @@ Template.registerHelper('getGroups', function () {
 });
 
 Template.registerHelper('getSelectedGroup', function (checkAdmin) {
+    //console.info('calling from helper');
     setSelectedGroup(checkAdmin);
     return Session.get('selectedGroup');
 });
@@ -197,19 +198,12 @@ var setSelectedGroup = function (checkAdmin, id = null) {
         newGroupId = currentUser.adminGroups[groupLength - 1];
     }
 
-    console.info(oldGroupId + ' ' + newGroupId);
-    if (newGroupId != oldGroupId) {
-        if (newGroupId) {
-            Session.set('selectedGroup', getGroup(newGroupId));
-            console.info('set ' + newGroupId);
-        } else {
-            // there is no new or old group ids, a default needs to be set
-            var groupLength = currentUser.groups.length;
-            Session.set('selectedGroup', getGroup(currentUser.groups[groupLength - 1]));
-            console.info('set default group');
-        }
-    } else {
-        console.info('set no group');
+    if (!newGroupId && !oldGroupId) {
+        // there is no new or old group ids, a default needs to be set
+        var groupLength = currentUser.groups.length;
+        Session.set('selectedGroup', getGroup(currentUser.groups[groupLength - 1]));
+    } else if (newGroupId != oldGroupId) {
+        Session.set('selectedGroup', getGroup(newGroupId));
     }
 }
 
