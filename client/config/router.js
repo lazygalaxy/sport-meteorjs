@@ -58,7 +58,7 @@ Router.route('/points/:_id', {
         return Meteor.subscribe("customusers");
     },
     action: function () {
-        setUser(this.params._id);
+        setSelectedUser(this.params._id);
         this.render('points');
     }
 });

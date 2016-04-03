@@ -1,6 +1,8 @@
+// ---------- general helpers ----------
 prettyDate = function (date) {
     return moment(date).format('YYYY-MM-DD HH:mm:ss');
 }
+
 Template.registerHelper('prettyDate', function (date) {
     return prettyDate(date);
 });
@@ -8,6 +10,13 @@ Template.registerHelper('prettyDate', function (date) {
 Template.registerHelper('equals', function (a, b) {
     return a === b;
 });
+
+// ---------- actor helpers ----------
+getActor = function (id) {
+    return Actors.findOne({
+        _id: id
+    });
+}
 
 Template.registerHelper('getActors', function (value, tokenizer, prefix) {
     var values = value.split(tokenizer);
@@ -23,28 +32,24 @@ Template.registerHelper('getActors', function (value, tokenizer, prefix) {
 });
 
 Template.registerHelper('getActor', function (id) {
-    var actor = Actors.findOne({
-        _id: id
-    });
+    var actor = getActor(id);
     if (actor) {
         return actor;
     } else {
-        return Actors.findOne({
-            _id: 'CTRY_XYZ'
-        });
+        return getActor('CTRY_XYZ');
     }
 });
 
-//users
-Template.registerHelper('getUsers', function () {
-    return CustomUsers.find({});
-});
-
+// ---------- user helpers ----------
 getUser = function (id) {
     return CustomUsers.findOne({
         _id: id
     });
 }
+
+Template.registerHelper('getUsers', function () {
+    return CustomUsers.find({});
+});
 
 getCurrentUser = function () {
     return getUser(Meteor.userId());
@@ -52,6 +57,21 @@ getCurrentUser = function () {
 
 Template.registerHelper('getCurrentUser', function () {
     return getCurrentUser();
+});
+
+setSelectedUser = function (id = null) {
+    if (id) {
+        Session.set('selectedUser', getUser(id));
+    }
+
+    if (!Session.get('selectedUser')) {
+        Session.set('selectedUser', getCurrentUser());
+    }
+}
+
+Template.registerHelper('getSelectedUser', function () {
+    setSelectedUser();
+    return Session.get('selectedUser');
 });
 
 Template.registerHelper('hasPaid', function (id) {
@@ -74,7 +94,13 @@ Template.registerHelper('getPaidAttribute', function () {
 });
 
 
-//competitions
+// ---------- competition helpers ----------
+getCompetition = function (id) {
+    return Competitions.findOne({
+        _id: id
+    });
+}
+
 getCompetitions = function () {
     var competitions = [];
     var nowDate = new Date();
@@ -98,16 +124,41 @@ Template.registerHelper('getCompetitions', function () {
     return getCompetitions();
 });
 
-Template.registerHelper('getSelectedCompetition', function (checkAdmin) {
-    setCompetition(checkAdmin);
-    return Session.get('selectedCompetition');
-});
-
 Template.registerHelper('getAdminCompetitions', function () {
     return getCurrentUser().adminCompetitions;
 });
 
-//groups
+var setSelectedCompetition = function (checkAdmin, id = null) {
+    if (id) {
+        Session.set('selectedCompetition', getCompetition(id));
+    }
+
+    //ensure that a competition is set
+    if (!Session.get('selectedCompetition')) {
+        //TODO: should not be hardcoded to EURO2016
+        Session.set('selectedCompetition', getCompetition('EURO2016'));
+    }
+
+    //if it is required ensure it is an admin group
+    if (checkAdmin && getCurrentUser().adminCompetitions.indexOf(Session.get('selectedCompetition')) == -1) {
+        var currentUser = getCurrentUser();
+        var competitionLength = currentUser.adminCompetitions.length;
+        Session.set('selectedCompetition', getCompetition(currentUser.adminCompetitions[0]));
+    }
+}
+
+Template.registerHelper('getSelectedCompetition', function (checkAdmin) {
+    setSelectedCompetition(checkAdmin);
+    return Session.get('selectedCompetition');
+});
+
+// ---------- group helpes ----------
+getGroup = function (id) {
+    return Groups.findOne({
+        _id: id
+    });
+}
+
 Template.registerHelper('getGroups', function () {
     //TODO: should maybe also include groups that the user is an admin for
     return Groups.find({
@@ -118,7 +169,7 @@ Template.registerHelper('getGroups', function () {
 });
 
 Template.registerHelper('getSelectedGroup', function (checkAdmin) {
-    setGroup(checkAdmin);
+    setSelectedGroup(checkAdmin);
     return Session.get('selectedGroup');
 });
 
@@ -126,11 +177,26 @@ Template.registerHelper('getAdminGroups', function () {
     return getCurrentUser().adminGroups;
 });
 
-Template.registerHelper('getSelectedUser', function () {
-    setUser();
-    return Session.get('selectedUser');
-});
+var setSelectedGroup = function (checkAdmin, id = null) {
+    if (id) {
+        Session.set('selectedGroup', getGroup(id));
+    }
 
+    var currentUser = getCurrentUser();
+    //ensure that a group is set
+    if (!Session.get('selectedGroup')) {
+        var groupLength = currentUser.groups.length;
+        Session.set('selectedGroup', getGroup(currentUser.groups[groupLength - 1]));
+    }
+
+    //if it is required ensure it is an admin group
+    if (checkAdmin && currentUser.adminGroups.indexOf(Session.get('selectedGroup')) == -1) {
+        var groupLength = currentUser.adminGroups.length;
+        Session.set('selectedGroup', getGroup(currentUser.adminGroups[groupLength - 1]));
+    }
+}
+
+// ---------- server calls ----------
 inputUpsertPrediction = function (id, name, value) {
     Meteor.call('upsertPrediction', id, name, value, function (error, result) {
         if (error) {
@@ -151,73 +217,31 @@ inputUpsertResult = function (id, name, value) {
     });
 }
 
+// ---------- events ----------
 //TODO: this repetition of events should be avoided
 Template.userAdmin.events({
     "click .group-selection li a": function (event) {
-        Session.set('selectedGroup', event.target.text);
+        setSelectedGroup(false, event.target.id);
     },
     "click .competition-selection li a": function (event) {
-        Session.set('selectedCompetition', event.target.text);
+        setSelectedCompetition(false, event.target.id);
     }
 });
 
 Template.standings.events({
     "click .group-selection li a": function (event) {
-        Session.set('selectedGroup', Groups.findOne({
-            _id: event.target.id
-        }));
+        setSelectedGroup(false, event.target.id);
     },
     "click .competition-selection li a": function (event) {
-        Session.set('selectedCompetition', Competitions.findOne({
-            _id: event.target.id
-        }));
+        setSelectedCompetition(false, event.target.id);
     }
 });
 
 Template.points.events({
     "click .competition-selection li a": function (event) {
-        Session.set('selectedCompetition', event.target.text);
+        setSelectedCompetition(false, event.target.id);
     },
     "click .user-selection li a": function (event) {
-        Session.set('selectedUser', getUser(event.target.id));
+        setSelectedUser(false, event.target.id);
     }
 });
-
-var setCompetition = function (checkAdmin) {
-    //ensure that a competition is set
-    if (!Session.get('selectedCompetition')) {
-        //TODO: should not be hardcoded to EURO2016
-        Session.set('selectedCompetition', 'EURO2016');
-    }
-
-    //if it is required ensure it is an admin group
-    if (checkAdmin && getCurrentUser().adminCompetitions.indexOf(Session.get('selectedCompetition')) == -1) {
-        var competitionLength = getCurrentUser().adminCompetitions.length;
-        Session.set('selectedCompetition', getCurrentUser().adminCompetitions[0]);
-    }
-}
-
-var setGroup = function (checkAdmin) {
-    //ensure that a group is set
-    if (!Session.get('selectedGroup')) {
-        var groupLength = getCurrentUser().groups.length;
-        Session.set('selectedGroup', getCurrentUser().groups[groupLength - 1]);
-    }
-
-    //if it is required ensure it is an admin group
-    if (checkAdmin && getCurrentUser().adminGroups.indexOf(Session.get('selectedGroup')) == -1) {
-        var groupLength = getCurrentUser().adminGroups.length;
-        Session.set('selectedGroup', getCurrentUser().adminGroups[groupLength - 1]);
-    }
-}
-
-setUser = function (id) {
-    //ensure that a user is set
-    if (!Session.get('selectedUser')) {
-        Session.set('selectedUser', getCurrentUser());
-    }
-
-    if (id) {
-        Session.set('selectedUser', getUser(id));
-    }
-}
