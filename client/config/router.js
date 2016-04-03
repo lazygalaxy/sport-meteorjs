@@ -53,12 +53,11 @@ Router.route('/predictions', function () {
     this.render('predictions');
 });
 
-Router.route('/points/:_id', {
+Router.route('/points', {
     waitOn: function () {
         return Meteor.subscribe("customusers");
     },
     action: function () {
-        setSelectedUser(this.params._id);
         this.render('points');
     }
 });

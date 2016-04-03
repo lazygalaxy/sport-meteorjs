@@ -38,6 +38,6 @@
         <td>{{username}}</td>
         <td>{{prettyDate date}}</td>
         <td>{{#if hasPaid _id}}<i class="fa fa-btc"></i>&nbsp;Yes{{/if}}</td>
-        <td><a href="/points/{{_id}}">{{points}}</a></td>
+        <td class="user-selection"><a id="{{_id}}" href="{{pathFor route='points'}}">{{points}}</a></td>
     </tr>
 </template>

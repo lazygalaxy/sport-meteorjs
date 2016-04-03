@@ -96,3 +96,9 @@ Template.standings.helpers({
         return users;
     }
 });
+
+Template.standings.events({
+    "click .user-selection a": function (event) {
+        setSelectedUser(event.target.id);
+    }
+});

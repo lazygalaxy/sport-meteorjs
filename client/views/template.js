@@ -244,6 +244,6 @@ Template.points.events({
         setSelectedCompetition(false, event.target.id);
     },
     "click .user-selection li a": function (event) {
-        setSelectedUser(false, event.target.id);
+        setSelectedUser(event.target.id);
     }
 });

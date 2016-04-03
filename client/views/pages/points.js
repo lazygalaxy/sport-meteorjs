@@ -4,14 +4,14 @@ Template.points.helpers({
         var user = Session.get('selectedUser');
 
         var matches = Matches.find({
-            competitionId: competition,
+            competitionId: competition._id,
             date: {
                 $lt: new Date()
             }
         });
 
         var questions = Questions.find({
-            competitionId: competition,
+            competitionId: competition._id,
             date: {
                 $lt: new Date()
             }
@@ -19,14 +19,14 @@ Template.points.helpers({
 
         var predictionMap = Predictions.find({
             userId: user._id,
-            competitionId: competition
+            competitionId: competition._id
         }).fetch().reduce(function (map, obj) {
             map[obj.itemId] = obj;
             return map;
         }, {});
 
         var resultMap = Results.find({
-            competitionId: competition
+            competitionId: competition._id
         }).fetch().reduce(function (map, obj) {
             //TODO: consider the highest weighted here if multiple exists
             map[obj.itemId] = obj;
