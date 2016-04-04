@@ -11,6 +11,10 @@ Template.registerHelper('equals', function (a, b) {
     return a === b;
 });
 
+Template.registerHelper('gtLength1', function (array) {
+    return array.length > 1;
+});
+
 // ---------- actor helpers ----------
 getActor = function (id) {
     return Actors.findOne({
@@ -70,7 +74,6 @@ setSelectedUser = function (id = null) {
 }
 
 Template.registerHelper('getSelectedUser', function () {
-    setSelectedUser();
     return Session.get('selectedUser');
 });
 
@@ -122,11 +125,7 @@ Template.registerHelper('getCompetitions', function () {
     return getCompetitions();
 });
 
-Template.registerHelper('getAdminCompetitions', function () {
-    return getCurrentUser().adminCompetitions;
-});
-
-var setSelectedCompetition = function (checkAdmin, id = null) {
+setSelectedCompetition = function (checkAdmin, id = null) {
     if (id) {
         Session.set('selectedCompetition', getCompetition(id));
     }
@@ -145,8 +144,7 @@ var setSelectedCompetition = function (checkAdmin, id = null) {
     }
 }
 
-Template.registerHelper('getSelectedCompetition', function (checkAdmin) {
-    setSelectedCompetition(checkAdmin);
+Template.registerHelper('getSelectedCompetition', function () {
     return Session.get('selectedCompetition');
 });
 
@@ -163,12 +161,10 @@ Template.registerHelper('getGroups', function () {
         _id: {
             $in: getCurrentUser().groups
         }
-    });
+    }).fetch();
 });
 
-Template.registerHelper('getSelectedGroup', function (checkAdmin) {
-    //console.info('calling from helper');
-    setSelectedGroup(checkAdmin);
+Template.registerHelper('getSelectedGroup', function () {
     return Session.get('selectedGroup');
 });
 
@@ -177,10 +173,10 @@ Template.registerHelper('getAdminGroups', function () {
         _id: {
             $in: getCurrentUser().adminGroups
         }
-    });
+    }).fetch();
 });
 
-var setSelectedGroup = function (checkAdmin, id = null) {
+setSelectedGroup = function (checkAdmin, id = null) {
     var oldGroupId;
     if (Session.get('selectedGroup')) {
         oldGroupId = Session.get('selectedGroup')._id;

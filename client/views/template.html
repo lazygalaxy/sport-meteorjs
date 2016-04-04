@@ -1,6 +1,7 @@
 <template name="adminGroupSelection">
+    {{#if gtLength1 getAdminGroups}}
     <div class="btn-group">
-        <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle" style="width: 200px;">{{#with getSelectedGroup true}}<img src="logos/{{_id}}.png" height="25px">&nbsp;{{label}}{{/with}} <span class="caret"></span></button>
+        <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle" style="width: 200px;">{{#with getSelectedGroup}}<img src="logos/{{_id}}.png" height="25px">&nbsp;{{label}}{{/with}} <span class="caret"></span></button>
         <ul class="dropdown-menu group-selection">
             {{#each getAdminGroups}}
             <li>
@@ -9,11 +10,13 @@
             {{/each}}
         </ul>
     </div>
+    {{/if}}
 </template>
 
 <template name="groupSelection">
+    {{#if gtLength1 getGroups}}
     <div class="btn-group">
-        <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle" style="width: 200px;">{{#with getSelectedGroup false}}<img src="logos/{{_id}}.png" height="25px">&nbsp;{{label}}{{/with}} <span class="caret"></span></button>
+        <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle" style="width: 200px;">{{#with getSelectedGroup}}<img src="logos/{{_id}}.png" height="25px">&nbsp;{{label}}{{/with}} <span class="caret"></span></button>
         <ul class="dropdown-menu group-selection">
             {{#each getGroups}}
             <li>
@@ -22,11 +25,12 @@
             {{/each}}
         </ul>
     </div>
+    {{/if}}
 </template>
 
 <template name="userSelection">
     <div class="btn-group">
-        <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle" style="width: 200px;">{{#with getSelectedUser}}<img src="logos/GLOBAL.png" height="25px">&nbsp;{{username}}{{/with}} <span class="caret"></span></button>
+        <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle" style="width: 200px;">{{#with getSelectedUser}}<img src="avatar.png" height="25px">&nbsp;{{username}}{{/with}} <span class="caret"></span></button>
         <ul class="dropdown-menu scrollable-menu user-selection">
             {{#each getUsers}}
             <li>
@@ -38,8 +42,9 @@
 </template>
 
 <template name="competitionSelection">
+    {{#if gtLength1 getCompetitions}}
     <div class="btn-group">
-        <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle" style="width: 200px;">{{#with getSelectedCompetition false}}<img src="logos/{{_id}}.png" height="25px">&nbsp;{{label}}{{/with}} <span class="caret"></span></button>
+        <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle" style="width: 200px;">{{#with getSelectedCompetition}}<img src="logos/{{_id}}.png" height="25px">&nbsp;{{label}}{{/with}} <span class="caret"></span></button>
         <ul class="dropdown-menu competition-selection">
             {{#each getCompetitions}}
             <li>
@@ -48,6 +53,7 @@
             {{/each}}
         </ul>
     </div>
+    {{/if}}
 </template>
 
 <template name="matchRow">

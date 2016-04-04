@@ -58,6 +58,7 @@ Router.route('/points', {
         return Meteor.subscribe("customusers");
     },
     action: function () {
+        setSelectedUser();
         this.render('points');
     }
 });
@@ -67,6 +68,8 @@ Router.route('/standings', {
         return Meteor.subscribe("customusers");
     },
     action: function () {
+        setSelectedGroup(false);
+        setSelectedCompetition(false);
         this.render('standings');
     }
 });
@@ -85,6 +88,8 @@ Router.route('/userAdmin', {
         return Meteor.subscribe("customusers");
     },
     action: function () {
+        setSelectedGroup(true);
+        setSelectedCompetition(false);
         this.render('userAdmin');
     }
 });
