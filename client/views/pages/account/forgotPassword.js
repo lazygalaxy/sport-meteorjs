@@ -1,7 +1,7 @@
 Template.forgotPassword.events({
-    'submit form': function (event) {
+    'submit #forgotPassword-form': function (event) {
         event.preventDefault();
-        var email = $('[name=email]').val();
+        var email = $('[id=email]').val();
 
         Accounts.forgotPassword({
             email: email
