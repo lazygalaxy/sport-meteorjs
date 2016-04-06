@@ -1,6 +1,4 @@
 <template name="resultAdmin">
-    {{> pageHeading title='Results Admin' }}
-
     <div class="text-center wrapper wrapper-content animated fadeInRight">
         {{#if getAnswerItems}} {{#each getAnswerItems}} {{#if equals this.type 'match'}} {{>matchRow}} {{/if}} {{#if equals this.type 'question'}} {{>questionRow}} {{/if}} {{/each}} {{else}} {{>noResultsAdmin}}{{/if}}
     </div>

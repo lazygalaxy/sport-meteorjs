@@ -58,86 +58,46 @@
 
 <template name="matchRow">
     <div class="row">
-        <div class="col-xs-12">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title" style="border-radius: 10px 10px 0px 0px;">
-                    <div class="row">
-                        <div class="col-xs-6">
-                            <h5>{{prettyDate this.date}}</h5>
-                        </div>
-                        <div class="col-xs-6" style="text-align:right;">
-                            <img src="/logos/{{this.competitionId}}.png" height="25px">&nbsp; {{this.competitionId}}
-                        </div>
-                    </div>
+        <div class="col-xs-3 col-sm-4">
+            <img src="/flags/{{this.homeTeam.iso3}}.png" style="max-width: 100%;float: right;" />
+        </div>
+        <div class="col-xs-6 col-sm-4">
+            <div class="row">
+                <div class="col-xs-6">
+                    {{this.homeTeam.label}}
                 </div>
-                <div class="ibox-content">
-                    <div class="row">
-                        <div class="col-xs-3 col-sm-4">
-                            <img src="/flags/{{this.homeTeam.iso3}}.png" style="max-width: 100%;float: right;" />
-                        </div>
-                        <div class="col-xs-6 col-sm-4">
-                            <div class="row">
-                                <div class="col-xs-6">
-                                    {{this.homeTeam.label}}
-                                </div>
-                                <div class="col-xs-6">
-                                    {{this.awayTeam.label}}
-                                </div>
-                                <div class="col-xs-6">
-                                    <input id="{{this._id}}" name="homeScore" value="{{this.homeScore}}" class="form-control" style="margin: 0 auto;width: 50px;text-align: center;">
-                                </div>
-                                <div class="col-xs-6">
-                                    <input id="{{this._id}}" name="awayScore" value="{{this.awayScore}}" class="form-control" style="margin: 0 auto;width: 50px;text-align: center;">
-                                </div>
-                                <div class="col-xs-12">{{this.description}}
-                                </div>
+                <div class="col-xs-6">
+                    {{this.awayTeam.label}}
+                </div>
+                <div class="col-xs-6">
+                    <input id="{{this._id}}" name="homeScore" value="{{this.homeScore}}" class="form-control" style="margin: 0 auto;width: 50px;text-align: center;">
+                </div>
+                <div class="col-xs-6">
+                    <input id="{{this._id}}" name="awayScore" value="{{this.awayScore}}" class="form-control" style="margin: 0 auto;width: 50px;text-align: center;">
+                </div>
+                <div class="col-xs-12">{{this.description}}
+                </div>
 
-                            </div>
-                        </div>
-                        <div class="col-xs-3 col-sm-4">
-                            <img src="/flags/{{this.awayTeam.iso3}}.png" style="max-width: 100%;float: left;">
-                        </div>
-                    </div>
-                </div>
             </div>
+        </div>
+        <div class="col-xs-3 col-sm-4">
+            <img src="/flags/{{this.awayTeam.iso3}}.png" style="max-width: 100%;float: left;">
         </div>
     </div>
 </template>
 
 <template name="questionRow">
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title" style="border-radius: 10px 10px 0px 0px;">
-                    <div class="row">
-                        <div class="col-xs-6">
-                            <h5>{{prettyDate this.date}}</h5>
-                        </div>
-                        <div class="col-xs-6" style="text-align:right;">
-                            <img src="/logos/{{this.competitionId}}.png" height="25px">&nbsp; {{this.competitionId}}
-                        </div>
-                    </div>
-                </div>
-                <div class="ibox-content">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <p>{{this.description}}</p> {{#if equals this.options 'INTEGER'}}
-                            <input id="{{this._id}}" name="answer" value="{{this.answer}}" class="form-control" style="margin: 0 auto;width: 200px;text-align: center;"> {{else}}
-                            <div class="btn-group">
-                                <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle" style="width: 200px;">{{> displayCountry getActor this.answer}}<span class="caret"></span></button>
-                                <ul class="dropdown-menu scrollable-menu answer-selection">
-                                    <li id="{{this._id}}">
-                                        {{#each getActors this.options ',' 'CTRY'}} {{> dropdownAnswer}} {{/each}}
-                                    </li>
-                                </ul>
-                            </div>
-                            {{/if}}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <p>{{this.description}}</p> {{#if equals this.options 'INTEGER'}}
+    <input id="{{this._id}}" name="answer" value="{{this.answer}}" class="form-control" style="margin: 0 auto;width: 200px;text-align: center;"> {{else}}
+    <div class="btn-group">
+        <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle" style="width: 200px;">{{> displayCountry getActor this.answer}}<span class="caret"></span></button>
+        <ul class="dropdown-menu scrollable-menu answer-selection">
+            <li id="{{this._id}}">
+                {{#each getActors this.options ',' 'CTRY'}} {{> dropdownAnswer}} {{/each}}
+            </li>
+        </ul>
     </div>
+    {{/if}}
 </template>
 
 <template name="dropdownAnswer">

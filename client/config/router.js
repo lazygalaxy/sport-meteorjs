@@ -1,3 +1,4 @@
+// routes allowed when a user is not logged in
 var ALLOW_ROUTES = ['login', 'register', 'forgotPassword'];
 
 Router.configure({

@@ -1,9 +1,9 @@
 Template.register.events({
-    'submit form': function (event) {
+    'submit #register-form': function (event) {
         event.preventDefault();
-        var username = $('[name=username]').val();
-        var email = $('[name=email]').val();
-        var password = $('[name=password]').val();
+        var username = $('[id=registerUsername]').val();
+        var email = $('[id=email]').val();
+        var password = $('[id=registerPassword]').val();
 
         Accounts.createUser({
             username: username,

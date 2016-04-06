@@ -1,41 +1,23 @@
-Template.header.rendered = function () {
-    // FIXED TOP NAVBAR OPTION
-    // Uncomment this if you want to have fixed top navbar
-    // $('body').addClass('fixed-nav');
-    // $(".navbar-static-top").removeClass('navbar-static-top').addClass('navbar-fixed-top');
-};
-
 Template.header.events({
+    'submit #login-form': function (event) {
+        event.preventDefault();
+        var username = $('[id=username]').val();
+        var password = $('[id=password]').val();
+
+        Meteor.loginWithPassword(username, password, function (error) {
+            if (error) {
+                toastr.error(error.reason, 'Login Denied')
+            } else {
+                Router.go("home");
+            }
+        });
+    },
+    'click .logout': function (event) {
+        event.preventDefault();
+        Meteor.logout();
+        Router.go('login');
+    },
     'click .back-button': function (event) {
         history.back();
-    },
-    // Toggle left navigation
-    'click .menu-button': function (event) {
-
-        event.preventDefault();
-
-        // Toggle special class
-        $("body").toggleClass("mini-navbar");
-
-        // Enable smoothly hide/show menu
-        if (!$('body').hasClass('mini-navbar') || $('body').hasClass('body-small')) {
-            // Hide menu in order to smoothly turn on when maximize menu
-            $('#side-menu').hide();
-            // For smoothly turn on menu
-            setTimeout(
-                function () {
-                    $('#side-menu').fadeIn(400);
-                }, 200);
-        } else if ($('body').hasClass('fixed-sidebar')) {
-            $('#side-menu').hide();
-            setTimeout(
-                function () {
-                    $('#side-menu').fadeIn(400);
-                }, 100);
-        } else {
-            // Remove all inline style from jquery fadeIn function to reset menu state
-            $('#side-menu').removeAttr('style');
-        }
     }
-
 });

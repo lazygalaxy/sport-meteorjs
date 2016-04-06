@@ -24,29 +24,29 @@
                     </div>
                 </li>
 
-                <li class="{{isActiveRoute regex='predictions'}}">
+                <li>
                     <a href="{{pathFor route='predictions'}}"><i class="fa fa-magic"></i> <span class="nav-label">Predictions</span> </a>
                 </li>
-                <li class="{{isActiveRoute regex='standings'}}">
+                <li>
                     <a href="{{pathFor route='standings'}}"><i class="fa fa-trophy"></i> <span class="nav-label">Standings</span> </a>
                 </li>
 
                 {{#if getCurrentUser.adminCompetitions}}
-                <li class="{{isActiveRoute regex='resultAdmin'}}">
+                <li>
                     <a href="{{pathFor route='resultAdmin'}}"><i class="fa fa-pencil"></i> <span class="nav-label">Result Admin</span> </a>
                 </li>
                 {{/if}} {{#if getCurrentUser.adminGroups}}
-                <li class="{{isActiveRoute regex='userAdmin'}}">
+                <li>
                     <a href="{{pathFor route='userAdmin'}}"><i class="fa fa-users"></i> <span class="nav-label">User Admin</span> </a>
                 </li>
                 {{/if}} {{else}}
-                <li class="{{isActiveRoute regex='login'}}">
+                <li>
                     <a href="{{pathFor route='login'}}"><i class="fa fa-user"></i> <span class="nav-label">Login</span> </a>
                 </li>
-                <li class="{{isActiveRoute regex='register'}}">
+                <li>
                     <a href="{{pathFor route='register'}}"><i class="fa fa-pencil"></i> <span class="nav-label">Register</span> </a>
                 </li>
-                <li class="{{isActiveRoute regex='forgotPassword'}}">
+                <li>
                     <a href="{{pathFor route='forgotPassword'}}"><i class="fa fa-wrench"></i> <span class="nav-label">Forgot Password</span> </a>
                 </li>
                 {{/if}}
