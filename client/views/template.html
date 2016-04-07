@@ -30,7 +30,7 @@
 
 <template name="userSelection">
     <div class="btn-group">
-        <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle" style="width: 200px;">{{#with getSelectedUser}}<img src="avatar.png" height="25px">&nbsp;{{username}}{{/with}} <span class="caret"></span></button>
+        <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle" style="width: 200px;">{{#with getSelectedUser}}<img src="avatar.png" class="img-circle" height="25px">&nbsp;{{username}}{{/with}} <span class="caret"></span></button>
         <ul class="dropdown-menu scrollable-menu user-selection">
             {{#each getUsers}}
             <li>

@@ -32,13 +32,13 @@
                     <li class="dropdown" style="padding: 6px;">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img alt="image" class="img-circle" src="avatar.png" style="height:40px;" />&nbsp;{{getCurrentUser.username}}<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#changeUsername" data-toggle="modal"><i class="fa fa-user"></i>&nbsp;Change Username</a></li>
-                            <li><a href="#changePassword" data-toggle="modal"><i class="fa fa-user-secret"></i>&nbsp;Change Password</a></li>
+                            <li><a href="#" data-target="#changeUsername" data-toggle="modal"><i class="fa fa-user"></i>&nbsp;Change Username</a></li>
+                            <li><a href="#" data-target="#changePassword" data-toggle="modal"><i class="fa fa-user-secret"></i>&nbsp;Change Password</a></li>
                             <li><a href="#" class="logout"><i class="fa fa-sign-out"></i>&nbsp;Logout</a></li>
                         </ul>
                     </li>
                     <li>
-                        <button class="btn btn-success navbar-btn back-button" style="width:90px;"><i class="fa fa-backward"></i>&nbsp;Back</button>
+                        <button class="btn btn-success navbar-btn back-button"><i class="fa fa-backward"></i>&nbsp;Back</button>
                     </li>
                 </ul>
                 {{else}}
@@ -55,4 +55,5 @@
             </div>
         </div>
     </nav>
+    {{#if getCurrentUser}}{{> changeUsername}} {{> changePassword}}{{/if}}
 </template>
