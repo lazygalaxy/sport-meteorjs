@@ -20,8 +20,6 @@ Template.resultAdmin.helpers({
                 }
             }).fetch();
 
-            console.info(matches.length + ' ' + questions.length);
-
             var resultsMap = Results.find({
                 userId: Meteor.user()._id
             }).fetch().reduce(function (map, obj) {

@@ -15,16 +15,16 @@ Template.userAdmin.helpers({
 var inputUpsertUser = function (userId, name, value) {
     Meteor.call('upsertUser', userId, name, value, function (error, result) {
         if (error) {
-            console.error(error);
+            toastr.error(error.reason, 'Error: Result Not Saved.');
         } else {
-            console.info("update the user GUI here!!!");
+            toastr.success(result, 'Result Saved');
         }
     });
 }
 
 Template.userAdmin.rendered = function () {
     // Initialize dataTables
-    $('.dataTables-example').DataTable({
+    $('.dataTables-users').DataTable({
         dom: '<"html5buttons"B>lTfgitp',
         buttons: [
             {

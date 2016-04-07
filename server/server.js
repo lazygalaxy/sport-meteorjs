@@ -146,7 +146,6 @@ Meteor.startup(function () {
                 value = value.trim();
 
                 var message = '';
-
                 var match = Matches.findOne({
                     _id: itemId
                 });
@@ -193,13 +192,23 @@ Meteor.startup(function () {
             }
         },
         'upsertUser': function (userId, name, value) {
-            var obj = {};
-            obj[name] = value;
-            UserInfo.upsert({
+            var user = Meteor.users.findOne({
                 _id: userId
-            }, {
-                $set: obj
             });
+
+            if (user) {
+                var obj = {};
+                obj[name] = value;
+                UserInfo.upsert({
+                    _id: userId
+                }, {
+                    $set: obj
+                });
+
+                return 'Updated ' + user.username + ' to ' + value + '.';
+            } else {
+                throw new Meteor.Error(500, 'User not found ' + userId + '.');
+            }
         },
         'changeUsername': function (username) {
             Accounts.setUsername(Meteor.user()._id, username);

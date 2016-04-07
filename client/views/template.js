@@ -211,10 +211,10 @@ setSelectedGroup = function (checkAdmin, id = null) {
 inputUpsertPrediction = function (id, name, value) {
     Meteor.call('upsertPrediction', id, name, value, function (error, result) {
         if (error) {
-            toastr.error(error.reason, 'Error: Prediction Not Saved.')
+            toastr.error(error.reason, 'Error: Prediction Not Saved.');
         } else {
             if (result) {
-                toastr.success(result, 'Prediction Saved')
+                toastr.success(result, 'Prediction Saved');
             }
         }
     });
@@ -223,10 +223,10 @@ inputUpsertPrediction = function (id, name, value) {
 inputUpsertResult = function (id, name, value) {
     Meteor.call('upsertResult', id, name, value, function (error, result) {
         if (error) {
-            toastr.error(error.reason, 'Error: Result Not Saved.')
+            toastr.error(error.reason, 'Error: Result Not Saved.');
         } else {
             if (result) {
-                toastr.success(result, 'Result Saved')
+                toastr.success(result, 'Result Saved');
             }
         }
     });

@@ -26,3 +26,4 @@ accounts-password
 momentjs:moment
 chrismbeckett:toastr
 session
+ephemer:reactive-datatables
