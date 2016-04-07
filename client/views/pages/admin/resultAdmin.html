@@ -1,7 +1,7 @@
 <template name="resultAdmin">
-    {{#if getAnswerItems}}
+
     <div class="container">
-        {{#each getAnswerItems}}
+        {{#if getAnswerItems}} {{#each getAnswerItems}}
         <div class="row">
             <div class="col-xs-12 col-sm-10 col-md-8 col-xs-offset-0 col-sm-offset-1 col-md-offset-2">
                 <div class="panel panel-success">
@@ -21,9 +21,11 @@
                 </div>
             </div>
         </div>
-        {{/each}}
+        {{/each}} {{else}}
+        <h2>There are no results required at this time.</h2>
+        <p>Please come back later.</p>
+        {{/if}}
     </div>
-    {{/if}}
 </template>
 
 <template name="noResultsAdmin">

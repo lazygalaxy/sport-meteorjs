@@ -223,9 +223,11 @@ inputUpsertPrediction = function (id, name, value) {
 inputUpsertResult = function (id, name, value) {
     Meteor.call('upsertResult', id, name, value, function (error, result) {
         if (error) {
-            console.error(error);
+            toastr.error(error.reason, 'Error: Result Not Saved.')
         } else {
-            console.info("update the results GUI here!!!");
+            if (result) {
+                toastr.success(result, 'Result Saved')
+            }
         }
     });
 }

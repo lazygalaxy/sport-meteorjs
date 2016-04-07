@@ -94,7 +94,7 @@ Meteor.startup(function () {
                     if (!value || (value % 1 != 0) || value < 0 || value > 9) {
                         throw new Meteor.Error(500, 'Invalid value entered ' + value + '. Integer values between 0 and 9 expected.');
                     }
-
+                    value = parseInt(value);
                     predictionEndDate = match.date;
                     if (name == 'homeScore') {
                         message = match.homeTeam.label + ' score set to ' + value + '.';
@@ -109,7 +109,7 @@ Meteor.startup(function () {
                         if ((question.options == 'INTEGER') && (!value || (value % 1 != 0) || value < 0 || value > 999)) {
                             throw new Meteor.Error(500, 'Invalid value entered ' + value + '. Integer values between 0 and 999 expected.');
                         }
-
+                        value = parseInt(value);
                         predictionEndDate = question.date;
                         message = question.description + ' Answer set to ' + value + '.';
                     }
@@ -137,24 +137,59 @@ Meteor.startup(function () {
                     }, {
                         $set: obj
                     });
-
                     return message;
                 }
             }
         },
         'upsertResult': function (itemId, name, value) {
             if (Meteor.user()) {
-                var obj = {};
-                obj[name] = value;
-                obj['date'] = new Date();
-                obj['itemId'] = itemId;
-                obj['competitionId'] = itemId.split('_')[0];
-                obj['userId'] = Meteor.user()._id;
-                Results.upsert({
-                    _id: itemId + '_' + Meteor.user()._id
-                }, {
-                    $set: obj
+                value = value.trim();
+
+                var message = '';
+
+                var match = Matches.findOne({
+                    _id: itemId
                 });
+                if (match) {
+                    if (!value || (value % 1 != 0) || value < 0 || value > 9) {
+                        throw new Meteor.Error(500, 'Invalid value entered ' + value + '. Integer values between 0 and 9 expected.');
+                    }
+                    value = parseInt(value);
+                    if (name == 'homeScore') {
+                        message = match.homeTeam.label + ' score set to ' + value + '.';
+                    } else if (name == 'awayScore') {
+                        message = match.awayTeam.label + ' score set to ' + value + '.';
+                    }
+                } else {
+                    var question = Questions.findOne({
+                        _id: itemId
+                    });
+                    if (question) {
+                        if ((question.options == 'INTEGER') && (!value || (value % 1 != 0) || value < 0 || value > 999)) {
+                            throw new Meteor.Error(500, 'Invalid value entered ' + value + '. Integer values between 0 and 999 expected.');
+                        }
+                        value = parseInt(value);
+                        message = question.description + ' Answer set to ' + value + '.';
+                    }
+                }
+
+                var result = Results.findOne({
+                    _id: itemId + '_' + Meteor.user()._id
+                });
+                if (!result || !result.hasOwnProperty(name) || result[name] != value) {
+                    var obj = {};
+                    obj[name] = value;
+                    obj['date'] = new Date();
+                    obj['itemId'] = itemId;
+                    obj['competitionId'] = itemId.split('_')[0];
+                    obj['userId'] = Meteor.user()._id;
+                    Results.upsert({
+                        _id: itemId + '_' + Meteor.user()._id
+                    }, {
+                        $set: obj
+                    });
+                    return message;
+                }
             }
         },
         'upsertUser': function (userId, name, value) {

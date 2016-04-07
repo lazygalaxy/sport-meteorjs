@@ -1,26 +1,27 @@
 Template.resultAdmin.helpers({
     getAnswerItems: function () {
         var currentUser = getCurrentUser();
+        if (currentUser) {
+            var matches = Matches.find({
+                date: {
+                    $lt: new Date()
+                },
+                competitionId: {
+                    $in: currentUser.adminCompetitions
+                }
+            }).fetch();
 
-        var matches = Matches.find({
-            date: {
-                $lt: new Date()
-            },
-            competitionId: {
-                $in: currentUser.adminCompetitions
-            }
-        }).fetch();
+            var questions = Questions.find({
+                date: {
+                    $lt: new Date()
+                },
+                competitionId: {
+                    $in: currentUser.adminCompetitions
+                }
+            }).fetch();
 
-        var questions = Questions.find({
-            date: {
-                $lt: new Date()
-            },
-            competitionId: {
-                $in: currentUser.adminCompetitions
-            }
-        }).fetch();
+            console.info(matches.length + ' ' + questions.length);
 
-        if (Meteor.user()) {
             var resultsMap = Results.find({
                 userId: Meteor.user()._id
             }).fetch().reduce(function (map, obj) {
