@@ -1,8 +1,8 @@
 Template.changePassword.events({
     'submit form': function (event) {
         event.preventDefault();
-        var oldPassword = $('[name=old]').val();
-        var newPassword = $('[name=new]').val();
+        var oldPassword = $('[id=oldPassword]').val();
+        var newPassword = $('[id=newPassword]').val();
 
         Accounts.changePassword(oldPassword, newPassword, function (error) {
             if (error) {

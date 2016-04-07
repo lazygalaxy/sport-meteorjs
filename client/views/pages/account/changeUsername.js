@@ -1,7 +1,7 @@
 Template.changeUsername.events({
     'submit form': function (event) {
         event.preventDefault();
-        var username = $('[name=username]').val();
+        var username = $('[id=username]').val();
         Meteor.call('changeUsername', username, function (error, result) {
             if (error) {
                 toastr.error(error.reason, 'Change Username')
