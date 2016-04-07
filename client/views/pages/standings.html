@@ -12,7 +12,9 @@
                             <th>Rank</th>
                             <th>User</th>
                             <th>Date</th>
+                            {{#unless isGlobalGroup}}
                             <th>Paid</th>
+                            {{/unless}}
                             <th>Points</th>
                         </tr>
                     </thead>
@@ -30,7 +32,9 @@
         <td>{{rank}}</td>
         <td>{{username}}</td>
         <td>{{prettyDate date}}</td>
+        {{#unless isGlobalGroup}}
         <td>{{#if hasPaid _id}}<i class="fa fa-btc"></i>&nbsp;Yes{{/if}}</td>
+        {{/unless}}
         <td class="user-selection"><a id="{{_id}}" href="{{pathFor route='points'}}">{{points}}</a></td>
     </tr>
 </template>

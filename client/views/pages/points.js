@@ -51,7 +51,7 @@ Template.points.helpers({
 
             if (prediction) {
                 info.predictDate = prettyDate(prediction.date);
-                info.prediction = prediction.homeScore + ' - ' + prediction.awayScore + ' (' + prettyDate(prediction.date) + ')';
+                info.prediction = prediction.homeScore + ' - ' + prediction.awayScore;
             } else {
                 info.predictDate = 'N/A';
                 info.prediction = 'N/A';

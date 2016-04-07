@@ -176,6 +176,10 @@ Template.registerHelper('getAdminGroups', function () {
     }).fetch();
 });
 
+Template.registerHelper('isGlobalGroup', function () {
+    return Session.get('selectedGroup')._id == 'GLOBAL';
+});
+
 setSelectedGroup = function (checkAdmin, id = null) {
     var oldGroupId;
     if (Session.get('selectedGroup')) {
@@ -207,9 +211,11 @@ setSelectedGroup = function (checkAdmin, id = null) {
 inputUpsertPrediction = function (id, name, value) {
     Meteor.call('upsertPrediction', id, name, value, function (error, result) {
         if (error) {
-            console.error(error);
+            toastr.error(error.reason, 'Error: Prediction Not Saved.')
         } else {
-            console.info("update the predictions GUI here!!!");
+            if (result) {
+                toastr.success(result, 'Prediction Saved')
+            }
         }
     });
 }

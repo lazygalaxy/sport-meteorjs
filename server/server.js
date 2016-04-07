@@ -82,17 +82,28 @@ Meteor.startup(function () {
     Meteor.methods({
         'upsertPrediction': function (itemId, name, value) {
             if (Meteor.user()) {
-                var obj = {};
-                obj[name] = value;
-                obj['date'] = new Date();
-                obj['itemId'] = itemId;
-                obj['competitionId'] = itemId.split('_')[0];
-                obj['userId'] = Meteor.user()._id;
-                Predictions.upsert({
+                if ((name == 'homeScore' || name == 'awayScore') && ((value % 1 != 0) || value < 0 || value > 9)) {
+                    throw new Meteor.Error(500, 'Integer value between 0 and 9 expected.');
+                }
+
+                var prediction = Predictions.findOne({
                     _id: itemId + '_' + Meteor.user()._id
-                }, {
-                    $set: obj
                 });
+                if (!prediction || !prediction.hasOwnProperty(name) || prediction[name] != value) {
+                    var obj = {};
+                    obj[name] = value;
+                    obj['date'] = new Date();
+                    obj['itemId'] = itemId;
+                    obj['competitionId'] = itemId.split('_')[0];
+                    obj['userId'] = Meteor.user()._id;
+                    Predictions.upsert({
+                        _id: itemId + '_' + Meteor.user()._id
+                    }, {
+                        $set: obj
+                    });
+
+                    return value;
+                }
             }
         },
         'upsertResult': function (itemId, name, value) {
