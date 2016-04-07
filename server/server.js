@@ -82,8 +82,44 @@ Meteor.startup(function () {
     Meteor.methods({
         'upsertPrediction': function (itemId, name, value) {
             if (Meteor.user()) {
-                if ((name == 'homeScore' || name == 'awayScore') && ((value % 1 != 0) || value < 0 || value > 9)) {
-                    throw new Meteor.Error(500, 'Integer value between 0 and 9 expected.');
+                value = value.trim();
+
+                var message = '';
+                var predictionEndDate;
+
+                var match = Matches.findOne({
+                    _id: itemId
+                });
+                if (match) {
+                    if (!value || (value % 1 != 0) || value < 0 || value > 9) {
+                        throw new Meteor.Error(500, 'Invalid value entered ' + value + '. Integer values between 0 and 9 expected.');
+                    }
+
+                    predictionEndDate = match.date;
+                    if (name == 'homeScore') {
+                        message = match.homeTeam.label + ' score set to ' + value + '.';
+                    } else if (name == 'awayScore') {
+                        message = match.awayTeam.label + ' score set to ' + value + '.';
+                    }
+                } else {
+                    var question = Questions.findOne({
+                        _id: itemId
+                    });
+                    if (question) {
+                        if ((question.options == 'INTEGER') && (!value || (value % 1 != 0) || value < 0 || value > 999)) {
+                            throw new Meteor.Error(500, 'Invalid value entered ' + value + '. Integer values between 0 and 999 expected.');
+                        }
+
+                        predictionEndDate = question.date;
+                        message = question.description + ' Answer set to ' + value + '.';
+                    }
+                }
+
+                var nowDate = new Date();
+                if (!predictionEndDate) {
+                    throw new Meteor.Error(500, 'Prediction item not found ' + itemId + '.');
+                } else if (nowDate > predictionEndDate) {
+                    throw new Meteor.Error(500, 'Prediction item has expired.');
                 }
 
                 var prediction = Predictions.findOne({
@@ -102,7 +138,7 @@ Meteor.startup(function () {
                         $set: obj
                     });
 
-                    return value;
+                    return message;
                 }
             }
         },
