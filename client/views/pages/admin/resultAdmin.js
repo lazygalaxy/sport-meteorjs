@@ -80,7 +80,6 @@ Template.resultAdmin.events({
     "click .answer-selection li a": function (event) {
         var itemId = event.target.parentNode.id;
         var answer = event.target.id;
-        console.log(itemId + ' - ' + answer);
         inputUpsertResult(itemId, 'answer', answer);
     }
 });

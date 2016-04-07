@@ -1,6 +1,6 @@
 <template name="points">
     <div class="container">
-        {{> userSelection }} {{> competitionSelection }}
+        {{> userSelection }} {{> competitionSelection }} {{#if getUserPoints}}
         <table class="table">
             <thead>
                 <tr>
@@ -15,6 +15,10 @@
                 {{#each getUserPoints}} {{>userPoints}} {{/each}}
             </tbody>
         </table>
+        {{else}} {{#with getSelectedCompetition}}
+        <h2>{{label}} starts on the {{prettyDate startDate}}.</h2>
+        <p>Please come back later.</p>
+        {{/with}} {{/if}}
     </div>
 </template>
 

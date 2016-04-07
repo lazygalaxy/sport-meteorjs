@@ -8,6 +8,8 @@ Router.configure({
 });
 
 Router.onBeforeAction(function () {
+
+
     var routeName = Router.current().route.getName();
 
     if (!Meteor.userId()) {
@@ -50,8 +52,13 @@ Router.route('/home', function () {
     Router.go('predictions');
 });
 
-Router.route('/predictions', function () {
-    this.render('predictions');
+Router.route('/predictions', {
+    waitOn: function () {
+        return Meteor.subscribe("customusers");
+    },
+    action: function () {
+        this.render('predictions');
+    }
 });
 
 Router.route('/points', {
@@ -60,6 +67,7 @@ Router.route('/points', {
     },
     action: function () {
         setSelectedUser();
+        setSelectedCompetition(false);
         this.render('points');
     }
 });
