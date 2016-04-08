@@ -82,43 +82,11 @@ Meteor.startup(function () {
     Meteor.methods({
         'upsertPrediction': function (itemId, name, value) {
             if (Meteor.user()) {
-                value = value.trim();
-
-                var message = '';
-                var predictionEndDate;
-
-                var match = Matches.findOne({
-                    _id: itemId
-                });
-                if (match) {
-                    if (!value || (value % 1 != 0) || value < 0 || value > 9) {
-                        throw new Meteor.Error(500, 'Invalid value entered ' + value + '. Integer values between 0 and 9 expected.');
-                    }
-                    value = parseInt(value);
-                    predictionEndDate = match.date;
-                    if (name == 'homeScore') {
-                        message = match.homeTeam.label + ' score set to ' + value + '.';
-                    } else if (name == 'awayScore') {
-                        message = match.awayTeam.label + ' score set to ' + value + '.';
-                    }
-                } else {
-                    var question = Questions.findOne({
-                        _id: itemId
-                    });
-                    if (question) {
-                        if ((question.options == 'INTEGER') && (!value || (value % 1 != 0) || value < 0 || value > 999)) {
-                            throw new Meteor.Error(500, 'Invalid value entered ' + value + '. Integer values between 0 and 999 expected.');
-                        }
-                        value = parseInt(value);
-                        predictionEndDate = question.date;
-                        message = question.description + ' Answer set to ' + value + '.';
-                    }
-                }
+                var validation = validateValue(itemId, name, value);
+                value = validation[0];
 
                 var nowDate = new Date();
-                if (!predictionEndDate) {
-                    throw new Meteor.Error(500, 'Prediction item not found ' + itemId + '.');
-                } else if (nowDate > predictionEndDate) {
+                if (nowDate > validation[1]) {
                     throw new Meteor.Error(500, 'Prediction item has expired.');
                 }
 
@@ -137,40 +105,14 @@ Meteor.startup(function () {
                     }, {
                         $set: obj
                     });
-                    return message;
+                    return validation[2];
                 }
             }
         },
         'upsertResult': function (itemId, name, value) {
             if (Meteor.user()) {
-                value = value.trim();
-
-                var message = '';
-                var match = Matches.findOne({
-                    _id: itemId
-                });
-                if (match) {
-                    if (!value || (value % 1 != 0) || value < 0 || value > 9) {
-                        throw new Meteor.Error(500, 'Invalid value entered ' + value + '. Integer values between 0 and 9 expected.');
-                    }
-                    value = parseInt(value);
-                    if (name == 'homeScore') {
-                        message = match.homeTeam.label + ' score set to ' + value + '.';
-                    } else if (name == 'awayScore') {
-                        message = match.awayTeam.label + ' score set to ' + value + '.';
-                    }
-                } else {
-                    var question = Questions.findOne({
-                        _id: itemId
-                    });
-                    if (question) {
-                        if ((question.options == 'INTEGER') && (!value || (value % 1 != 0) || value < 0 || value > 999)) {
-                            throw new Meteor.Error(500, 'Invalid value entered ' + value + '. Integer values between 0 and 999 expected.');
-                        }
-                        value = parseInt(value);
-                        message = question.description + ' Answer set to ' + value + '.';
-                    }
-                }
+                var validation = validateValue(itemId, name, value);
+                value = validation[0];
 
                 var result = Results.findOne({
                     _id: itemId + '_' + Meteor.user()._id
@@ -187,7 +129,7 @@ Meteor.startup(function () {
                     }, {
                         $set: obj
                     });
-                    return message;
+                    return validation[2];
                 }
             }
         },
@@ -214,4 +156,45 @@ Meteor.startup(function () {
             Accounts.setUsername(Meteor.user()._id, username);
         }
     });
+
+    var validateValue = function (itemId, name, value) {
+        value = value.trim();
+
+        var message = '';
+        var predictionEndDate;
+
+        var match = Matches.findOne({
+            _id: itemId
+        });
+        if (match) {
+            if (!value || (value % 1 != 0) || value < 0 || value > 9) {
+                throw new Meteor.Error(500, 'Invalid value entered ' + value + '. Integer values between 0 and 9 expected.');
+            }
+            value = parseInt(value);
+            predictionEndDate = match.date;
+            if (name == 'homeScore') {
+                message = match.homeTeam.label + ' score set to ' + value + '.';
+            } else if (name == 'awayScore') {
+                message = match.awayTeam.label + ' score set to ' + value + '.';
+            }
+        } else {
+            var question = Questions.findOne({
+                _id: itemId
+            });
+            if (question) {
+                if (question.options == 'INTEGER') {
+                    if (!value || (value % 1 != 0) || value < 0 || value > 999) {
+                        throw new Meteor.Error(500, 'Invalid value entered ' + value + '. Integer values between 0 and 999 expected.');
+                    }
+                    value = parseInt(value);
+                }
+                predictionEndDate = question.date;
+                message = question.description + ' Answer set to ' + value + '.';
+            } else {
+                throw new Meteor.Error(500, 'Prediction item not found ' + itemId + '.');
+            }
+        }
+
+        return [value, predictionEndDate, message];
+    }
 });
