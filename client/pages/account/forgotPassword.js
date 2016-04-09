@@ -7,9 +7,9 @@ Template.forgotPassword.events({
             email: email
         }, function (error) {
             if (error) {
-                toastr.error(error.reason, 'Forgot Password')
+                toastr.error(error.reason);
             } else {
-                toastr.success('A new password has been emailed to you.', 'Forgot Password')
+                toastr.success('A new password has been emailed to you.');
             }
         });
     }

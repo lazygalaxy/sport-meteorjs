@@ -12,16 +12,6 @@ Template.userAdmin.helpers({
     }
 });
 
-var inputUpsertUser = function (userId, name, value) {
-    Meteor.call('upsertUser', userId, name, value, function (error, result) {
-        if (error) {
-            toastr.error(error.reason, 'Error: Result Not Saved.');
-        } else {
-            toastr.success(result, 'Result Saved');
-        }
-    });
-}
-
 Template.userAdmin.rendered = function () {
     // Initialize dataTables
     $('.dataTables-users').DataTable({

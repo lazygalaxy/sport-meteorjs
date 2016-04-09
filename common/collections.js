@@ -1,11 +1,12 @@
-UserInfo = new Mongo.Collection('userinfo');
+Actors = new Mongo.Collection('actors');
 Competitions = new Mongo.Collection('competitions');
 Groups = new Mongo.Collection('groups');
-Actors = new Mongo.Collection('actors');
 Matches = new Mongo.Collection('matches');
+Predictions = new Mongo.Collection('predictions');
 Questions = new Mongo.Collection('questions');
 Results = new Mongo.Collection('results');
-Predictions = new Mongo.Collection('predictions');
+UserInfo = new Mongo.Collection('userinfo');
+
 
 //Predictions.allow({
 //    update: function (userId, doc) {
