@@ -1,22 +1,32 @@
 <template name="userAdmin">
     <div class="container">
-        {{> adminGroupSelection }} {{> competitionSelection }} {{#with getSelectedGroup}}{{label}}{{/with}} - {{#with getSelectedCompetition}}{{label}}{{/with}}
-        <div class="table-responsive">
-            <table class="table dataTables-users">
-                <thead>
-                    <tr>
-                        <th>Username</th>
-                        <th>E-Mail</th>
-                        <th>Group</th>
-                        <th>Competition</th>
-                        <th>Paid</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {{#each getGroupUsers}} {{>userRow}} {{/each}}
-                </tbody>
-            </table>
+        {{> adminGroupSelection }} {{> competitionSelection }}
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h5>{{#with getSelectedGroup}}{{label}}{{/with}} - {{#with getSelectedCompetition}}{{label}}{{/with}}</h5>
+            </div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table dataTables-adminusers">
+                        <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>E-Mail</th>
+                                <th>Group</th>
+                                <th>Competition</th>
+                                <th>Paid</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each getGroupUsers}} {{>userRow}} {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
+        <button class="btn btn-primary clipboard-button" style="width:150px;" data-clipboard-text="{{getClipboardEmails}}">
+            <i class="fa fa-table"></i>&nbsp;Copy Emails
+        </button>
     </div>
 </template>
 
