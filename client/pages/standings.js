@@ -1,5 +1,5 @@
 Template.standings.helpers({
-    getUsers: function () {
+    getCompetitionUsers: function () {
         var competition = Session.get('selectedCompetition');
         var group = Session.get('selectedGroup');
 

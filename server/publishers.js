@@ -59,7 +59,21 @@ Meteor.startup(function () {
     });
 
     Meteor.publish("groups", function () {
-        return Groups.find({});
+        var userInfo = UserInfo.findOne({
+            _id: this.userId
+        });
+
+        return Groups.find({
+            $or: [{
+                _id: {
+                    $in: userInfo.groups
+                }
+            }, {
+                _id: {
+                    $in: userInfo.adminGroups
+                }
+            }]
+        });
     });
 
     Meteor.publish("matches", function () {

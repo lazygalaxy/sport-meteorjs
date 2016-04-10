@@ -5,7 +5,11 @@ getUser = function (id) {
 }
 
 Template.registerHelper('getUsers', function () {
-    return CustomUsers.find({});
+    return CustomUsers.find({}, {
+        sort: {
+            username: 1
+        }
+    });
 });
 
 getCurrentUser = function () {

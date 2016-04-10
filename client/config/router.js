@@ -39,10 +39,9 @@ Router.route('/forgotPassword', function () {
     this.render('forgotPassword');
 });
 
-//TODO: remove this once loading looks good
-Router.route('/loading', function () {
-    this.render('loading');
-});
+//Router.route('/loading', function () {
+//    this.render('loading');
+//});
 
 Router.route('/', function () {
     Router.go('predictions');
@@ -54,7 +53,7 @@ Router.route('/home', function () {
 
 Router.route('/predictions', {
     waitOn: function () {
-        return Meteor.subscribe("customusers");
+        return [Meteor.subscribe("actors"), Meteor.subscribe("competitions"), Meteor.subscribe("customusers"), Meteor.subscribe("matches"), Meteor.subscribe("predictions"), Meteor.subscribe("questions")];
     },
     action: function () {
         this.render('predictions');
@@ -63,7 +62,7 @@ Router.route('/predictions', {
 
 Router.route('/points', {
     waitOn: function () {
-        return Meteor.subscribe("customusers");
+        return [Meteor.subscribe("competitions"), Meteor.subscribe("customusers"), Meteor.subscribe("matches"), Meteor.subscribe("predictions"), Meteor.subscribe("questions"), Meteor.subscribe("results")];
     },
     action: function () {
         setSelectedUser();
@@ -74,7 +73,7 @@ Router.route('/points', {
 
 Router.route('/standings', {
     waitOn: function () {
-        return Meteor.subscribe("customusers");
+        return [Meteor.subscribe("competitions"), Meteor.subscribe("customusers"), Meteor.subscribe("groups"), Meteor.subscribe("matches"), Meteor.subscribe("predictions"), Meteor.subscribe("questions"), Meteor.subscribe("results")];
     },
     action: function () {
         setSelectedGroup(false);
@@ -85,7 +84,7 @@ Router.route('/standings', {
 
 Router.route('/resultAdmin', {
     waitOn: function () {
-        return Meteor.subscribe("customusers");
+        return [Meteor.subscribe("actors"), Meteor.subscribe("competitions"), Meteor.subscribe("customusers"), Meteor.subscribe("matches"), Meteor.subscribe("questions"), Meteor.subscribe("results")];
     },
     action: function () {
         this.render('resultAdmin');
@@ -94,7 +93,7 @@ Router.route('/resultAdmin', {
 
 Router.route('/userAdmin', {
     waitOn: function () {
-        return Meteor.subscribe("customusers");
+        return [Meteor.subscribe("competitions"), Meteor.subscribe("customusers"), Meteor.subscribe("groups")];
     },
     action: function () {
         setSelectedGroup(true);
