@@ -63,17 +63,25 @@ Meteor.startup(function () {
             _id: this.userId
         });
 
-        return Groups.find({
-            $or: [{
-                _id: {
-                    $in: userInfo.groups
-                }
+        if (userInfo) {
+            var adminGroups = userInfo.adminGroups;
+            if (!adminGroups) {
+                adminGroups = [];
+            }
+
+            return Groups.find({
+                $or: [{
+                    _id: {
+                        $in: userInfo.groups
+                    }
             }, {
-                _id: {
-                    $in: userInfo.adminGroups
-                }
+                    _id: {
+                        $in: adminGroups
+                    }
             }]
-        });
+            });
+        }
+        return [];
     });
 
     Meteor.publish("matches", function () {
