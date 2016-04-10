@@ -1,15 +1,9 @@
-getGroup = function (id) {
-    return Groups.findOne({
-        _id: id
-    });
-}
+Template.registerHelper('isGlobalGroup', function () {
+    return Session.get('selectedGroup')._id == 'GLOBAL';
+});
 
 Template.registerHelper('getGroups', function () {
-    return Groups.find({}, {
-        sort: {
-            label: 1
-        }
-    }).fetch();
+    return getGroups();
 });
 
 Template.registerHelper('getSelectedGroup', function () {
@@ -28,9 +22,19 @@ Template.registerHelper('getAdminGroups', function () {
     }).fetch();
 });
 
-Template.registerHelper('isGlobalGroup', function () {
-    return Session.get('selectedGroup')._id == 'GLOBAL';
-});
+getGroup = function (id) {
+    return Groups.findOne({
+        _id: id
+    });
+}
+
+getGroups = function () {
+    return Groups.find({}, {
+        sort: {
+            label: 1
+        }
+    }).fetch();
+}
 
 setSelectedGroup = function (checkAdmin, id = null) {
     var oldGroupId;
@@ -39,23 +43,22 @@ setSelectedGroup = function (checkAdmin, id = null) {
     }
 
     var newGroupId = oldGroupId;
-    if (getGroup(id)) {
+    if (id && getGroup(id)) {
         newGroupId = getGroup(id)._id;
     }
 
     var currentUser = getCurrentUser();
-    //if it is required ensure it is an admin group
+    //chech if it is an admin group if required
     if (checkAdmin && currentUser.adminGroups.indexOf(newGroupId) == -1) {
-        var groupLength = currentUser.adminGroups.length;
-        newGroupId = currentUser.adminGroups[groupLength - 1];
+        newGroupId = currentUser.adminGroups[0];
     }
 
-    if (!newGroupId && !oldGroupId) {
-        // there is no new or old group ids, a default needs to be set
-        var groupLength = currentUser.groups.length;
-        console.info(currentUser.groups[groupLength - 1]);
-        Session.set('selectedGroup', getGroup(currentUser.groups[groupLength - 1]));
-    } else if (newGroupId != oldGroupId) {
+    if (newGroupId && newGroupId != oldGroupId && getGroup(newGroupId)) {
+        // if there is valid newGrouId
         Session.set('selectedGroup', getGroup(newGroupId));
+
+    } else if (!oldGroupId || !getGroup(oldGroupId)) {
+        // if there is no oldGroupId or the oldGroupId is invalid
+        Session.set('selectedGroup', getGroups()[0]);
     }
 }

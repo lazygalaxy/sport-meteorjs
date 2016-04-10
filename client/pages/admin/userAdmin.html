@@ -1,7 +1,6 @@
 <template name="userAdmin">
     <div class="container">
-        {{> adminGroupSelection }} {{> competitionSelection }}
-
+        {{> adminGroupSelection }} {{> competitionSelection }} {{#with getSelectedGroup}}{{label}}{{/with}} - {{#with getSelectedCompetition}}{{label}}{{/with}}
         <div class="table-responsive">
             <table class="table dataTables-users">
                 <thead>
