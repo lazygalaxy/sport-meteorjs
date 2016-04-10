@@ -2,6 +2,7 @@ Template.standings.helpers({
     getCompetitionUsers: function () {
         var competition = Session.get('selectedCompetition');
         var group = Session.get('selectedGroup');
+        var nowDate = new Date();
 
         var predictionMap = Predictions.find({
             competitionId: competition._id
@@ -43,21 +44,28 @@ Template.standings.helpers({
                             var question = Questions.findOne({
                                 _id: prediction.itemId
                             });
-                            if (question.options == 'INTEGER') {
-                                if (Math.abs(result.answer - prediction.answer) <= question.threshold) {
+                            if (question.date < nowDate) {
+                                if (question.options == 'INTEGER') {
+                                    if (Math.abs(result.answer - prediction.answer) <= question.threshold) {
+                                        user.points += parseInt(question.points);
+                                    }
+                                } else if (result.answer == prediction.answer) {
                                     user.points += parseInt(question.points);
                                 }
-                            } else if (result.answer == prediction.answer) {
-                                user.points += parseInt(question.points);
                             }
                         } else {
-                            //calculate the actual points
-                            if (result.homeScore == prediction.homeScore && result.awayScore == prediction.awayScore) {
-                                user.points += 3;
-                            } else if ((result.homeScore - result.awayScore) == (prediction.homeScore - prediction.awayScore)) {
-                                user.points += 2;
-                            } else if ((result.homeScore > result.awayScore && prediction.awayScore > prediction.awayScore) || (result.homeScore < result.awayScore && prediction.awayScore < prediction.awayScore)) {
-                                user.points += 1;
+                            var match = Matches.findOne({
+                                _id: prediction.itemId
+                            });
+                            if (match.date < nowDate) {
+                                //calculate the actual points
+                                if (result.homeScore == prediction.homeScore && result.awayScore == prediction.awayScore) {
+                                    user.points += 3;
+                                } else if ((result.homeScore - result.awayScore) == (prediction.homeScore - prediction.awayScore)) {
+                                    user.points += 2;
+                                } else if ((result.homeScore > result.awayScore && prediction.awayScore > prediction.awayScore) || (result.homeScore < result.awayScore && prediction.awayScore < prediction.awayScore)) {
+                                    user.points += 1;
+                                }
                             }
                         }
                     }
