@@ -8,21 +8,24 @@ Router.configure({
 });
 
 Router.onBeforeAction(function () {
-
-
-    var routeName = Router.current().route.getName();
-
-    if (!Meteor.userId()) {
-        if (ALLOW_ROUTES.indexOf(routeName) > -1) {
-            this.render(routeName);
-        } else {
-            Router.go('login');
-        }
+    if (Accounts._resetPasswordToken) {
+        Session.set('resetPasswordToken', Accounts._resetPasswordToken);
+        this.render('resetPassword');
     } else {
-        if (ALLOW_ROUTES.indexOf(routeName) == -1) {
-            this.next();
+        var routeName = Router.current().route.getName();
+
+        if (!Meteor.userId()) {
+            if (ALLOW_ROUTES.indexOf(routeName) > -1) {
+                this.render(routeName);
+            } else {
+                Router.go('login');
+            }
         } else {
-            Router.go('home');
+            if (ALLOW_ROUTES.indexOf(routeName) == -1) {
+                this.next();
+            } else {
+                Router.go('home');
+            }
         }
     }
 });
@@ -38,6 +41,11 @@ Router.route('/register', function () {
 Router.route('/forgotPassword', function () {
     this.render('forgotPassword');
 });
+
+Router.route('/resetPassword', function () {
+    this.render('resetPassword');
+});
+
 
 //Router.route('/loading', function () {
 //    this.render('loading');
