@@ -9,6 +9,7 @@ Template.resetPassword.events({
             } else {
                 toastr.success('Your password has successfully been reset.');
                 Session.set('resetPasswordToken', undefined);
+                Router.go('home');
             }
         });
     }

@@ -9,7 +9,8 @@ Template.forgotPassword.events({
             if (error) {
                 toastr.error(error.reason);
             } else {
-                toastr.success('A new password has been emailed to you.');
+                toastr.success('An email to reset your password has been sent to you.');
+                Router.go('home');
             }
         });
     }

@@ -5,16 +5,18 @@ Template.register.events({
         var email = $('[id=email]').val();
         var password = $('[id=registerPassword]').val();
 
-        Accounts.createUser({
+        var userId = Accounts.createUser({
             username: username,
             email: email,
             password: password
         }, function (error) {
             if (error) {
                 toastr.error(error.reason, 'Login Denied')
-            } else {
-                Router.go("home");
             }
         });
+
+        if (userId) {
+            Router.go("home");
+        }
     }
 });

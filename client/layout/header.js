@@ -1,3 +1,20 @@
+getUnverifiedEmails = function () {
+    var currentUser = getCurrentUser();
+    var emails = [];
+    currentUser.emails.forEach(function (email) {
+        if (!email.verified) {
+            emails.push(email.address);
+        }
+    });
+    return emails;
+};
+
+Template.header.helpers({
+    getUnverifiedEmails: function () {
+        return getUnverifiedEmails();
+    }
+});
+
 Template.header.events({
     'submit #login-form': function (event) {
         event.preventDefault();
@@ -6,7 +23,7 @@ Template.header.events({
 
         Meteor.loginWithPassword(username, password, function (error) {
             if (error) {
-                toastr.error(error.reason, 'Login Denied')
+                toastr.error(error.reason, 'Login Denied');
             } else {
                 Router.go("home");
             }
@@ -16,6 +33,17 @@ Template.header.events({
         event.preventDefault();
         Meteor.logout();
         Router.go('login');
+    },
+    'click .verifyEmail': function (event) {
+        event.preventDefault();
+        var emails = getUnverifiedEmails();
+        Meteor.call('emailVerification', emails, function (error, result) {
+            if (error) {
+                toastr.error(error.reason);
+            } else {
+                toastr.success('Verification link sent to: ' + emails);
+            }
+        });
     },
     'click .back-button': function (event) {
         history.back();

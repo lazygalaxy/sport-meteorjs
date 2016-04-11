@@ -74,6 +74,11 @@ Meteor.startup(function () {
         },
         'changeUsername': function (username) {
             Accounts.setUsername(Meteor.user()._id, username);
+        },
+        'emailVerification': function (emails) {
+            emails.forEach(function (email) {
+                Accounts.sendVerificationEmail(Meteor.user()._id, email);
+            });
         }
     });
 

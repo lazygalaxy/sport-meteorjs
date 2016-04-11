@@ -34,6 +34,9 @@
                         <ul class="dropdown-menu">
                             <li><a href="#" data-target="#changeUsername" data-toggle="modal"><i class="fa fa-user"></i>&nbsp;Change Username</a></li>
                             <li><a href="#" data-target="#changePassword" data-toggle="modal"><i class="fa fa-user-secret"></i>&nbsp;Change Password</a></li>
+                            {{#if getUnverifiedEmails}}
+                            <li><a href="#" class="verifyEmail"><i class="fa fa-check"></i>&nbsp;Verify Email</a></li>
+                            {{/if}}
                             <li><a href="#" class="logout"><i class="fa fa-sign-out"></i>&nbsp;Logout</a></li>
                         </ul>
                     </li>
