@@ -8,7 +8,7 @@ Template.userAdmin.events({
     }
 });
 
-Template.standings.events({
+Template.rankings.events({
     "click .group-selection li a": function (event) {
         setSelectedGroup(false, event.target.id);
     },

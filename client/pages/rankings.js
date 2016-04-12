@@ -1,4 +1,4 @@
-Template.standings.helpers({
+Template.rankings.helpers({
     getCompetitionUsers: function () {
         var competition = Session.get('selectedCompetition');
         var group = Session.get('selectedGroup');
@@ -105,7 +105,7 @@ Template.standings.helpers({
     }
 });
 
-Template.standings.events({
+Template.rankings.events({
     "click .user-selection a": function (event) {
         setSelectedUser(event.target.id);
     }

@@ -79,14 +79,14 @@ Router.route('/points', {
     }
 });
 
-Router.route('/standings', {
+Router.route('/rankings', {
     waitOn: function () {
         return [Meteor.subscribe("competitions"), Meteor.subscribe("customusers"), Meteor.subscribe("groups"), Meteor.subscribe("matches"), Meteor.subscribe("predictions"), Meteor.subscribe("questions"), Meteor.subscribe("results")];
     },
     action: function () {
         setSelectedGroup(false);
         setSelectedCompetition(false);
-        this.render('standings');
+        this.render('rankings');
     }
 });
 

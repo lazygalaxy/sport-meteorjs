@@ -1,4 +1,4 @@
-<template name="standings">
+<template name="rankings">
     <div class="container">
         {{> groupSelection }} {{> competitionSelection }}
         <div class="panel panel-success">
@@ -19,7 +19,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {{#each getCompetitionUsers}} {{>standingsRow}} {{/each}}
+                        {{#each getCompetitionUsers}} {{>rankingsRow}} {{/each}}
                     </tbody>
                 </table>
             </div>
@@ -27,7 +27,7 @@
     </div>
 </template>
 
-<template name="standingsRow">
+<template name="rankingsRow">
     <tr>
         <td>{{rank}}</td>
         <td>{{username}}</td>
