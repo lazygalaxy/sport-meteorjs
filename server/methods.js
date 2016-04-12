@@ -67,7 +67,7 @@ Meteor.startup(function () {
                     $set: obj
                 });
 
-                return 'Updated ' + user.username + ' to ' + value + '.';
+                return 'Updated ' + name + ' of ' + user.username + ' to ' + value + '.';
             } else {
                 throw new Meteor.Error(500, 'User not found ' + userId + '.');
             }

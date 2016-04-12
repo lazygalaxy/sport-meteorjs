@@ -12,9 +12,9 @@
                             <tr>
                                 <th>Username</th>
                                 <th>E-Mail</th>
-                                <th>Group</th>
-                                <th>Competition</th>
-                                <th>Paid</th>
+                                <!--th>Group</th>
+                                <th>Competition</th-->
+                                <th>Paid (Date)</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -34,10 +34,10 @@
     <tr>
         <td>{{username}}</td>
         <td>{{emails.[0].address}}</td>
-        <td>{{#with getSelectedGroup}}{{label}}{{/with}}</td>
-        <td>{{#with getSelectedCompetition}}{{label}}{{/with}}</td>
+        <!--td>{{#with getSelectedGroup}}{{label}}{{/with}}</td>
+        <td>{{#with getSelectedCompetition}}{{label}}{{/with}}</td-->
         <td>
-            <input id={{_id}} name="{{getPaidAttribute}}" type="checkbox" checked="{{hasPaid _id}}">&nbsp;{{#if hasPaid _id}}Yes{{else}}No{{/if}}
+            <input id={{_id}} name="{{getPaidAttribute}}" type="checkbox" checked="{{hasPaid _id}}">&nbsp;{{#if hasPaid _id}}Yes ({{paidDate _id}}){{else}}No{{/if}}
         </td>
     </tr>
 </template>

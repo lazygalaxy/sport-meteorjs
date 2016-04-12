@@ -1,6 +1,7 @@
 Template.userRow.events({
     "change": function (event) {
         inputUpsertUser(event.target.id, event.target.name, event.target.checked);
+        inputUpsertUser(event.target.id, event.target.name + 'Date', new Date());
     }
 });
 

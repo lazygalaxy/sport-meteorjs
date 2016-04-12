@@ -43,6 +43,15 @@ Template.registerHelper('hasPaid', function (id) {
     }
 });
 
+Template.registerHelper('paidDate', function (id) {
+    var user = getUser(id);
+    if (user && user.hasOwnProperty(getPaidAttribute() + 'Date')) {
+        return prettyDate(user[getPaidAttribute() + 'Date']);
+    } else {
+        return 'N/A';
+    }
+});
+
 getPaidAttribute = function () {
     return "paid" + Session.get('selectedGroup')._id + Session.get('selectedCompetition')._id;
 }
