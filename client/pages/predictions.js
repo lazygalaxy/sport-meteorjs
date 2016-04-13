@@ -7,13 +7,18 @@ Template.predictions.helpers({
         }).fetch();
 
         var matches = Matches.find({
+            "homeTeam.iso3": {
+                $ne: 'XYZ'
+            },
+            "awayTeam.iso3": {
+                $ne: 'XYZ'
+            },
             date: {
                 $gt: new Date()
             }
         }).fetch();
 
         if (Meteor.user()) {
-            //TODO: get the user predictions
             var predictionsMap = Predictions.find({
                 userId: Meteor.user()._id
             }).fetch().reduce(function (map, obj) {

@@ -27,7 +27,9 @@ inputUpsertUser = function (userId, name, value) {
         if (error) {
             toastr.error(error.reason);
         } else {
-            toastr.success(result);
+            if (result) {
+                toastr.success(result);
+            }
         }
     });
 }

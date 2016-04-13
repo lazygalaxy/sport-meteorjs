@@ -1,7 +1,9 @@
 Template.userRow.events({
-    "change": function (event) {
+    "change .paid-checkbox": function (event) {
         inputUpsertUser(event.target.id, event.target.name, event.target.checked);
-        inputUpsertUser(event.target.id, event.target.name + 'Date', new Date());
+    },
+    "focusin .paid-date": function (event) {
+        inputUpsertUser(event.target.id, event.target.name, event.target.value);
     }
 });
 
@@ -21,7 +23,6 @@ Template.userAdmin.helpers({
         getGroupUsers().forEach(function (user) {
             emails += user.emails[0].address + ';';
         });
-        console.info(emails);
         return emails;
     }
 });
@@ -30,3 +31,9 @@ Template.userAdmin.rendered = function () {
     // Initialize dataTables
     $('.dataTables-adminusers').DataTable();
 };
+
+Template.userRow.rendered = function () {
+    $('.my-datepicker').datepicker({
+        format: "dd/mm/yyyy"
+    });
+}

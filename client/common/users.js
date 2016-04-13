@@ -46,7 +46,7 @@ Template.registerHelper('hasPaid', function (id) {
 Template.registerHelper('paidDate', function (id) {
     var user = getUser(id);
     if (user && user.hasOwnProperty(getPaidAttribute() + 'Date')) {
-        return prettyDate(user[getPaidAttribute() + 'Date']);
+        return user[getPaidAttribute() + 'Date'];
     } else {
         return 'N/A';
     }

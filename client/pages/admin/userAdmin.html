@@ -14,7 +14,8 @@
                                 <th>E-Mail</th>
                                 <!--th>Group</th>
                                 <th>Competition</th-->
-                                <th>Paid (Date)</th>
+                                <th>Paid</th>
+                                <th>Date</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -37,7 +38,10 @@
         <!--td>{{#with getSelectedGroup}}{{label}}{{/with}}</td>
         <td>{{#with getSelectedCompetition}}{{label}}{{/with}}</td-->
         <td>
-            <input id={{_id}} name="{{getPaidAttribute}}" type="checkbox" checked="{{hasPaid _id}}">&nbsp;{{#if hasPaid _id}}Yes ({{paidDate _id}}){{else}}No{{/if}}
+            <input id={{_id}} name="{{getPaidAttribute}}" type="checkbox" checked="{{hasPaid _id}}" class="paid-checkbox">&nbsp;{{#if hasPaid _id}}Yes{{else}}No{{/if}}
+        </td>
+        <td>
+            <input id={{_id}} name="{{getPaidAttribute}}Date" type="text" value="{{paidDate _id}}" class="my-datepicker form-control paid-date" readonly>
         </td>
     </tr>
 </template>

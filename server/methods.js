@@ -54,22 +54,25 @@ Meteor.startup(function () {
             }
         },
         'upsertUser': function (userId, name, value) {
-            var user = Meteor.users.findOne({
-                _id: userId
-            });
-
-            if (user) {
-                var obj = {};
-                obj[name] = value;
-                UserInfo.upsert({
+            if (Meteor.user()) {
+                var user = Meteor.users.findOne({
                     _id: userId
-                }, {
-                    $set: obj
                 });
 
-                return 'Updated ' + name + ' of ' + user.username + ' to ' + value + '.';
-            } else {
-                throw new Meteor.Error(500, 'User not found ' + userId + '.');
+                var userInfo = UserInfo.findOne({
+                    _id: userId
+                });
+                if (!userInfo || !userInfo.hasOwnProperty(name) || userInfo[name] != value) {
+                    var obj = {};
+                    obj[name] = value;
+                    UserInfo.upsert({
+                        _id: userId
+                    }, {
+                        $set: obj
+                    });
+
+                    return 'Updated ' + user.username + ' to ' + value + '.';
+                }
             }
         },
         'changeUsername': function (username) {
