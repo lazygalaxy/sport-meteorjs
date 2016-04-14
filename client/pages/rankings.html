@@ -47,7 +47,7 @@
         <td>{{username}}</td>
         <td>{{prettyDate date}}</td>
         {{#if isPaidGroup}}
-        <td>{{#if hasPaid _id}}Yes ({{paidDate _id}}){{else}}No{{/if}}</td>
+        <td>{{#if hasPaid _id}}Yes ({{getPaidDate _id}}){{else}}No{{/if}}</td>
         {{/if}}
         <td class="user-selection"><a id="{{_id}}" href="{{pathFor route='points'}}">{{points}}</a></td>
     </tr>

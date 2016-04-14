@@ -7,7 +7,7 @@ Meteor.startup(function () {
     const EURO2016 = 'EURO2016';
     const EURO2016TEST = 'EURO2016TEST';
 
-    //TODO: these group upserts could form part of a .csv file
+    //TODO: these group upserts could form part of a .csv files
     Groups.upsert({
         _id: GLOBAL,
     }, {
@@ -76,7 +76,7 @@ Meteor.startup(function () {
             _id: vangosUser._id
         }, {
             $set: {
-                adminGroups: [AXPO, AXPO_TRADING, VONTOBEL],
+                adminGroups: [AXPO_TRADING, VONTOBEL],
                 adminCompetitions: [EURO2016]
             }
         });
@@ -88,8 +88,20 @@ Meteor.startup(function () {
             _id: olafUser._id
         }, {
             $set: {
-                adminGroups: [AXPO],
+                adminGroups: [AXPO_TRADING],
                 adminCompetitions: [EURO2016, EURO2016TEST]
+            }
+        });
+    }
+
+    var andreasUser = Accounts.findUserByEmail('andreas.muenst@axpo.com');
+    if (andreasUser) {
+        db.userinfo.update({
+            _id: andreasUser._id
+        }, {
+            $set: {
+                adminGroups: [AXPO_TRADING],
+                adminCompetitions: [EURO2016TEST]
             }
         });
     }

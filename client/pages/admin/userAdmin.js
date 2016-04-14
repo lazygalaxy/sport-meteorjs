@@ -1,9 +1,16 @@
 Template.userRow.events({
     "change .paid-checkbox": function (event) {
         inputUpsertUser(event.target.id, event.target.name, event.target.checked);
+        var paidDate = getPaidDate(event.target.id);
+        console.log(paidDate);
+        if (!paidDate || paidDate == 'N/A') {
+            inputUpsertUser(event.target.id, event.target.name + "Date", moment(new Date()).format('DD/MM/YYYY'));
+        }
     },
     "focusin .paid-date": function (event) {
-        inputUpsertUser(event.target.id, event.target.name, event.target.value);
+        if (event.target.value != 'N/A') {
+            inputUpsertUser(event.target.id, event.target.name, event.target.value);
+        }
     }
 });
 
