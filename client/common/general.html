@@ -1,5 +1,5 @@
 <template name="matchRow">
-    <div class="row">
+    <div class="row text-center">
         <div class="col-xs-3 col-sm-4">
             <img src="/flags/{{this.homeTeam.iso3}}.png" style="max-width: 100%;float: right;" />
         </div>
@@ -29,17 +29,31 @@
 </template>
 
 <template name="questionRow">
-    <p>{{this.description}}</p> {{#if equals this.options 'INTEGER'}}
-    <input id="{{this._id}}" name="answer" value="{{this.answer}}" class="form-control" style="margin: 0 auto;width: 200px;text-align: center;"> {{else}}
-    <div class="btn-group">
-        <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle" style="width: 200px;">{{> displayCountry getActor this.answer}}<span class="caret"></span></button>
-        <ul class="dropdown-menu scrollable-menu answer-selection">
-            <li id="{{this._id}}">
-                {{#each getActors this.options ',' 'CTRY'}} {{> dropdownAnswer}} {{/each}}
-            </li>
-        </ul>
+    <div class="modal fade" id="{{_id}}" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Question Point Rules ({{points}} points)</h4>
+                </div>
+                <div class="modal-body">
+                    {{this.details}}
+                </div>
+            </div>
+        </div>
     </div>
-    {{/if}}
+    <div class=" text-center">
+        <p>{{this.description}}</p>{{#if equals this.options 'INTEGER'}}
+        <input id="{{this._id}}" name="answer" value="{{this.answer}}" class="form-control" style="margin: 0 auto;width: 200px;text-align: center;"> {{else}}
+        <div class="btn-group">
+            <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle" style="width: 200px;">{{> displayCountry getActor this.answer}}<span class="caret"></span></button>
+            <ul class="dropdown-menu scrollable-menu answer-selection">
+                <li id="{{this._id}}">
+                    {{#each getActors this.options ',' 'CTRY'}} {{> dropdownAnswer}} {{/each}}
+                </li>
+            </ul>
+        </div>
+        {{/if}}
+    </div>
 </template>
 
 <template name="dropdownAnswer">

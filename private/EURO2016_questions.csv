@@ -1,7 +1,7 @@
-_Q1;20160610 19:00;Which team is going to win the Euro 2016?;40;0;ALB,AUT,BEL,CHE,CZE,DEU,ENG,ESP,FRA,HRV,HUN,IRL,ISL,ITA,NIR,POL,PRT,ROU,RUS,SVK,SWE,TUR,UKR,WAL
-_Q2;20160610 19:00;How many goals will be scored in total?;10;10;INTEGER
-_Q3;20160610 19:00;Which team will receive the most yellow cards?;10;0;ALB,AUT,BEL,CHE,CZE,DEU,ENG,ESP,FRA,HRV,HUN,IRL,ISL,ITA,NIR,POL,PRT,ROU,RUS,SVK,SWE,TUR,UKR,WAL
-_Q4;20160610 19:00;How many yellow cards will be shown in total?;10;20;INTEGER
-_Q5;20160610 19:00;Which team will receive the most red cards?;10;0;ALB,AUT,BEL,CHE,CZE,DEU,ENG,ESP,FRA,HRV,HUN,IRL,ISL,ITA,NIR,POL,PRT,ROU,RUS,SVK,SWE,TUR,UKR,WAL
-_Q6;20160610 19:00;How many red cards will be shown in total?;10;0;INTEGER
-_Q7;20160610 19:00;Which team will score the fastest goal?;10;0;ALB,AUT,BEL,CHE,CZE,DEU,ENG,ESP,FRA,HRV,HUN,IRL,ISL,ITA,NIR,POL,PRT,ROU,RUS,SVK,SWE,TUR,UKR,WAL
+_Q1;20160610 19:00;Which team is going to win the Euro 2016?;40;0;ALB,AUT,BEL,CHE,CZE,DEU,ENG,ESP,FRA,HRV,HUN,IRL,ISL,ITA,NIR,POL,PRT,ROU,RUS,SVK,SWE,TUR,UKR,WAL;Choose the team you believe will lift the Euro 2016 trophy and become European champions.
+_Q2;20160610 19:00;How many goals will be scored in total?;10;10;INTEGER;Predict the total number of goals you believe will be scored during the world cup. This does not include any goals scored during penalty shoot-outs. All users that predict the total number within a threshold of 10 goals will be awarded with the points.
+_Q3;20160610 19:00;Which team will receive the most yellow cards?;10;0;ALB,AUT,BEL,CHE,CZE,DEU,ENG,ESP,FRA,HRV,HUN,IRL,ISL,ITA,NIR,POL,PRT,ROU,RUS,SVK,SWE,TUR,UKR,WAL;Predict which team will be shown the most yellow cards during the Euro 2016.
+_Q4;20160610 19:00;How many yellow cards will be shown in total?;10;20;INTEGER;Predict the total number of yellow cards you believe will be shown during the world cup. All users that predict the total number within a threshold of 20 cards will be awarded with the points.
+_Q5;20160610 19:00;Which team will receive the most red cards?;10;0;ALB,AUT,BEL,CHE,CZE,DEU,ENG,ESP,FRA,HRV,HUN,IRL,ISL,ITA,NIR,POL,PRT,ROU,RUS,SVK,SWE,TUR,UKR,WAL;Predict which team will be shown the most red cards during the Euro 2016.
+_Q6;20160610 19:00;How many red cards will be shown in total?;10;0;INTEGER;Predict the total number of red cards you believe will be shown during the world cup.
+_Q7;20160610 19:00;Which team will score the fastest goal?;10;0;ALB,AUT,BEL,CHE,CZE,DEU,ENG,ESP,FRA,HRV,HUN,IRL,ISL,ITA,NIR,POL,PRT,ROU,RUS,SVK,SWE,TUR,UKR,WAL;Make a prediction on which team you believe will score the quickest goal during the Euro 2016.

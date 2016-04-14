@@ -174,7 +174,8 @@ var loadMatches = function (competitionLabel) {
             description: fields[2],
             points: fields[3],
             threshold: fields[4],
-            options: fields[5]
+            options: fields[5],
+            details: fields[6]
         });
     });
 

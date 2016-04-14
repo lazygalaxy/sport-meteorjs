@@ -39,6 +39,8 @@ Template.points.helpers({
             var result = resultMap[match._id];
 
             var info = {};
+
+            info.match = match;
             info.endDate = match.date;
             info.matchOrQuestion = match.homeTeam.label + ' vs ' + match.awayTeam.label;
             info.points = '-';
@@ -79,6 +81,8 @@ Template.points.helpers({
             var result = resultMap[question._id];
 
             var info = {};
+
+            info.question = question;
             info.endDate = question.date;
             info.matchOrQuestion = question.description;
             info.points = '-';
