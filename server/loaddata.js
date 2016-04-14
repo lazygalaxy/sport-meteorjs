@@ -1,6 +1,7 @@
 Meteor.startup(function () {
     const GLOBAL = 'GLOBAL';
     const AXPO = 'AXPO';
+    const AXPO_TRADING = 'AXPO_TRADING';
     const VONTOBEL = 'VONTOBEL';
 
     const EURO2016 = 'EURO2016';
@@ -11,21 +12,32 @@ Meteor.startup(function () {
         _id: GLOBAL,
     }, {
         label: 'Global',
-        domains: []
+        domains: [],
+        paid: false
     });
 
     Groups.upsert({
         _id: AXPO,
     }, {
         label: 'Axpo Group',
-        domains: ['axpo.com', 'axpo.ch']
+        domains: ['axpo.com', 'axpo.ch', 'avectris.com', 'ckw.ch'],
+        paid: false
+    });
+
+    Groups.upsert({
+        _id: AXPO_TRADING,
+    }, {
+        label: 'Axpo Trading',
+        domains: ['axpo.com', 'axpo.ch'],
+        paid: true
     });
 
     Groups.upsert({
         _id: VONTOBEL,
     }, {
         label: 'Bank Vontobel',
-        domains: ['vontobel.com', 'vontobel.ch']
+        domains: ['vontobel.com', 'vontobel.ch'],
+        paid: false
     });
 
     Competitions.upsert({
@@ -64,7 +76,7 @@ Meteor.startup(function () {
             _id: vangosUser._id
         }, {
             $set: {
-                adminGroups: [AXPO, VONTOBEL],
+                adminGroups: [AXPO, AXPO_TRADING, VONTOBEL],
                 adminCompetitions: [EURO2016]
             }
         });

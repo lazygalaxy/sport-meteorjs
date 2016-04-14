@@ -13,9 +13,9 @@
                             <th>Rank</th>
                             <th>User</th>
                             <th>Last Prediction Date</th>
-                            {{#unless isGlobalGroup}}
+                            {{#if isPaidGroup}}
                             <th>Paid (Date)</th>
-                            {{/unless}}
+                            {{/if}}
                             <th>Points</th>
                         </tr>
                     </thead>
@@ -46,9 +46,9 @@
         <td>{{rank}}</td>
         <td>{{username}}</td>
         <td>{{prettyDate date}}</td>
-        {{#unless isGlobalGroup}}
+        {{#if isPaidGroup}}
         <td>{{#if hasPaid _id}}Yes ({{paidDate _id}}){{else}}No{{/if}}</td>
-        {{/unless}}
+        {{/if}}
         <td class="user-selection"><a id="{{_id}}" href="{{pathFor route='points'}}">{{points}}</a></td>
     </tr>
 </template>

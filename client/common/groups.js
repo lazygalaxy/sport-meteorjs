@@ -1,5 +1,5 @@
-Template.registerHelper('isGlobalGroup', function () {
-    return Session.get('selectedGroup')._id == 'GLOBAL';
+Template.registerHelper('isPaidGroup', function () {
+    return Session.get('selectedGroup').paid;
 });
 
 Template.registerHelper('getGroups', function () {
