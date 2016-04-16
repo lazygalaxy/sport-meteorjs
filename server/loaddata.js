@@ -7,7 +7,7 @@ Meteor.startup(function () {
     const EURO2016 = 'EURO2016';
     const EURO2016TEST = 'EURO2016TEST';
 
-    //TODO: these group upserts could form part of a .csv file
+    //TODO: these group upserts could form part of a .csv files
     Groups.upsert({
         _id: GLOBAL,
     }, {

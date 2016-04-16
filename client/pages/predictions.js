@@ -7,12 +7,12 @@ Template.predictions.helpers({
         }).fetch();
 
         var matches = Matches.find({
-            "homeTeam.iso3": {
-                $ne: 'XYZ'
-            },
-            "awayTeam.iso3": {
-                $ne: 'XYZ'
-            },
+//            "homeTeam.iso3": {
+//                $ne: 'XYZ'
+//            },
+//            "awayTeam.iso3": {
+//                $ne: 'XYZ'
+//            },
             date: {
                 $gt: new Date()
             }

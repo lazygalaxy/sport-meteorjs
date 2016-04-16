@@ -10,9 +10,11 @@
                                 <h5>{{prettyDate this.date}}</h5>
                             </div>
                             <div class="col-xs-4" style="text-align:center;">
-                                {{#if equals this.type 'match'}}
+                                {{#if equals this.type 'match'}} {{#if equals this.homeTeam._id 'CTRY_XYZ'}}
+                                <button class="btn btn-warning info-button" data-target="#matchRulesDisable" data-toggle="modal"><i class="fa fa-info-circle"></i>&nbsp;Match Info</button>
+                                {{else}}
                                 <button class="btn btn-warning info-button" data-target="#matchRules" data-toggle="modal"><i class="fa fa-info-circle"></i>&nbsp;Match Rules</button>
-                                {{/if}} {{#if equals this.type 'question'}}
+                                {{/if}} {{/if}} {{#if equals this.type 'question'}}
                                 <button class="btn btn-warning info-button" data-target="#{{_id}}" data-toggle="modal"><i class="fa fa-info-circle"></i>&nbsp;Question Rules</button>
                                 {{/if}}
                             </div>
@@ -21,37 +23,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="modal fade" id="matchRules" role="dialog">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h4 class="modal-title">Match Point Rules (3, 2 or 1 Points)</h4>
-                                </div>
-                                <div class="modal-body">
-                                    Points are awarded in the following way for a match prediction:
-                                    <p>
-                                        <ul>
-                                            <li>3 points awarded if the exact score is predicted correctly</li>
-                                            <li>2 points awarded if the correct winner and goal difference is predicted correctly</li>
-                                            <li>1 point awarded if only the winner of the match is predicted correctly</li>
-                                        </ul>
-                                    </p>
-                                    <p>
-                                        Here is a list of possible points awarded, given the outcome of a game being 2-1:
-                                        <ul>
-                                            <li>3 points awarded if the prediction was 2-1</li>
-                                            <li>2 points awarded if the prediction was 1-0, 3-2 or 4-3</li>
-                                            <li>1 point awarded if the prediction was 2-0, 3-1 or 4-2</li>
-                                            <li>0 points awarded if the prediction was 0-1, 0-2 or 1-2</li>
-                                        </ul>
-                                    </p>
-                                    <p>
-                                        These points are applied against the 90 minute result of a match. Should the game extend to extra time, the scoring system is then applied against the 120 minute result. A penalty shoot-out does not affect the scoring in any way, since penalties scored during the shoot-out are not considered.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {{> matchRules}} {{> matchRulesDisable}}
                     <div class="panel-body">
                         {{#if equals this.type 'match'}} {{>matchRow}} {{/if}} {{#if equals this.type 'question'}} {{>questionRow}} {{/if}}
                     </div>
