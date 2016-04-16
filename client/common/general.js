@@ -13,3 +13,7 @@ Template.registerHelper('equals', function (a, b) {
 Template.registerHelper('gtLength1', function (array) {
     return array.length > 1;
 });
+
+Template.registerHelper('length', function (array) {
+    return array.length;
+});

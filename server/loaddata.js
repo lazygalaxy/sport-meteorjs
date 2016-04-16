@@ -7,7 +7,7 @@ Meteor.startup(function () {
     const EURO2016 = 'EURO2016';
     const EURO2016TEST = 'EURO2016TEST';
 
-    //TODO: these group upserts could form part of a .csv files
+    //TODO: these group upserts could form part of a .csv file
     Groups.upsert({
         _id: GLOBAL,
     }, {
@@ -65,6 +65,20 @@ Meteor.startup(function () {
             iso3: fields[2],
             isoCode: fields[3]
         });
+    });
+
+    Actors.upsert({
+        _id: 'UNKNOWN',
+    }, {
+        type: 'COMMON',
+        label: 'Unknown'
+    });
+
+    Actors.upsert({
+        _id: 'BOOL_UNKNOWN',
+    }, {
+        type: 'BOOL',
+        label: 'Unknown'
     });
 
     Actors.upsert({

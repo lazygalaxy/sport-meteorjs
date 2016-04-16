@@ -61,7 +61,8 @@
 </template>
 
 <template name="displayOption">
-    {{#if this.iso3}}
+    {{#if equals _id 'UNKNOWN'}}
+    <img src="question.png" height="25px">&nbsp;{{this.label}} {{else}} {{#if this.iso3}}
     <img src="flags/{{this.iso3}}.png" height="25px">&nbsp;{{this.label}} {{else}}
-    <img src="BOOL/{{this._id}}.png" height="25px">&nbsp;{{this.label}} {{/if}}
+    <img src="BOOL/{{this._id}}.png" height="25px">&nbsp;{{this.label}} {{/if}} {{/if}}
 </template>

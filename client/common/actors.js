@@ -22,6 +22,6 @@ Template.registerHelper('getActor', function (id) {
     if (actor) {
         return actor;
     } else {
-        return getActor('CTRY_XYZ');
+        return getActor('UNKNOWN');
     }
 });

@@ -9,7 +9,7 @@ Template.registerHelper('getUsers', function () {
         sort: {
             username: 1
         }
-    });
+    }).fetch();
 });
 
 getCurrentUser = function () {
