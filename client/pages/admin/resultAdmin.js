@@ -29,6 +29,8 @@ Template.resultAdmin.helpers({
 
             matches.forEach(function (match) {
                 match.type = 'match';
+                match.homeScoreColor = '#ffffff';
+                match.awayScoreColor = '#ffffff';
                 if (match._id in resultsMap) {
                     match.homeScore = resultsMap[match._id].homeScore;
                     match.awayScore = resultsMap[match._id].awayScore;
@@ -37,6 +39,8 @@ Template.resultAdmin.helpers({
 
             questions.forEach(function (question) {
                 question.type = 'question';
+                question.answerColor = '#ffffff';
+
                 if (question._id in resultsMap) {
                     question.answer = resultsMap[question._id].answer;
                 }

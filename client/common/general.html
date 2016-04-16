@@ -14,12 +14,12 @@
                 <div class="col-xs-6">
                     {{#if equals this.homeTeam._id 'CTRY_XYZ'}}
                     <input value="" class="form-control" style="margin: 0 auto;width: 50px;text-align: center;" required disabled> {{else}}
-                    <input id="{{this._id}}" name="homeScore" value="{{this.homeScore}}" class="form-control" style="margin: 0 auto;width: 50px;text-align: center;" required> {{/if}}
+                    <input id="{{this._id}}" name="homeScore" value="{{this.homeScore}}" class="form-control" style="margin: 0 auto;width: 50px;text-align: center;background-color: {{this.homeScoreColor}};" required> {{/if}}
                 </div>
                 <div class="col-xs-6">
                     {{#if equals this.awayTeam._id 'CTRY_XYZ'}}
                     <input value="" class="form-control" style="margin: 0 auto;width: 50px;text-align: center;" required disabled> {{else}}
-                    <input id="{{this._id}}" name="awayScore" value="{{this.awayScore}}" class="form-control" style="margin: 0 auto;width: 50px;text-align: center;" required> {{/if}}
+                    <input id="{{this._id}}" name="awayScore" value="{{this.awayScore}}" class="form-control" style="margin: 0 auto;width: 50px;text-align: center;background-color: {{this.awayScoreColor}};" required> {{/if}}
                 </div>
                 <div class="col-xs-12">{{this.description}}
                 </div>
@@ -96,7 +96,7 @@
     </div>
     <div class=" text-center">
         <p>{{this.description}} ({{points}} points)</p>{{#if equals this.optionType 'INTEGER'}}
-        <input id="{{this._id}}" name="answer" value="{{this.answer}}" class="form-control" style="margin: 0 auto;width: 200px;text-align: center;"> {{else}}
+        <input id="{{this._id}}" name="answer" value="{{this.answer}}" class="form-control" style="margin: 0 auto;width: 200px;text-align: center;background-color: {{this.answerColor}};"> {{else}}
         <div class="btn-group">
             <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle" style="width: 200px;">{{> displayOption getActor this.answer}}&nbsp;<span class="caret"></span></button>
             <ul class="dropdown-menu scrollable-menu answer-selection">

@@ -7,12 +7,12 @@ Template.predictions.helpers({
         }).fetch();
 
         var matches = Matches.find({
-//            "homeTeam.iso3": {
-//                $ne: 'XYZ'
-//            },
-//            "awayTeam.iso3": {
-//                $ne: 'XYZ'
-//            },
+            //            "homeTeam.iso3": {
+            //                $ne: 'XYZ'
+            //            },
+            //            "awayTeam.iso3": {
+            //                $ne: 'XYZ'
+            //            },
             date: {
                 $gt: new Date()
             }
@@ -28,16 +28,47 @@ Template.predictions.helpers({
 
             matches.forEach(function (match) {
                 match.type = 'match';
+                match.homeScoreColor = '#ffffff';
+                match.awayScoreColor = '#ffffff';
+
                 if (match._id in predictionsMap) {
-                    match.homeScore = predictionsMap[match._id].homeScore;
-                    match.awayScore = predictionsMap[match._id].awayScore;
+                    var prediction = predictionsMap[match._id];
+
+                    match.homeScore = prediction.homeScore;
+                    if (prediction.hasOwnProperty('homeScoreError')) {
+                        if (prediction.homeScoreError) {
+                            match.homeScoreColor = '#ff7777';
+                        } else {
+                            match.homeScoreColor = '#77ff77';
+                        }
+                    }
+
+                    match.awayScore = prediction.awayScore;
+                    if (prediction.hasOwnProperty('awayScoreError')) {
+                        if (prediction.awayScoreError) {
+                            match.awayScoreColor = '#ff7777';
+                        } else {
+                            match.awayScoreColor = '#77ff77';
+                        }
+                    }
                 }
             });
 
             questions.forEach(function (question) {
                 question.type = 'question';
+                question.answerColor = '#ffffff';
+
                 if (question._id in predictionsMap) {
-                    question.answer = predictionsMap[question._id].answer;
+                    var prediction = predictionsMap[question._id];
+                    question.answer = prediction.answer;
+
+                    if (prediction.hasOwnProperty('answerError')) {
+                        if (prediction.answerError) {
+                            question.answerColor = '#ff7777';
+                        } else {
+                            question.answerColor = '#77ff77';
+                        }
+                    }
                 }
             });
         }

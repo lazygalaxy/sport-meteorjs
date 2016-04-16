@@ -2,11 +2,22 @@ Meteor.startup(function () {
     Meteor.methods({
         'upsertPrediction': function (itemId, name, value) {
             if (Meteor.user()) {
+                var obj = {};
                 var validation = validateValue(itemId, name, value);
-                value = validation[0];
+                if (validation.length == 2) {
+                    obj[name + 'Error'] = true;
+                    Predictions.upsert({
+                        _id: itemId + '_' + Meteor.user()._id
+                    }, {
+                        $set: obj
+                    });
+                    console.info(itemId + '_' + Meteor.user()._id + ' ' + name + 'Error');
+                    throw new Meteor.Error(500, validation[1]);
+                }
 
+                value = validation[0];
                 var nowDate = new Date();
-                if (nowDate > validation[1]) {
+                if (nowDate > validation[2]) {
                     throw new Meteor.Error(500, 'Prediction item has expired.');
                 }
 
@@ -14,8 +25,8 @@ Meteor.startup(function () {
                     _id: itemId + '_' + Meteor.user()._id
                 });
                 if (!prediction || !prediction.hasOwnProperty(name) || prediction[name] != value) {
-                    var obj = {};
                     obj[name] = value;
+                    obj[name + 'Error'] = false;
                     obj['date'] = new Date();
                     obj['itemId'] = itemId;
                     obj['competitionId'] = itemId.split('_')[0];
@@ -25,15 +36,25 @@ Meteor.startup(function () {
                     }, {
                         $set: obj
                     });
-                    return validation[2];
+                    return validation[1];
+                } else if (prediction[name] == value && prediction[name + 'Error']) {
+                    obj[name + 'Error'] = false;
+                    Predictions.upsert({
+                        _id: itemId + '_' + Meteor.user()._id
+                    }, {
+                        $set: obj
+                    });
                 }
             }
         },
         'upsertResult': function (itemId, name, value) {
             if (Meteor.user()) {
                 var validation = validateValue(itemId, name, value);
-                value = validation[0];
+                if (validation.length == 2) {
+                    throw new Meteor.Error(500, validation[1]);
+                }
 
+                value = validation[0];
                 var result = Results.findOne({
                     _id: itemId + '_' + Meteor.user()._id
                 });
@@ -49,7 +70,7 @@ Meteor.startup(function () {
                     }, {
                         $set: obj
                     });
-                    return validation[2];
+                    return validation[1];
                 }
             }
         },
@@ -96,7 +117,8 @@ Meteor.startup(function () {
         });
         if (match) {
             if (!value || (value % 1 != 0) || value < 0 || value > 9) {
-                throw new Meteor.Error(500, 'Invalid value entered ' + value + '. Integer values between 0 and 9 expected.');
+                message = 'Invalid value entered ' + value + '. Integer values between 0 and 9 expected.';
+                return [value, message];
             }
             value = parseInt(value);
             predictionEndDate = match.date;
@@ -112,7 +134,8 @@ Meteor.startup(function () {
             if (question) {
                 if (question.optionType == 'INTEGER') {
                     if (!value || (value % 1 != 0) || value < 0 || value > 999) {
-                        throw new Meteor.Error(500, 'Invalid value entered ' + value + '. Integer values between 0 and 999 expected.');
+                        message = 'Invalid value entered ' + value + '. Integer values between 0 and 999 expected.';
+                        return [value, message];
                     }
                     value = parseInt(value);
                 }
@@ -123,6 +146,6 @@ Meteor.startup(function () {
             }
         }
 
-        return [value, predictionEndDate, message];
+        return [value, message, predictionEndDate];
     }
 });
