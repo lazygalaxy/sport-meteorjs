@@ -110,7 +110,7 @@ Meteor.startup(function () {
                 _id: itemId
             });
             if (question) {
-                if (question.options == 'INTEGER') {
+                if (question.optionType == 'INTEGER') {
                     if (!value || (value % 1 != 0) || value < 0 || value > 999) {
                         throw new Meteor.Error(500, 'Invalid value entered ' + value + '. Integer values between 0 and 999 expected.');
                     }

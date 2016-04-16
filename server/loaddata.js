@@ -67,6 +67,20 @@ Meteor.startup(function () {
         });
     });
 
+    Actors.upsert({
+        _id: 'BOOL_YES',
+    }, {
+        type: 'BOOL',
+        label: 'Yes'
+    });
+
+    Actors.upsert({
+        _id: 'BOOL_NO',
+    }, {
+        type: 'BOOL',
+        label: 'No'
+    });
+
     loadMatches(EURO2016);
     loadMatches(EURO2016TEST);
 
@@ -96,7 +110,7 @@ Meteor.startup(function () {
 
     var andreasUser = Accounts.findUserByEmail('andreas.muenst@axpo.com');
     if (andreasUser) {
-        db.userinfo.update({
+        UserInfo.update({
             _id: andreasUser._id
         }, {
             $set: {
@@ -174,8 +188,9 @@ var loadMatches = function (competitionLabel) {
             description: fields[2],
             points: fields[3],
             threshold: fields[4],
-            options: fields[5],
-            details: fields[6]
+            optionType: fields[5],
+            options: fields[6],
+            details: fields[7]
         });
     });
 

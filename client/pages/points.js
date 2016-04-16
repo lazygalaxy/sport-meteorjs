@@ -103,7 +103,7 @@ Template.points.helpers({
             }
 
             if (prediction && result) {
-                if (question.options == 'INTEGER') {
+                if (question.optionType == 'INTEGER') {
                     if (Math.abs(result.answer - prediction.answer) <= question.threshold) {
                         info.points = question.points;
                     } else {

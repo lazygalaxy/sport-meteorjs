@@ -45,7 +45,7 @@ Template.rankings.helpers({
                                 _id: prediction.itemId
                             });
                             if (question.date < nowDate) {
-                                if (question.options == 'INTEGER') {
+                                if (question.optionType == 'INTEGER') {
                                     if (Math.abs(result.answer - prediction.answer) <= question.threshold) {
                                         user.points += parseInt(question.points);
                                     }

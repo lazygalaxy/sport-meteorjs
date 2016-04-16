@@ -42,13 +42,13 @@
         </div>
     </div>
     <div class=" text-center">
-        <p>{{this.description}}</p>{{#if equals this.options 'INTEGER'}}
+        <p>{{this.description}} ({{points}} points)</p>{{#if equals this.optionType 'INTEGER'}}
         <input id="{{this._id}}" name="answer" value="{{this.answer}}" class="form-control" style="margin: 0 auto;width: 200px;text-align: center;"> {{else}}
         <div class="btn-group">
-            <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle" style="width: 200px;">{{> displayCountry getActor this.answer}}<span class="caret"></span></button>
+            <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle" style="width: 200px;">{{> displayOption getActor this.answer}}&nbsp;<span class="caret"></span></button>
             <ul class="dropdown-menu scrollable-menu answer-selection">
                 <li id="{{this._id}}">
-                    {{#each getActors this.options ',' 'CTRY'}} {{> dropdownAnswer}} {{/each}}
+                    {{#each getActors this.options ',' this.optionType}} {{> dropdownOptionAnswer}} {{/each}}
                 </li>
             </ul>
         </div>
@@ -56,10 +56,12 @@
     </div>
 </template>
 
-<template name="dropdownAnswer">
-    <a id="{{this._id}}" href="#">{{> displayCountry}}</a>
+<template name="dropdownOptionAnswer">
+    <a id="{{this._id}}" href="#">{{> displayOption}}</a>
 </template>
 
-<template name="displayCountry">
-    <img src="flags/{{this.iso3}}.png" height="25px">&nbsp;{{this.label}}
+<template name="displayOption">
+    {{#if this.iso3}}
+    <img src="flags/{{this.iso3}}.png" height="25px">&nbsp;{{this.label}} {{else}}
+    <img src="BOOL/{{this._id}}.png" height="25px">&nbsp;{{this.label}} {{/if}}
 </template>
