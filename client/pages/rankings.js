@@ -100,7 +100,6 @@ Template.rankings.helpers({
             }
         });
 
-
         return users;
     }
 });

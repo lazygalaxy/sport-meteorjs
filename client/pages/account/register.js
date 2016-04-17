@@ -12,11 +12,18 @@ Template.register.events({
         }, function (error) {
             if (error) {
                 toastr.error(error.reason, 'Login Denied')
+            } else {
+                var emails = getUnverifiedEmails();
+                Meteor.call('emailVerification', emails, function (error, result) {
+                    if (error) {
+                        toastr.error(error.reason);
+                    } else {
+                        toastr.success('Verification link sent to: ' + emails);
+                    }
+                });
+
+                Router.go("home");
             }
         });
-
-        if (userId) {
-            Router.go("home");
-        }
     }
 });
