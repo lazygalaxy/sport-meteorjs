@@ -11,7 +11,6 @@ Meteor.startup(function () {
                     }, {
                         $set: obj
                     });
-                    console.info(itemId + '_' + Meteor.user()._id + ' ' + name + 'Error');
                     throw new Meteor.Error(500, validation[1]);
                 }
 

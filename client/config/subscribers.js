@@ -6,6 +6,7 @@ Meteor.subscribe("competitions");
 Meteor.subscribe("customusers");
 Meteor.subscribe("groups");
 Meteor.subscribe("matches");
+//Meteor.subscribe("points");
 Meteor.subscribe("predictions");
 Meteor.subscribe("questions");
 Meteor.subscribe("results");

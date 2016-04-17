@@ -13,7 +13,6 @@ Router.onBeforeAction(function () {
         this.render('resetPassword');
     } else {
         var routeName = Router.current().route.getName();
-
         if (!Meteor.userId()) {
             if (ALLOW_ROUTES.indexOf(routeName) > -1) {
                 this.render(routeName);

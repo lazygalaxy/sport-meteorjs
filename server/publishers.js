@@ -88,6 +88,10 @@ Meteor.startup(function () {
         return Matches.find({});
     });
 
+    Meteor.publish("points", function () {
+        return Points.find({});
+    });
+
     Meteor.publish("predictions", function () {
         return Predictions.find({});
     });
