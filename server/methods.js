@@ -98,7 +98,7 @@ Meteor.startup(function () {
         'changeUsername': function (username) {
             Accounts.setUsername(Meteor.user()._id, username);
         },
-        'emailVerification': function (emails) {
+        'sendVerificationEmails': function (emails) {
             emails.forEach(function (email) {
                 Accounts.sendVerificationEmail(Meteor.user()._id, email);
             });
@@ -115,8 +115,8 @@ Meteor.startup(function () {
             _id: itemId
         });
         if (match) {
-            if (!value || (value % 1 != 0) || value < 0 || value > 9) {
-                message = 'Invalid value entered ' + value + '. Integer values between 0 and 9 expected.';
+            if (!value || (value % 1 != 0) || value < 0 || value > 99) {
+                message = 'Invalid value entered ' + value + '. Integer values between 0 and 99 expected.';
                 return [value, message];
             }
             value = parseInt(value);

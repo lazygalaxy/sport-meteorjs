@@ -8,15 +8,25 @@ Router.configure({
 });
 
 Router.onBeforeAction(function () {
+    if (Accounts._verifyEmailToken) {
+        verifyEmail(Accounts._verifyEmailToken);
+        Router.go('home');
+    }
+
     if (Accounts._resetPasswordToken) {
+        //handle reset password stuff
         Session.set('resetPasswordToken', Accounts._resetPasswordToken);
         this.render('resetPassword');
     } else {
+        //if there is no reset password stuff, bussiness as usual
         var routeName = Router.current().route.getName();
         if (!Meteor.userId()) {
+            //if the user is not logged in, he should not be able to roam freely
             if (ALLOW_ROUTES.indexOf(routeName) > -1) {
+                //if it is one of the known routes, render it
                 this.render(routeName);
             } else {
+                //any other random route for non members will be directed to the login page
                 Router.go('login');
             }
         } else {
@@ -44,7 +54,6 @@ Router.route('/forgotPassword', function () {
 Router.route('/resetPassword', function () {
     this.render('resetPassword');
 });
-
 
 //Router.route('/loading', function () {
 //    this.render('loading');

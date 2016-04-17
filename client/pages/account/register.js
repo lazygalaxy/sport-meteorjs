@@ -14,7 +14,7 @@ Template.register.events({
                 toastr.error(error.reason, 'Login Denied')
             } else {
                 var emails = getUnverifiedEmails();
-                Meteor.call('emailVerification', emails, function (error, result) {
+                Meteor.call('sendVerificationEmails', emails, function (error, result) {
                     if (error) {
                         toastr.error(error.reason);
                     } else {

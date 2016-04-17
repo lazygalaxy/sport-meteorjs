@@ -37,7 +37,7 @@ Template.header.events({
     'click .verifyEmail': function (event) {
         event.preventDefault();
         var emails = getUnverifiedEmails();
-        Meteor.call('emailVerification', emails, function (error, result) {
+        Meteor.call('sendVerificationEmails', emails, function (error, result) {
             if (error) {
                 toastr.error(error.reason);
             } else {
