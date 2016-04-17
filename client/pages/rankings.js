@@ -107,6 +107,7 @@ Template.rankings.helpers({
 
 Template.rankings.events({
     "click .user-selection a": function (event) {
+        event.preventDefault();
         setSelectedUser(event.target.id);
     }
 });

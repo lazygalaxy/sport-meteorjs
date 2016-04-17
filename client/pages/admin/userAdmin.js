@@ -1,5 +1,6 @@
 Template.userRow.events({
     "change .paid-checkbox": function(event) {
+        event.preventDefault();
         inputUpsertUser(event.target.id, event.target.name, event.target.checked);
         var paidDate = getPaidDate(event.target.id);
         if (!paidDate || paidDate == 'N/A') {
@@ -7,6 +8,7 @@ Template.userRow.events({
         }
     },
     "focusin .paid-date": function(event) {
+        event.preventDefault();
         if (event.target.value != 'N/A') {
             inputUpsertUser(event.target.id, event.target.name, event.target.value);
         }

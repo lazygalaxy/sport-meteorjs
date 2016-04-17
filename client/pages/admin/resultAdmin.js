@@ -71,16 +71,19 @@ Template.resultAdmin.helpers({
 
 Template.resultAdmin.events({
     "focusout": function (event) {
+        event.preventDefault();
         if (event.target.value) {
             inputUpsertResult(event.target.id, event.target.name, event.target.value);
         }
     },
     "keyup": function (event) {
+        event.preventDefault();
         if (event.which == 13 && event.target.value) {
             inputUpsertResult(event.target.id, event.target.name, event.target.value);
         }
     },
     "click .answer-selection li a": function (event) {
+        event.preventDefault();
         var itemId = event.target.parentNode.id;
         var answer = event.target.id;
         inputUpsertResult(itemId, 'answer', answer);

@@ -98,6 +98,7 @@ Template.predictions.helpers({
 
 Template.predictions.events({
     "focusout": function (event) {
+        event.preventDefault();
         if (event.target.value) {
             inputUpsertPrediction(event.target.id, event.target.name, event.target.value);
         }

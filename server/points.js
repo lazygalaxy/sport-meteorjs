@@ -158,6 +158,18 @@
              return 0;
      });
 
+     var rank = 0;
+     var lastPoints = -1;
+     dataArray.forEach(function (entry) {
+         if (entry.points != lastPoints) {
+             rank += 1;
+             entry.rank = rank;
+             lastPoints = entry.points;
+         } else {
+             entry.rank = '-';
+         }
+     });
+
      return dataArray;
  }
 
