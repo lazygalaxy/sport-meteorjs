@@ -24,4 +24,17 @@ Meteor.startup(function () {
             });
         }
     });
+
+    //TODO resolve issue where this is called multiple time on startup
+    Results.find({}).observeChanges({
+        added: function (id, doc) {
+            upsertCalculatePoints(doc.competitionId);
+        },
+        changed: function (id, doc) {
+            var result = Results.findOne({
+                _id: id
+            });
+            upsertCalculatePoints(result.competitionId);
+        }
+    });
 });
