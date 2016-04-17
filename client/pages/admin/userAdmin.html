@@ -12,6 +12,7 @@
                             <tr>
                                 <th>Username</th>
                                 <th>E-Mail</th>
+                                <th>Verified</th>
                                 <!--th>Group</th>
                                 <th>Competition</th-->
                                 {{#if isPaidGroup}}
@@ -37,6 +38,7 @@
     <tr>
         <td>{{username}}</td>
         <td>{{emails.[0].address}}</td>
+        <td>{{emails.[0].verified}}</td>
         <!--td>{{#with getSelectedGroup}}{{label}}{{/with}}</td>
         <td>{{#with getSelectedCompetition}}{{label}}{{/with}}</td-->
         {{#if isPaidGroup}}

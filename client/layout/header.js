@@ -1,20 +1,3 @@
-getUnverifiedEmails = function () {
-    var currentUser = getCurrentUser();
-    var emails = [];
-    currentUser.emails.forEach(function (email) {
-        if (!email.verified) {
-            emails.push(email.address);
-        }
-    });
-    return emails;
-};
-
-Template.header.helpers({
-    getUnverifiedEmails: function () {
-        return getUnverifiedEmails();
-    }
-});
-
 Template.header.events({
     'submit #login-form': function (event) {
         event.preventDefault();

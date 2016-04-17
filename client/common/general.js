@@ -10,6 +10,10 @@ Template.registerHelper('equals', function (a, b) {
     return a === b;
 });
 
+Template.registerHelper('gtLength0', function (array) {
+    return array.length > 0;
+});
+
 Template.registerHelper('gtLength1', function (array) {
     return array.length > 1;
 });

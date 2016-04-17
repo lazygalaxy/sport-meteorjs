@@ -10,7 +10,6 @@ Router.configure({
 Router.onBeforeAction(function () {
     if (Accounts._verifyEmailToken) {
         verifyEmail(Accounts._verifyEmailToken);
-        Router.go('home');
     }
 
     if (Accounts._resetPasswordToken) {
