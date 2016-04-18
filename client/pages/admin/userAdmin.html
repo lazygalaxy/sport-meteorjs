@@ -38,7 +38,7 @@
     <tr>
         <td>{{username}}</td>
         <td>{{emails.[0].address}}</td>
-        <td>{{emails.[0].verified}}</td>
+        <td>{{#if emails.[0].verified}}Yes{{else}}No{{/if}}</td>
         <!--td>{{#with getSelectedGroup}}{{label}}{{/with}}</td>
         <td>{{#with getSelectedCompetition}}{{label}}{{/with}}</td-->
         {{#if isPaidGroup}}
