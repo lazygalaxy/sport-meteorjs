@@ -1,24 +1,24 @@
 <template name="login">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-8 col-sm-6 col-md-5 col-xs-offset-2 col-sm-offset-0 col-md-offset-1">
-                <img src='logos/gome.png' style='width:100%;'>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-5 text-center">
-                <h3>Welcome to GoPredict.com</h3>
-                <p>GoPredict.com is a social sports prediction network. Challenge other users in the Euro2016 competition and become a prediction wizard.</p>
-                <p>Join our community of {{length getUsers}} wizards!</p>
-                <p class="text-muted">
-                    <small>Do you need to create a new account?</small>
-                    <br>
-                    <a href="{{pathFor route='register'}}" class="btn btn-primary" style="width:150px;"><i class="fa fa-pencil"></i>&nbsp;Register</a>
-                </p>
-                <p class="text-muted">
-                    <small>Have you forgotten your password and would like to reset it?</small>
-                    <br>
-                    <a href="{{pathFor route='forgotPassword'}}" class="btn btn-primary" style="width:150px;"><i class="fa fa-undo"></i>&nbsp;Reset Password</a>
-                </p>
-            </div>
-        </div>
-    </div>
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-8 col-sm-6 col-md-5 col-xs-offset-2 col-sm-offset-0 col-md-offset-1">
+				<img src='logos/gome.png' style='width:100%;'>
+			</div>
+			<div class="col-xs-12 col-sm-6 col-md-5 text-center">
+				<h3>Welcome to GoPredict.com</h3>
+				<p>GoPredict.com is a social sports prediction network. Challenge other users in the Euro2016 competition and become a prediction wizard.</p>
+				<p>Join our community of {{length getUsers}} wizards!</p>
+				<p class="text-muted">
+					<small>Do you need to create a new account?</small>
+					<br>
+					<a href="{{pathFor route='register'}}" class="btn btn-primary" style="width:150px;"><i class="fa fa-pencil"></i>&nbsp;Register</a>
+				</p>
+				<p class="text-muted">
+					<small>Have you forgotten your password and would like to reset it?</small>
+					<br>
+					<a href="{{pathFor route='forgotPassword'}}" class="btn btn-primary" style="width:150px;"><i class="fa fa-undo"></i>&nbsp;Reset Password</a>
+				</p>
+			</div>
+		</div>
+	</div>
 </template>

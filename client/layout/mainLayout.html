@@ -1,24 +1,21 @@
 <template name="mainLayout">
+	<!-- Wrapper-->
+	<div id="wrapper">
 
-    <!-- Wrapper-->
-    <div id="wrapper">
+		<!-- Page wraper -->
+		<div id="page-wrapper" class="gray-bg">
 
-        <!-- Page wraper -->
-        <div id="page-wrapper" class="gray-bg">
+			<!-- Header -->
+			{{> header }}
 
-            <!-- Page wrapper -->
-            {{> header }}
+			<!-- Main view  -->
+			{{> yield}}
 
-            <!-- Main view  -->
-            {{> yield}}
+			<!-- Footer -->
+			{{> footer }}
 
-            <!-- Footer -->
-            {{> footer }}
-
-        </div>
-        <!-- End page wrapper-->
-
-    </div>
-    <!-- End wrapper-->
-
+		</div>
+		<!-- End page wrapper-->
+	</div>
+	<!-- End wrapper-->
 </template>

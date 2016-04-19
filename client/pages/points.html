@@ -1,57 +1,56 @@
 <template name="points">
-    <div class="container">
-        {{> userSelection }} {{> competitionSelection }} {{#if getUserPoints}}
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Match/Question</th>
-                    <th>Result</th>
-                    <th>Prediction (Date)</th>
-                    <th>Points</th>
-                    <th>Rules</th>
-                </tr>
-            </thead>
-            <tbody>
-                {{#each getUserPoints}} {{>userPoints}} {{/each}}
-            </tbody>
-        </table>
-        {{> matchRules}}
-        {{else}} {{#with getSelectedCompetition}}
-        <h2>{{label}} starts on the {{prettyDate startDate}}.</h2>
-        <p>Please come back when the competition starts to view user predictions and points.</p>
-        {{/with}} {{/if}}
-    </div>
+	<div class="container">
+		{{> userSelection }} {{> competitionSelection }} {{#if getUserPoints}}
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Date</th>
+					<th>Match/Question</th>
+					<th>Result</th>
+					<th>Prediction (Date)</th>
+					<th>Points</th>
+					<th>Rules</th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#each getUserPoints}} {{>userPoints}} {{/each}}
+			</tbody>
+		</table>
+		{{> matchRules}} {{else}} {{#with getSelectedCompetition}}
+		<h2>{{label}} starts on the {{prettyDate startDate}}.</h2>
+		<p>Please come back when the competition starts to view user predictions and points.</p>
+		{{/with}} {{/if}}
+	</div>
 </template>
 
 <template name="userPoints">
-    <tr>
-        <td>{{prettyDate endDate}}</td>
-        <td>{{matchOrQuestion}}</td>
-        <td>{{result}}</td>
-        <td>{{prediction}}</td>
-        <td>{{points}}</td>
+	<tr>
+		<td>{{prettyDate endDate}}</td>
+		<td>{{matchOrQuestion}}</td>
+		<td>{{result}}</td>
+		<td>{{prediction}}</td>
+		<td>{{points}}</td>
 
-        {{#if match}}
-        <td>
-            <button class="btn btn-warning info-button" data-target="#matchRules" data-toggle="modal"><i class="fa fa-info-circle"></i></button>
-        </td>
-        {{/if}} {{#if question}}
-        <td>
-            <button class="btn btn-warning info-button" data-target="#{{question._id}}" data-toggle="modal"><i class="fa fa-info-circle"></i></button>
-        </td>
-        <div class="modal fade" id="{{question._id}}" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Question Point Rules ({{question.points}} points)</h4>
-                    </div>
-                    <div class="modal-body">
-                        {{question.details}}
-                    </div>
-                </div>
-            </div>
-        </div>
-        {{/if}}
-    </tr>
+		{{#if match}}
+		<td>
+			<button class="btn btn-warning info-button" data-target="#matchRules" data-toggle="modal"><i class="fa fa-info-circle"></i></button>
+		</td>
+		{{/if}} {{#if question}}
+		<td>
+			<button class="btn btn-warning info-button" data-target="#{{question._id}}" data-toggle="modal"><i class="fa fa-info-circle"></i></button>
+		</td>
+		<div class="modal fade" id="{{question._id}}" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Question Point Rules ({{question.points}} points)</h4>
+					</div>
+					<div class="modal-body">
+						{{question.details}}
+					</div>
+				</div>
+			</div>
+		</div>
+		{{/if}}
+	</tr>
 </template>

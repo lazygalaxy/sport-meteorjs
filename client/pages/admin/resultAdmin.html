@@ -1,29 +1,28 @@
 <template name="resultAdmin">
-
-    <div class="container">
-        {{#if getAnswerItems}} {{#each getAnswerItems}}
-        <div class="row">
-            <div class="col-xs-12 col-sm-10 col-md-8 col-xs-offset-0 col-sm-offset-1 col-md-offset-2">
-                <div class="panel panel-success">
-                    <div class="panel-heading">
-                        <div class="row">
-                            <div class="col-xs-6">
-                                <h5>{{prettyDate this.date}}</h5>
-                            </div>
-                            <div class="col-xs-6" style="text-align:right;">
-                                <img src="/logos/{{this.competitionId}}.png" height="25px">&nbsp; {{this.competitionId}}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel-body text-center">
-                        {{#if equals this.type 'match'}} {{>matchRow}} {{/if}} {{#if equals this.type 'question'}} {{>questionRow}} {{/if}}
-                    </div>
-                </div>
-            </div>
-        </div>
-        {{/each}} {{else}}
-        <h2>There are no match/questions results required at this time.</h2>
-        <p>Please come back later.</p>
-        {{/if}}
-    </div>
+	<div class="container">
+		{{#if getAnswerItems}} {{#each getAnswerItems}}
+		<div class="row">
+			<div class="col-xs-12 col-sm-10 col-md-8 col-xs-offset-0 col-sm-offset-1 col-md-offset-2">
+				<div class="panel panel-success">
+					<div class="panel-heading">
+						<div class="row">
+							<div class="col-xs-6">
+								<h5>{{prettyDate this.date}}</h5>
+							</div>
+							<div class="col-xs-6" style="text-align:right;">
+								<img src="/logos/{{this.competitionId}}.png" height="25px">&nbsp; {{this.competitionId}}
+							</div>
+						</div>
+					</div>
+					<div class="panel-body text-center">
+						{{#if equals this.type 'match'}} {{>matchRow}} {{/if}} {{#if equals this.type 'question'}} {{>questionRow}} {{/if}}
+					</div>
+				</div>
+			</div>
+		</div>
+		{{/each}} {{else}}
+		<h2>There are no match/questions results required at this time.</h2>
+		<p>Please come back later.</p>
+		{{/if}}
+	</div>
 </template>

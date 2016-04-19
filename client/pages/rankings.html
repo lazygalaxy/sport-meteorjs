@@ -1,56 +1,56 @@
 <template name="rankings">
-    <!-- Message view -->
-    {{> message }}
-    <div class="container">
-        {{> groupSelection }} {{> competitionSelection }}
-        <div class="panel panel-success">
-            <div class="panel-heading">
-                <h5>{{#with getSelectedGroup}}{{label}}{{/with}} - {{#with getSelectedCompetition}}{{label}}{{/with}}&nbsp;
+	<!-- Message view -->
+	{{> message }}
+	<div class="container">
+		{{> groupSelection }} {{> competitionSelection }}
+		<div class="panel panel-success">
+			<div class="panel-heading">
+				<h5>{{#with getSelectedGroup}}{{label}}{{/with}} - {{#with getSelectedCompetition}}{{label}}{{/with}}&nbsp;
                 <button class="btn btn-warning info-button" data-target="#rankingRules" data-toggle="modal"><i class="fa fa-info-circle"></i>&nbsp;Ranking Rules</button></h5>
-            </div>
-            <div class="panel-body">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Rank</th>
-                            <th>User</th>
-                            <th>Last Prediction Date</th>
-                            {{#if isPaidGroup}}
-                            <th>Paid (Date)</th>
-                            {{/if}}
-                            <th>Points</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {{#each getCompetitionUsers}} {{>rankingsRow}} {{/each}}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+			</div>
+			<div class="panel-body">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Rank</th>
+							<th>User</th>
+							<th>Last Prediction Date</th>
+							{{#if isPaidGroup}}
+							<th>Paid (Date)</th>
+							{{/if}}
+							<th>Points</th>
+						</tr>
+					</thead>
+					<tbody>
+						{{#each getCompetitionUsers}} {{>rankingsRow}} {{/each}}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
 
-    <div class="modal fade" id="rankingRules" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content text-center">
-                <div class="modal-header">
-                    <h4 class="modal-title">Ranking Rules</h4>
-                </div>
-                <div class="modal-body">
-                    In the case where two or more users have equal points, the tie breaker is decided based on the last prediction date. The user with the earliest last prediction date will have the advantage.
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="modal fade" id="rankingRules" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content text-center">
+				<div class="modal-header">
+					<h4 class="modal-title">Ranking Rules</h4>
+				</div>
+				<div class="modal-body">
+					In the case where two or more users have equal points, the tie breaker is decided based on the last prediction date. The user with the earliest last prediction date will have the advantage.
+				</div>
+			</div>
+		</div>
+	</div>
 </template>
 
 <template name="rankingsRow">
-    <tr>
-        <td>{{rank}}</td>
-        <td>{{username}}</td>
-        <td>{{prettyDate date}}</td>
-        {{#if isPaidGroup}}
-        <td>{{#if hasPaid _id}}Yes ({{getPaidDate _id}}){{else}}No{{/if}}</td>
-        {{/if}}
-        <td class="user-selection"><a id="{{_id}}" href="{{pathFor route='points'}}">{{points}}</a></td>
-    </tr>
+	<tr>
+		<td>{{rank}}</td>
+		<td>{{username}}</td>
+		<td>{{prettyDate date}}</td>
+		{{#if isPaidGroup}}
+		<td>{{#if hasPaid _id}}Yes ({{getPaidDate _id}}){{else}}No{{/if}}</td>
+		{{/if}}
+		<td class="user-selection"><a id="{{_id}}" href="{{pathFor route='points'}}">{{points}}</a></td>
+	</tr>
 </template>

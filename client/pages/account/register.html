@@ -1,30 +1,30 @@
 <template name="register">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-10 col-sm-8 col-md-6 col-xs-offset-1 col-sm-offset-2 col-md-offset-3">
-                <p>
-                    <h3>Register with GoPredict.com</h3>
-                </p>
-                <p>Fill in your details below and start predicting immediately.</p>
-                <form id="register-form" role="form">
-                    <div class="form-group">
-                        <input type="text" id="registerUsername" class="form-control" placeholder="Username" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="email" id="email" class="form-control" placeholder="Email" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="password" id="registerPassword" class="form-control" placeholder="Password" required>
-                    </div>
-                    <button type="submit" class="btn btn-lg btn-success btn-block"><i class="fa fa-pencil"></i>&nbsp;Register</button>
-                </form>
-                <br>
-                <p class="text-muted text-center">
-                    <small>Have you forgotten your password and would like to reset it?</small>
-                    <br>
-                    <a href="{{pathFor route='forgotPassword'}}" class="btn btn-primary" style="width:150px;"><i class="fa fa-undo"></i>&nbsp;Reset Password</a>
-                </p>
-            </div>
-        </div>
-    </div>
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-10 col-sm-8 col-md-6 col-xs-offset-1 col-sm-offset-2 col-md-offset-3">
+				<p>
+					<h3>Register with GoPredict.com</h3>
+				</p>
+				<p>Fill in your details below and start predicting immediately.</p>
+				<form id="register-form" role="form">
+					<div class="form-group">
+						<input type="text" id="registerUsername" class="form-control" placeholder="Username" required>
+					</div>
+					<div class="form-group">
+						<input type="email" id="email" class="form-control" placeholder="Email" required>
+					</div>
+					<div class="form-group">
+						<input type="password" id="registerPassword" class="form-control" placeholder="Password" required>
+					</div>
+					<button type="submit" class="btn btn-lg btn-success btn-block"><i class="fa fa-pencil"></i>&nbsp;Register</button>
+				</form>
+				<br>
+				<p class="text-muted text-center">
+					<small>Have you forgotten your password and would like to reset it?</small>
+					<br>
+					<a href="{{pathFor route='forgotPassword'}}" class="btn btn-primary" style="width:150px;"><i class="fa fa-undo"></i>&nbsp;Reset Password</a>
+				</p>
+			</div>
+		</div>
+	</div>
 </template>
