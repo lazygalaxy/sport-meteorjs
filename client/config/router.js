@@ -4,26 +4,9 @@ Router.configure({
 	loadingTemplate: 'loading'
 });
 
-//Router.onBeforeAction(function () {
-//	//TODO: find a way to manage sticky verify email token
-//	if (Accounts._verifyEmailToken && Session.get('verifyEmailToken') != Accounts._verifyEmailToken) {
-//		Session.set('verifyEmailToken', Accounts._verifyEmailToken);
-//		verifyEmail(Accounts._verifyEmailToken);
-//		this.next();
-//	}
-//	//TODO: find a way to manage sticky reset password token
-//	else if (Accounts._resetPasswordToken && Session.get('resetPasswordToken') != Accounts._resetPasswordToken) {
-//		console.info('new token!');
-//		Session.set('resetPasswordToken', Accounts._resetPasswordToken);
-//		this.render('resetPasswor');
-//	} else {
-//		this.next();
-//	}
-//});
-
-var counter = 0;
+//var counter = 0;
 var getRoute = function (route, loginRequired = true) {
-	console.info('load: ' + counter++);
+	//console.info('load: ' + counter++);
 
 	if (!Meteor.userId()) {
 		if (loginRequired) {

@@ -1,59 +1,60 @@
 <template name="header">
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="{{pathFor route='home'}}">GoPredict.com</a>
-            </div>
-            <div id="navbar" class="navbar-collapse collapse">
-                {{#if getCurrentUser}}
-                <ul class="nav navbar-nav">
-                    <li><a href="{{pathFor route='predictions'}}"><i class="fa fa-magic"></i>&nbsp;Predictions</a></li>
-                    <li><a href="{{pathFor route='rankings'}}"><i class="fa fa-trophy"></i>&nbsp;Rankings</a></li>
-                    {{#if getCurrentUser.adminGroups}} {{#if getCurrentUser.adminCompetitions}}
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-pencil"></i>&nbsp;Admin<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            {{#if getCurrentUser.adminGroups}}
-                            <li><a href="{{pathFor route='userAdmin'}}"><i class="fa fa-users"></i>&nbsp;Users</a></li>
-                            {{/if}} {{#if getCurrentUser.adminCompetitions}}
-                            <li><a href="{{pathFor route='resultAdmin'}}"><i class="fa fa-table"></i>&nbsp;Results</a></li>
-                            {{/if}}
-                        </ul>
-                    </li>
-                    {{/if}} {{/if}}
-                </ul>
-                <ul class="navbar-nav navbar-right">
-                    <li class="dropdown" style="padding: 6px;">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img alt="image" class="img-circle" src="avatar.png" style="height:40px;" />&nbsp;{{getCurrentUser.username}}<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#" data-target="#changeUsername" data-toggle="modal"><i class="fa fa-user"></i>&nbsp;Change Username</a></li>
-                            <li><a href="#" data-target="#changePassword" data-toggle="modal"><i class="fa fa-user-secret"></i>&nbsp;Change Password</a></li>
-                            <li><a href="#" class="logout"><i class="fa fa-sign-out"></i>&nbsp;Logout</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <button class="btn btn-success navbar-btn back-button"><i class="fa fa-backward"></i>&nbsp;Back</button>
-                    </li>
-                </ul>
-                {{else}}
-                <form id="login-form" class="navbar-form navbar-right">
-                    <div class="form-group">
-                        <input type="text" id="username" placeholder="Username or Email" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="password" id="password" placeholder="Password" class="form-control" required>
-                    </div>
-                    <button type="submit" class="btn btn-success" style="width:90px;"><i class=" fa fa-sign-in"></i>&nbsp;Log In</button>
-                </form>
-                {{/if}}
-            </div>
-        </div>
-    </nav>
-    {{#if getCurrentUser}}{{> changeUsername}} {{> changePassword}}{{/if}}
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a href="{{pathFor route='home'}}" class="pull-left"><img alt="image" src="gome.png" style="height:50px;" /></a>
+				<a class="navbar-brand" href="{{pathFor route='home'}}">&nbsp;GoPredict.com</a>
+			</div>
+			<div id="navbar" class="navbar-collapse collapse">
+				{{#if getCurrentUser}}
+				<ul class="nav navbar-nav">
+					<li><a href="{{pathFor route='predictions'}}"><i class="fa fa-magic"></i>&nbsp;Predictions</a></li>
+					<li><a href="{{pathFor route='rankings'}}"><i class="fa fa-trophy"></i>&nbsp;Rankings</a></li>
+					{{#if getCurrentUser.adminGroups}} {{#if getCurrentUser.adminCompetitions}}
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-pencil"></i>&nbsp;Admin<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							{{#if getCurrentUser.adminGroups}}
+							<li><a href="{{pathFor route='userAdmin'}}"><i class="fa fa-users"></i>&nbsp;Users</a></li>
+							{{/if}} {{#if getCurrentUser.adminCompetitions}}
+							<li><a href="{{pathFor route='resultAdmin'}}"><i class="fa fa-table"></i>&nbsp;Results</a></li>
+							{{/if}}
+						</ul>
+					</li>
+					{{/if}} {{/if}}
+				</ul>
+				<ul class="navbar-nav navbar-right">
+					<li class="dropdown" style="padding: 6px;">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img alt="image" class="img-circle" src="avatar.png" style="height:40px;" />&nbsp;{{getCurrentUser.username}}<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="#" data-target="#changeUsername" data-toggle="modal"><i class="fa fa-user"></i>&nbsp;Change Username</a></li>
+							<li><a href="#" data-target="#changePassword" data-toggle="modal"><i class="fa fa-user-secret"></i>&nbsp;Change Password</a></li>
+							<li><a href="#" class="logout"><i class="fa fa-sign-out"></i>&nbsp;Logout</a></li>
+						</ul>
+					</li>
+					<li>
+						<button class="btn btn-success navbar-btn back-button"><i class="fa fa-backward"></i>&nbsp;Back</button>
+					</li>
+				</ul>
+				{{else}}
+				<form id="login-form" class="navbar-form navbar-right">
+					<div class="form-group">
+						<input type="text" id="username" placeholder="Username or Email" class="form-control" required>
+					</div>
+					<div class="form-group">
+						<input type="password" id="password" placeholder="Password" class="form-control" required>
+					</div>
+					<button type="submit" class="btn btn-success" style="width:90px;"><i class=" fa fa-sign-in"></i>&nbsp;Log In</button>
+				</form>
+				{{/if}}
+			</div>
+		</div>
+	</nav>
+	{{#if getCurrentUser}}{{> changeUsername}} {{> changePassword}}{{/if}}
 </template>

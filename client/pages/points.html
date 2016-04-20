@@ -27,15 +27,19 @@
 	<tr>
 		<td>{{prettyDate endDate}}</td>
 		<td>{{matchOrQuestion}}</td>
+
+		{{#if match}}
 		<td>{{result}}</td>
 		<td>{{prediction}}</td>
 		<td>{{points}}</td>
-
-		{{#if match}}
 		<td>
 			<button class="btn btn-warning info-button" data-target="#matchRules" data-toggle="modal"><i class="fa fa-info-circle"></i></button>
 		</td>
 		{{/if}} {{#if question}}
+		<td>{{> displayActor getActor result}}</td>
+		<td>{{> displayActor getActor prediction}}</td>
+		<td>{{points}}</td>
+
 		<td>
 			<button class="btn btn-warning info-button" data-target="#{{question._id}}" data-toggle="modal"><i class="fa fa-info-circle"></i></button>
 		</td>
