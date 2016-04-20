@@ -1,4 +1,4 @@
-Template.passwordReset.events({
+Template.resetPassword.events({
 	'submit form': function (event) {
 		event.preventDefault();
 		var resetPassword = $('[id=resetPassword]').val();

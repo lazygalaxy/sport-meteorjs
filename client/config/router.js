@@ -4,22 +4,22 @@ Router.configure({
 	loadingTemplate: 'loading'
 });
 
-Router.onBeforeAction(function () {
-	//TODO: find a way to manage sticky verify email token
-	if (Accounts._verifyEmailToken && Session.get('verifyEmailToken') != Accounts._verifyEmailToken) {
-		Session.set('verifyEmailToken', Accounts._verifyEmailToken);
-		verifyEmail(Accounts._verifyEmailToken);
-		this.next();
-	}
-	//TODO: find a way to manage sticky reset password token
-	else if (Accounts._resetPasswordToken && Session.get('resetPasswordToken') != Accounts._resetPasswordToken) {
-		console.info('new token!');
-		Session.set('resetPasswordToken', Accounts._resetPasswordToken);
-		this.render('resetPasswor');
-	} else {
-		this.next();
-	}
-});
+//Router.onBeforeAction(function () {
+//	//TODO: find a way to manage sticky verify email token
+//	if (Accounts._verifyEmailToken && Session.get('verifyEmailToken') != Accounts._verifyEmailToken) {
+//		Session.set('verifyEmailToken', Accounts._verifyEmailToken);
+//		verifyEmail(Accounts._verifyEmailToken);
+//		this.next();
+//	}
+//	//TODO: find a way to manage sticky reset password token
+//	else if (Accounts._resetPasswordToken && Session.get('resetPasswordToken') != Accounts._resetPasswordToken) {
+//		console.info('new token!');
+//		Session.set('resetPasswordToken', Accounts._resetPasswordToken);
+//		this.render('resetPasswor');
+//	} else {
+//		this.next();
+//	}
+//});
 
 var counter = 0;
 var getRoute = function (route, loginRequired = true) {
@@ -65,12 +65,23 @@ Router.route('/forgotPassword', {
 	}
 });
 
-Router.route('/passwordReset', {
+Router.route('/resetPassword/:token', {
 	waitOn: function () {
 		return [Meteor.subscribe("customusers")];
 	},
 	action: function () {
-		this.render(getRoute('passwordReset'));
+		Session.set('resetPasswordToken', this.params.token);
+		this.render('resetPassword');
+	}
+});
+
+Router.route('/verifyEmail/:token', {
+	waitOn: function () {
+		return [Meteor.subscribe("customusers")];
+	},
+	action: function () {
+		verifyEmail(this.params.token);
+		Router.go('home');
 	}
 });
 
