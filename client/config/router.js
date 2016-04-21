@@ -102,6 +102,7 @@ Router.route('/rankings', {
 		if (getCurrentUser()) {
 			setSelectedGroup(false);
 			setSelectedCompetition(false);
+			setSelectedPaid();
 		}
 		this.render(getRoute('rankings'));
 	}

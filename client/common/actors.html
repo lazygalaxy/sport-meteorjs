@@ -1,6 +1,6 @@
 <template name="displayActor">
 	{{#if exists _id}} {{#if equals _id 'UNKNOWN'}}
-	<img src="question.png" height="25px">&nbsp;{{this.label}} {{else}} {{#if this.iso3}}
-	<img src="flags/{{this.iso3}}.png" height="25px">&nbsp;{{this.label}} {{else}}
-	<img src="BOOL/{{this._id}}.png" height="25px">&nbsp;{{this.label}} {{/if}} {{/if}} {{else}} {{this}} {{/if}}
+	<img id="{{_id}}" src="question.png" height="25px">&nbsp;{{this.label}} {{else}} {{#if this.iso3}}
+	<img id="{{_id}}" src="flags/{{this.iso3}}.png" height="25px">&nbsp;{{this.label}} {{else}}
+	<img id="{{_id}}" src="actors/{{this._id}}.png" height="25px">&nbsp;{{this.label}} {{/if}} {{/if}} {{else}} {{this}} {{/if}}
 </template>

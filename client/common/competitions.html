@@ -1,14 +1,14 @@
 <template name="competitionSelection">
-    {{#if gtLength1 getCompetitions}}
-    <div class="btn-group">
-        <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle" style="width: 200px;">{{#with getSelectedCompetition}}<img src="logos/{{_id}}.png" height="25px">&nbsp;{{label}}{{/with}} <span class="caret"></span></button>
-        <ul class="dropdown-menu competition-selection">
-            {{#each getCompetitions}}
-            <li>
-                <a id="{{_id}}" href="#"><img src="logos/{{_id}}.png" height="25px">&nbsp;{{label}}</a>
-            </li>
-            {{/each}}
-        </ul>
-    </div>
-    {{/if}}
+	{{#if gtLength1 getCompetitions}}
+	<div class="btn-group">
+		<button data-toggle="dropdown" class="btn btn-primary dropdown-toggle" style="width: 200px;">{{#with getSelectedCompetition}}<img src="logos/{{_id}}.png" height="25px">&nbsp;{{label}}{{/with}} <span class="caret"></span></button>
+		<ul class="dropdown-menu competition-selection">
+			{{#each getCompetitions}}
+			<li>
+				<a id="{{_id}}" href="#"><img id="{{_id}}" src="logos/{{_id}}.png" height="25px">&nbsp;{{label}}</a>
+			</li>
+			{{/each}}
+		</ul>
+	</div>
+	{{/if}}
 </template>

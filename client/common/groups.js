@@ -1,7 +1,3 @@
-Template.registerHelper('isPaidGroup', function () {
-	return Session.get('selectedGroup').paid;
-});
-
 Template.registerHelper('getGroups', function () {
 	return getGroups();
 });

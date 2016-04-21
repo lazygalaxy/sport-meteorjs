@@ -2,7 +2,9 @@
 	<!-- Message view -->
 	{{> message }}
 	<div class="container">
-		{{> groupSelection }} {{> competitionSelection }}
+		<p>
+			{{> groupSelection }} {{> competitionSelection }} {{#if paidButtonVisible}} {{> paidSelection }} {{/if}}
+		</p>
 		<div class="panel panel-success">
 			<div class="panel-heading">
 				<h5>{{#with getSelectedGroup}}{{label}}{{/with}} - {{#with getSelectedCompetition}}{{label}}{{/with}}&nbsp;
@@ -15,7 +17,7 @@
 							<th>Rank</th>
 							<th>User</th>
 							<th>Last Prediction Date</th>
-							{{#if isPaidGroup}}
+							{{#if isSelectedPaid}}
 							<th>Paid (Date)</th>
 							{{/if}}
 							<th>Points</th>
@@ -48,9 +50,23 @@
 		<td>{{rank}}</td>
 		<td>{{username}}</td>
 		<td>{{prettyDate date}}</td>
-		{{#if isPaidGroup}}
+		{{#if isSelectedPaid}}
 		<td>{{#if hasPaid _id}}Yes ({{getPaidDate _id}}){{else}}No{{/if}}</td>
 		{{/if}}
 		<td class="user-selection"><a id="{{_id}}" href="{{pathFor route='points'}}">{{points}}</a></td>
 	</tr>
+</template>
+
+<template name="paidSelection">
+	<div class="btn-group">
+		<button data-toggle="dropdown" class="btn btn-primary dropdown-toggle" style="width: 200px;">{{> displayActor getSelectedPaid}}Users&nbsp;<span class="caret"></span></button>
+		<ul class="dropdown-menu paid-selection">
+			<li>
+				<a id="OTHER_ALL" href="#">{{> displayActor getActor 'OTHER_ALL'}}</a>
+			</li>
+			<li>
+				<a id="OTHER_PAID" href="#">{{> displayActor getActor 'OTHER_PAID'}}</a>
+			</li>
+		</ul>
+	</div>
 </template>

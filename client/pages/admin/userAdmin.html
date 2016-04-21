@@ -1,6 +1,8 @@
 <template name="userAdmin">
 	<div class="container">
-		{{> adminGroupSelection }} {{> competitionSelection }}
+		<p>
+			{{> adminGroupSelection }} {{> competitionSelection }}
+		</p>
 		<div class="panel panel-success">
 			<div class="panel-heading">
 				<h5>{{#with getSelectedGroup}}{{label}}{{/with}} - {{#with getSelectedCompetition}}{{label}}{{/with}}</h5>
@@ -15,10 +17,8 @@
 								<th>Verified</th>
 								<!--th>Group</th>
                                 <th>Competition</th-->
-								{{#if isPaidGroup}}
 								<th>Paid</th>
 								<th>Date</th>
-								{{/if}}
 							</tr>
 						</thead>
 						<tbody>
@@ -41,13 +41,11 @@
 		<td>{{#if emails.[0].verified}}Yes{{else}}No{{/if}}</td>
 		<!--td>{{#with getSelectedGroup}}{{label}}{{/with}}</td>
         <td>{{#with getSelectedCompetition}}{{label}}{{/with}}</td-->
-		{{#if isPaidGroup}}
 		<td>
 			<input id={{_id}} name="{{getPaidAttribute}}" type="checkbox" checked="{{hasPaid _id}}" class="paid-checkbox">&nbsp;{{#if hasPaid _id}}Yes{{else}}No{{/if}}
 		</td>
 		<td>
 			<input id={{_id}} name="{{getPaidAttribute}}Date" type="text" value="{{getPaidDate _id}}" class="my-datepicker form-control paid-date" readonly>
 		</td>
-		{{/if}}
 	</tr>
 </template>

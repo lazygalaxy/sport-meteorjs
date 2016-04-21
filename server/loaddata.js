@@ -1,7 +1,6 @@
 Meteor.startup(function () {
 	const GLOBAL = 'GLOBAL';
 	const AXPO = 'AXPO';
-	const AXPO_TRADING = 'AXPO_TRADING';
 	const VONTOBEL = 'VONTOBEL';
 
 	const EURO2016 = 'EURO2016';
@@ -12,32 +11,21 @@ Meteor.startup(function () {
 		_id: GLOBAL,
 	}, {
 		label: 'Global',
-		domains: [],
-		paid: false
+		domains: []
 	});
 
 	Groups.upsert({
 		_id: AXPO,
 	}, {
 		label: 'Axpo Group',
-		domains: ['axpo.com', 'axpo.ch', 'avectris.com', 'ckw.ch'],
-		paid: false
-	});
-
-	Groups.upsert({
-		_id: AXPO_TRADING,
-	}, {
-		label: 'Axpo Trading',
-		domains: ['axpo.com', 'axpo.ch'],
-		paid: true
+		domains: ['axpo.com', 'axpo.ch', 'avectris.com', 'ckw.ch']
 	});
 
 	Groups.upsert({
 		_id: VONTOBEL,
 	}, {
 		label: 'Bank Vontobel',
-		domains: ['vontobel.com', 'vontobel.ch'],
-		paid: false
+		domains: ['vontobel.com', 'vontobel.ch']
 	});
 
 	Competitions.upsert({
@@ -95,6 +83,20 @@ Meteor.startup(function () {
 		label: 'No'
 	});
 
+	Actors.upsert({
+		_id: 'OTHER_ALL',
+	}, {
+		type: 'OTHER',
+		label: 'All'
+	});
+
+	Actors.upsert({
+		_id: 'OTHER_PAID',
+	}, {
+		type: 'OTHER',
+		label: 'Paid & Verified'
+	});
+
 	loadMatches(EURO2016);
 	loadMatches(EURO2016TEST);
 
@@ -104,7 +106,7 @@ Meteor.startup(function () {
 			_id: vangosUser._id
 		}, {
 			$set: {
-				adminGroups: [AXPO_TRADING, VONTOBEL],
+				adminGroups: [AXPO, VONTOBEL],
 				adminCompetitions: [EURO2016, EURO2016TEST]
 			}
 		});
@@ -116,7 +118,7 @@ Meteor.startup(function () {
 			_id: olafUser._id
 		}, {
 			$set: {
-				adminGroups: [AXPO_TRADING],
+				adminGroups: [AXPO],
 				adminCompetitions: [EURO2016TEST]
 			}
 		});
@@ -128,7 +130,7 @@ Meteor.startup(function () {
 			_id: andreasUser._id
 		}, {
 			$set: {
-				adminGroups: [AXPO_TRADING],
+				adminGroups: [AXPO],
 				adminCompetitions: [EURO2016TEST]
 			}
 		});

@@ -2,6 +2,7 @@ Template.rankings.helpers({
 	getCompetitionUsers: function () {
 		var competition = Session.get('selectedCompetition');
 		var group = Session.get('selectedGroup');
+		var isPaid = isSelectedPaid();
 		var nowDate = new Date();
 
 		var predictionMap = Predictions.find({
@@ -27,7 +28,8 @@ Template.rankings.helpers({
 			var user = CustomUsers.findOne({
 				_id: userId
 			});
-			if (!group.paid || user.emails[0].verified) {
+			var hasUserPaid = user[getPaidAttribute()];
+			if (!isPaid || (user.emails[0].verified && hasUserPaid)) {
 				//if the user belongs to the selected group
 				if (user.groups.indexOf(group._id) >= 0) {
 					user.points = 0;
@@ -108,4 +110,26 @@ Template.rankings.events({
 	"click .user-selection a": function (event) {
 		setSelectedUser(event.target.id);
 	}
+});
+
+setSelectedPaid = function (id = null) {
+	if (id) {
+		Session.set('selectedPaid', getActor(id));
+	}
+
+	if (!Session.get('selectedPaid')) {
+		Session.set('selectedPaid', getActor('OTHER_ALL'));
+	}
+}
+
+Template.registerHelper('getSelectedPaid', function () {
+	return Session.get('selectedPaid');
+});
+
+isSelectedPaid = function () {
+	return Session.get('selectedPaid')._id == 'OTHER_PAID';
+}
+
+Template.registerHelper('isSelectedPaid', function () {
+	return isSelectedPaid();
 });
