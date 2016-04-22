@@ -20,6 +20,10 @@ Template.registerHelper('getCurrentUser', function () {
 	return getCurrentUser();
 });
 
+Template.registerHelper('getUserAvatar', function (id) {
+	return getUser(id).profile.avatar;
+});
+
 setSelectedUser = function (id = null) {
 	if (id) {
 		Session.set('selectedUser', getUser(id));

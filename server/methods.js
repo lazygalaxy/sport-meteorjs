@@ -102,8 +102,34 @@ Meteor.startup(function () {
 			emails.forEach(function (email) {
 				Accounts.sendVerificationEmail(Meteor.user()._id, email);
 			});
+		},
+		'updateAvatar': function (id, url) {
+			return updateAvatar(id, url);
 		}
 	});
+
+	updateAvatar = function (id, url) {
+		try {
+			var user = Meteor.users.find({
+				_id: id
+			});
+			if (!user) {
+				throw new Meteor.Error(500, 'Unknown user ' + id + '.');
+			}
+
+			Meteor.users.update({
+				_id: id
+			}, {
+				$set: {
+					'profile.avatar': url,
+					'profile.date': new Date()
+				}
+			});
+			return user + ' avatar has been updated';
+		} catch (e) {
+			throw new Meteor.Error(500, e.message);
+		}
+	}
 
 	var validateValue = function (itemId, name, value) {
 		value = value.trim();

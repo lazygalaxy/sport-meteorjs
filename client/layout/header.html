@@ -31,10 +31,11 @@
 				</ul>
 				<ul class="navbar-nav navbar-right">
 					<li class="dropdown" style="padding: 6px;">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img alt="image" class="img-circle" src="avatar.png" style="height:40px;" />&nbsp;{{getCurrentUser.username}}<span class="caret"></span></a>
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img alt="image" class="img-circle" src="{{getUserAvatar getCurrentUser._id}}" style="height:40px;" />&nbsp;{{getCurrentUser.username}}<span class="caret"></span></a>
 						<ul class="dropdown-menu">
+							<li><a href="#" data-target="#changeAvatar" data-toggle="modal"><i class="fa fa-camera"></i>&nbsp;Change Avatar</a></li>
 							<li><a href="#" data-target="#changeUsername" data-toggle="modal"><i class="fa fa-user"></i>&nbsp;Change Username</a></li>
-							<li><a href="#" data-target="#changePassword" data-toggle="modal"><i class="fa fa-user-secret"></i>&nbsp;Change Password</a></li>
+							<li><a href="#" data-target="#changePassword" data-toggle="modal"><i class="fa fa-key"></i>&nbsp;Change Password</a></li>
 							<li><a href="#" class="logout"><i class="fa fa-sign-out"></i>&nbsp;Logout</a></li>
 						</ul>
 					</li>
@@ -56,5 +57,5 @@
 			</div>
 		</div>
 	</nav>
-	{{#if getCurrentUser}}{{> changeUsername}} {{> changePassword}}{{/if}}
+	{{#if getCurrentUser}} {{> changeAvatar}} {{> changeUsername}} {{> changePassword}}{{/if}}
 </template>

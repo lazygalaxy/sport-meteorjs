@@ -1,0 +1,16 @@
+<template name="changeAvatar">
+	<div class="modal fade" id="changeAvatar" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content text-center">
+				<div class="modal-header">
+					<h4 class="modal-title">Change Avatar</h4>
+					<small class="font-bold">Please select an avatar you would like to use.</small>
+				</div>
+				<div class="modal-body">
+					{{#each getPossibleAvatars}}
+					<img alt="image" class="img-circle" src="{{this}}" style="width:100px;" /> {{/each}}
+				</div>
+			</div>
+		</div>
+	</div>
+</template>

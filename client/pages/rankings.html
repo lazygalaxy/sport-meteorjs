@@ -48,7 +48,7 @@
 <template name="rankingsRow">
 	<tr>
 		<td>{{rank}}</td>
-		<td>{{username}}</td>
+		<td><img alt="image" class="img-circle" src="{{getUserAvatar _id}}" style="height:40px;" />&nbsp;{{username}}</td>
 		<td>{{prettyDate date}}</td>
 		{{#if isSelectedPaid}}
 		<td>{{#if hasPaid _id}}Yes ({{getPaidDate _id}}){{else}}No{{/if}}</td>
