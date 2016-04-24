@@ -18,16 +18,16 @@ Template.changeAvatar.helpers({
 });
 
 Template.changeAvatar.events({
-	'submit form': function (event) {
+	'click .avatarSelect': function (event) {
 		event.preventDefault();
-		var username = $('[id=username]').val();
+		var url = event.target.src;
 
-		Meteor.call('changeUsername', username, function (error, result) {
+		Meteor.call('updateAvatar', getCurrentUser()._id, url, function (error, result) {
 			if (error) {
 				toastr.error(error.reason)
 			} else {
-				toastr.success('Username has successfully been changed.');
-				$('#changeUsername').modal('hide');
+				toastr.success(result);
+				$('#changeAvatar').modal('hide');
 			}
 		});
 	}

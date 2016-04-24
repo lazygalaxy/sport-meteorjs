@@ -110,7 +110,7 @@ Meteor.startup(function () {
 
 	updateAvatar = function (id, url) {
 		try {
-			var user = Meteor.users.find({
+			var user = Meteor.users.findOne({
 				_id: id
 			});
 			if (!user) {
@@ -125,7 +125,7 @@ Meteor.startup(function () {
 					'profile.date': new Date()
 				}
 			});
-			return user + ' avatar has been updated';
+			return 'User ' + user.username + ' avatar has been updated';
 		} catch (e) {
 			throw new Meteor.Error(500, e.message);
 		}
