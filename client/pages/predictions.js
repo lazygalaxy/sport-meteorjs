@@ -28,35 +28,25 @@ Template.predictions.helpers({
 
 			matches.forEach(function (match) {
 				match.type = 'match';
-				match.homeScoreColor = '#ffffff';
-				match.awayScoreColor = '#ffffff';
+				match.panelColor = '#ffffff';
 
 				if (match._id in predictionsMap) {
 					var prediction = predictionsMap[match._id];
 
 					match.homeScore = prediction.homeScore;
-					if (prediction.hasOwnProperty('homeScoreError')) {
-						if (prediction.homeScoreError) {
-							match.homeScoreColor = '#ff7777';
-						} else {
-							match.homeScoreColor = '#77ff77';
-						}
-					}
-
 					match.awayScore = prediction.awayScore;
-					if (prediction.hasOwnProperty('awayScoreError')) {
-						if (prediction.awayScoreError) {
-							match.awayScoreColor = '#ff7777';
-						} else {
-							match.awayScoreColor = '#77ff77';
-						}
+
+					if ((prediction.hasOwnProperty('homeScoreError') && prediction.homeScoreError) || (prediction.hasOwnProperty('awayScoreError') && prediction.awayScoreError)) {
+						match.panelColor = '#ffdddd';
+					} else if (prediction.hasOwnProperty('homeScoreError') && !prediction.homeScoreError && prediction.hasOwnProperty('awayScoreError') && !prediction.awayScoreError) {
+						match.panelColor = '#ddffdd';
 					}
 				}
 			});
 
 			questions.forEach(function (question) {
 				question.type = 'question';
-				question.answerColor = '#ffffff';
+				question.panelColor = '#ffffff';
 
 				if (question.optionType != 'INTEGER') {
 					question.answer = 'UNKNOWN';
@@ -68,9 +58,9 @@ Template.predictions.helpers({
 
 					if (prediction.hasOwnProperty('answerError')) {
 						if (prediction.answerError) {
-							question.answerColor = '#ff7777';
+							question.panelColor = '#ffdddd';
 						} else {
-							question.answerColor = '#77ff77';
+							question.panelColor = '#ddffdd';
 						}
 					}
 				}

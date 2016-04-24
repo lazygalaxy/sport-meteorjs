@@ -2,6 +2,10 @@ prettyDate = function (date) {
 	return moment(date).format('YYYY-MM-DD HH:mm:ss');
 }
 
+titleCase = function (string) {
+	return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 Template.registerHelper('prettyDate', function (date) {
 	return prettyDate(date);
 });

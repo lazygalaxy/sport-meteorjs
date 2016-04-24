@@ -5,7 +5,7 @@
 		{{#each getPredictionItems}}
 		<div class="row">
 			<div class="col-xs-12 col-sm-10 col-md-8 col-xs-offset-0 col-sm-offset-1 col-md-offset-2">
-				<div class="panel panel-success">
+				<div class="panel panel-info">
 					<div class="panel-heading">
 						<div class="row">
 							<div class="col-xs-4">
@@ -25,10 +25,7 @@
 							</div>
 						</div>
 					</div>
-					{{> matchRules}} {{> matchRulesDisable}}
-					<div class="panel-body">
-						{{#if equals this.type 'match'}} {{>matchRow}} {{/if}} {{#if equals this.type 'question'}} {{>questionRow}} {{/if}}
-					</div>
+					{{> matchRules}} {{> matchRulesDisable}} {{#if equals this.type 'match'}} {{>matchRow}} {{/if}} {{#if equals this.type 'question'}} {{>questionRow}} {{/if}}
 				</div>
 			</div>
 		</div>

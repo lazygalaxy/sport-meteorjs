@@ -6,6 +6,9 @@ Meteor.startup(function () {
 				var validation = validateValue(itemId, name, value);
 				if (validation.length == 2) {
 					obj[name + 'Error'] = true;
+					obj['itemId'] = itemId;
+					obj['competitionId'] = itemId.split('_')[0];
+					obj['userId'] = Meteor.user()._id;
 					Predictions.upsert({
 						_id: itemId + '_' + Meteor.user()._id
 					}, {

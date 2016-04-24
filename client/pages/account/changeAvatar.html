@@ -4,11 +4,17 @@
 			<div class="modal-content text-center">
 				<div class="modal-header">
 					<h4 class="modal-title">Change Avatar</h4>
-					<small class="font-bold">Please select an avatar you would like to use.</small>
+					<small class="font-bold">Please select an avatar you would like to use. If you would like to upload a personal avatar, this can be done by using <a href="http://www.gravatar.com">gravatar.com</a>.</small>
 				</div>
 				<div class="modal-body">
-					{{#each getPossibleAvatars}}
-					<img alt="image" class="img-circle avatarSelect" src="{{this}}" style="width:100px;" /> {{/each}}
+					<div class="row">
+						{{#each getPossibleAvatars}}
+						<div class="col-xs-4 col-sm-3">
+							<img alt="image" class="img-circle avatarSelect" src="{{this.url}}" style="width:100px;" />
+							<br> {{this.text}}
+						</div>
+						{{/each}}
+					</div>
 				</div>
 			</div>
 		</div>

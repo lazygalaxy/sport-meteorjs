@@ -4,13 +4,20 @@ Template.changeAvatar.helpers({
 	getPossibleAvatars: function () {
 		var avatars = [];
 
-		avatars.push(Gravatar.imageUrl(getCurrentUser().emails[0].address, {
+		var gravatarItem = {};
+		gravatarItem.text = 'Gravatar.com';
+		gravatarItem.url = Gravatar.imageUrl(getCurrentUser().emails[0].address, {
 			size: 200,
 			default: 'mm'
-		}));
+		});
+
+		avatars.push(gravatarItem);
 
 		AVATARS.forEach(function (avatar) {
-			avatars.push(Meteor.absoluteUrl('avatars/' + avatar));
+			var item = {};
+			item.text = titleCase(avatar.substring(0, avatar.length - 4).replace('_', ' '));
+			item.url = Meteor.absoluteUrl('avatars/' + avatar);
+			avatars.push(item);
 		});
 
 		return avatars;

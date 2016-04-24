@@ -1,33 +1,35 @@
 <template name="matchRow">
-	<div class="row text-center">
-		<div class="col-xs-3 col-sm-4">
-			<img src="/flags/{{this.homeTeam.iso3}}.png" style="max-width: 100%;float: right;" />
-		</div>
-		<div class="col-xs-6 col-sm-4">
-			<div class="row">
-				<div class="col-xs-6">
-					{{this.homeTeam.label}}
-				</div>
-				<div class="col-xs-6">
-					{{this.awayTeam.label}}
-				</div>
-				<div class="col-xs-6">
-					{{#if equals this.homeTeam._id 'CTRY_XYZ'}}
-					<input value="" class="form-control" style="margin: 0 auto;width: 50px;text-align: center;" required disabled> {{else}}
-					<input id="{{this._id}}" name="homeScore" value="{{this.homeScore}}" class="form-control" style="margin: 0 auto;width: 50px;text-align: center;background-color: {{this.homeScoreColor}};" required> {{/if}}
-				</div>
-				<div class="col-xs-6">
-					{{#if equals this.awayTeam._id 'CTRY_XYZ'}}
-					<input value="" class="form-control" style="margin: 0 auto;width: 50px;text-align: center;" required disabled> {{else}}
-					<input id="{{this._id}}" name="awayScore" value="{{this.awayScore}}" class="form-control" style="margin: 0 auto;width: 50px;text-align: center;background-color: {{this.awayScoreColor}};" required> {{/if}}
-				</div>
-				<div class="col-xs-12">{{this.description}}
-				</div>
-
+	<div class="panel-body" style="background-color:{{this.panelColor}};">
+		<div class="row text-center">
+			<div class="col-xs-3 col-sm-4">
+				<img src="/flags/{{this.homeTeam.iso3}}.png" style="max-width: 100%;float: right;" />
 			</div>
-		</div>
-		<div class="col-xs-3 col-sm-4">
-			<img src="/flags/{{this.awayTeam.iso3}}.png" style="max-width: 100%;float: left;">
+			<div class="col-xs-6 col-sm-4">
+				<div class="row">
+					<div class="col-xs-6">
+						{{this.homeTeam.label}}
+					</div>
+					<div class="col-xs-6">
+						{{this.awayTeam.label}}
+					</div>
+					<div class="col-xs-6">
+						{{#if equals this.homeTeam._id 'CTRY_XYZ'}}
+						<input value="" class="form-control" style="margin: 0 auto;width: 50px;text-align: center;" required disabled> {{else}}
+						<input id="{{this._id}}" name="homeScore" value="{{this.homeScore}}" class="form-control" style="margin: 0 auto;width: 50px;text-align: center;" required> {{/if}}
+					</div>
+					<div class="col-xs-6">
+						{{#if equals this.awayTeam._id 'CTRY_XYZ'}}
+						<input value="" class="form-control" style="margin: 0 auto;width: 50px;text-align: center;" required disabled> {{else}}
+						<input id="{{this._id}}" name="awayScore" value="{{this.awayScore}}" class="form-control" style="margin: 0 auto;width: 50px;text-align: center;" required> {{/if}}
+					</div>
+					<div class="col-xs-12">{{this.description}}
+					</div>
+
+				</div>
+			</div>
+			<div class="col-xs-3 col-sm-4">
+				<img src="/flags/{{this.awayTeam.iso3}}.png" style="max-width: 100%;float: left;">
+			</div>
 		</div>
 	</div>
 </template>
@@ -82,30 +84,32 @@
 </template>
 
 <template name="questionRow">
-	<div class="modal fade" id="{{_id}}" role="dialog">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title">Question Rules ({{points}} points)</h4>
-				</div>
-				<div class="modal-body">
-					{{this.details}}
+	<div class="panel-body" style="background-color:{{this.panelColor}};">
+		<div class="modal fade" id="{{_id}}" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Question Rules ({{points}} points)</h4>
+					</div>
+					<div class="modal-body">
+						{{this.details}}
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	<div class=" text-center">
-		<p>{{this.description}} ({{points}} points)</p>{{#if equals this.optionType 'INTEGER'}}
-		<input id="{{this._id}}" name="answer" value="{{this.answer}}" class="form-control" style="margin: 0 auto;width: 200px;text-align: center;background-color: {{this.answerColor}};"> {{else}}
-		<div class="btn-group">
-			<button data-toggle="dropdown" class="btn btn-primary dropdown-toggle" style="width: 200px;">{{> displayActor getActor this.answer}}&nbsp;<span class="caret"></span></button>
-			<ul class="dropdown-menu scrollable-menu answer-selection">
-				<li id="{{this._id}}">
-					{{#each getActors this.options ',' this.optionType}} {{> dropdownOptionAnswer}} {{/each}}
-				</li>
-			</ul>
+		<div class="text-center">
+			<p>{{this.description}} ({{points}} points)</p>{{#if equals this.optionType 'INTEGER'}}
+			<input id="{{this._id}}" name="answer" value="{{this.answer}}" class="form-control" style="margin: 0 auto;width: 200px;text-align: center;"> {{else}}
+			<div class="btn-group">
+				<button data-toggle="dropdown" class="btn btn-primary dropdown-toggle" style="width: 200px;">{{> displayActor getActor this.answer}}&nbsp;<span class="caret"></span></button>
+				<ul class="dropdown-menu scrollable-menu answer-selection">
+					<li id="{{this._id}}">
+						{{#each getActors this.options ',' this.optionType}} {{> dropdownOptionAnswer}} {{/each}}
+					</li>
+				</ul>
+			</div>
+			{{/if}}
 		</div>
-		{{/if}}
 	</div>
 </template>
 
