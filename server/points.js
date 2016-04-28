@@ -1,16 +1,10 @@
  calculatePoints = function (competitionId) {
  	var matches = Matches.find({
  		competitionId: competitionId,
- 		//date: {
- 		//	$lt: new Date()
- 		//}
  	});
 
  	var questions = Questions.find({
  		competitionId: competitionId,
- 		//date: {
- 		//	$lt: new Date()
- 		//}
  	});
 
  	var predictionMap = Predictions.find({
@@ -50,6 +44,7 @@
  			if (match.date < new Date()) {
  				var prediction = predictionMap[userId][match._id];
  				if (prediction) {
+ 					info.predictionId = prediction._id;
  					info.predictionDate = prediction.date;
  				}
 
@@ -85,6 +80,7 @@
  			if (question.date < new Date()) {
  				var prediction = predictionMap[userId][question._id];
  				if (prediction) {
+ 					info.predictionId = prediction._id;
  					info.predictionDate = prediction.date;
  				}
 
