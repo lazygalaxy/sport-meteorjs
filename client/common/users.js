@@ -1,11 +1,11 @@
 getUser = function (id) {
-	return CustomUsers.findOne({
+	return UserInfo.findOne({
 		_id: id
 	});
 }
 
 Template.registerHelper('getUsers', function () {
-	return CustomUsers.find({}, {
+	return UserInfo.find({}, {
 		sort: {
 			username: 1
 		}

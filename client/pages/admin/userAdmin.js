@@ -16,7 +16,7 @@ Template.userRow.events({
 });
 
 var getGroupUsers = function () {
-	return CustomUsers.find({
+	return UserInfo.find({
 		groups: Session.get('selectedGroup')._id
 	}, {
 		sort: {

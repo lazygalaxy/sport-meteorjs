@@ -48,10 +48,10 @@
 <template name="rankingsRow">
 	<tr>
 		<td>{{rank}}</td>
-		<td><img alt="image" class="img-circle" src="{{getUserAvatar _id}}" style="height:40px;" />&nbsp;{{username}}</td>
+		<td><img alt="image" class="img-circle" src="{{avatar}}" style="height:40px;" />&nbsp;{{username}}</td>
 		<td>{{prettyDate date}}</td>
 		{{#if isSelectedPaid}}
-		<td>{{#if hasPaid _id}}Yes ({{getPaidDate _id}}){{else}}No{{/if}}</td>
+		<td>Yes ({{paidDate}})</td>
 		{{/if}}
 		<td class="user-selection"><a id="{{_id}}" href="{{pathFor route='points'}}">{{points}}</a></td>
 	</tr>
