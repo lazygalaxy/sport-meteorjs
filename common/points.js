@@ -14,6 +14,7 @@ calculateRankings = function (groupId, competitionId, isPaid = false) {
 			if (!isPaid || (user.emails[0].verified && user[getPaidAttribute()])) {
 				if (!data[userPointInfo.userId]) {
 					data[userPointInfo.userId] = {}
+					data[userPointInfo.userId].id = user._id;
 					data[userPointInfo.userId].username = user.username;
 					data[userPointInfo.userId].avatar = user.profile.avatar;
 					data[userPointInfo.userId].points = 0;

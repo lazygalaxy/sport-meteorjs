@@ -48,25 +48,22 @@ Meteor.startup(function () {
 	});
 
 	//TODO resolve issue where this is called multiple time on startup
-	Results.find({}).observeChanges({
+	Predictions.find({}).observeChanges({
 		added: function (id, doc) {
-			upsertCalculatePoints(doc.competitionId);
+			upsertPointInfoByPrediction(id);
 		},
 		changed: function (id, doc) {
-			var result = Results.findOne({
-				_id: id
-			});
-			upsertCalculatePoints(result.competitionId);
+			upsertPointInfoByPrediction(id);
 		}
 	});
 
-	Predictions.find({}).observeChanges({
+
+	Results.find({}).observeChanges({
 		added: function (id, doc) {
-			if (!Points.findOne({
-					_id: id
-				})) {
-				upsertCalculatePoints(doc.competitionId);
-			}
+			upsertPointInfoByResult(id);
+		},
+		changed: function (id, doc) {
+			upsertPointInfoByResult(id);
 		}
 	});
 });

@@ -1,10 +1,10 @@
 <template name="message">
-    {{#if gtLength0 getUnverifiedEmails}}
-    <div class="container text-center">
-        <div class="alert alert-warning" role="alert">
-            <p><strong>Warning!</strong> Please do not forget to verify {{getUnverifiedEmails}} by clicking on the verification link we emailed to you.</p> Click on this button if you would like another verification link:
-            <button class="btn btn-success email-verify-button"><i class="fa fa-check"></i>&nbsp;Send Verification Link</button>
-        </div>
-    </div>
-    {{/if}}
+	{{#if gtLength0 getUnverifiedEmails}}
+	<div class="container text-center">
+		<div class="alert alert-warning" role="alert">
+			<p><strong>Warning!</strong> Please do not forget to verify {{getUnverifiedEmails}} by clicking on the verification link we emailed you.</p> Click on this button if you would like another verification link:
+			<button class="btn btn-success email-verify-button"><i class="fa fa-check"></i>&nbsp;Send Verification Link</button>
+		</div>
+	</div>
+	{{/if}}
 </template>
