@@ -1,3 +1,7 @@
+Template.registerHelper('getUsersTotal', function () {
+	return UserInfo.find({}).fetch().length;
+});
+
 getUser = function (id) {
 	return UserInfo.findOne({
 		_id: id
@@ -5,7 +9,10 @@ getUser = function (id) {
 }
 
 Template.registerHelper('getUsers', function () {
-	return UserInfo.find({}, {
+	var selectedGroup = Session.get('selectedGroup');
+	return UserInfo.find({
+		groups: selectedGroup._id
+	}, {
 		sort: {
 			username: 1
 		}
