@@ -1,0 +1,86 @@
+<template name="groups">
+	<div class="container">
+		<p>
+			{{> adminGroupSelection }} {{> competitionSelection }}
+		</p>
+		<div class="panel panel-success">
+			<div class="panel-heading">
+				{{#with getSelectedGroup}}
+				<div class="form-inline">
+					<div class="form-group">
+						<label for="grouplabel">Label</label>
+						<input type="text" id="grouplabel" class="form-control group-label" value="{{label}}" required>
+					</div>
+					{{#if code}}
+					<div class="form-group">
+						<label for="groupcode">Code</label>
+						<input type="text" id="groupcode" class="form-control" value="{{code}}" readonly>
+					</div>
+					&nbsp;
+					<button class="btn btn-success" data-target="#inviteUsers" data-toggle="modal" style="width:150px;"> <i class="fa fa-envelope">
+						</i>&nbsp;Invite Users
+					</button>
+					{{> inviteUsers}} {{/if}}
+				</div>
+				{{/with}}
+			</div>
+			<div class="panel-body">
+				<div class="table-responsive">
+					<table class="table dataTables-adminusers">
+						<thead>
+							<tr>
+								<th>Username</th>
+								<th>E-Mail</th>
+								<th>Verified</th>
+								<th>Paid</th>
+								<th>Date</th>
+							</tr>
+						</thead>
+						<tbody>
+							{{#each getGroupUsers}} {{>userRow}} {{/each}}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<button class="btn btn-primary clipboard-button" style="width:150px;" data-clipboard-text="{{getClipboardEmails}}">
+			<i class="fa fa-table"></i>&nbsp;Copy Emails
+		</button>
+	</div>
+</template>
+
+<template name="userRow">
+	<tr>
+		<td>{{username}}</td>
+		<td>{{emails.[0].address}}</td>
+		<td>{{#if emails.[0].verified}}Yes{{else}}No{{/if}}</td>
+		<td>
+			<input id={{_id}} name="{{getPaidAttribute}}" type="checkbox" checked="{{hasPaid _id}}" class="paid-checkbox">&nbsp;{{#if hasPaid _id}}Yes{{else}}No{{/if}}
+		</td>
+		<td>
+			<input id={{_id}} name="{{getPaidAttribute}}Date" type="text" value="{{getPaidDate _id}}" class="my-datepicker form-control paid-date" readonly>
+		</td>
+	</tr>
+</template>
+
+<template name="inviteUsers">
+	<div class="modal fade" id="inviteUsers" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content text-center">
+				<div class="modal-header">
+					<h4 class="modal-title">Invite Users</h4>
+					<small class="font-bold">You can invite users to this group in two different ways.</small>
+				</div>
+				<div class="modal-body">
+					<div>
+						You could provide the group code {{code}} to users. Users can join the group by clicking the "Join Group" option under their user profile and entering this code.
+					</div>
+					<br>
+					<div>
+						Or you could provide the following link to users: <u>{{getJoinGroupURL code}}</u> to click on. Users will need to first log in before they click on the link.
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>

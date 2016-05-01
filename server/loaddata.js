@@ -11,21 +11,24 @@ Meteor.startup(function () {
 		_id: GLOBAL,
 	}, {
 		label: 'Global',
-		domains: []
+		domains: [],
+		logo: 'logos/GLOBAL.png'
 	});
 
 	Groups.upsert({
 		_id: AXPO,
 	}, {
 		label: 'Axpo Group',
-		domains: ['axpo.com', 'axpo.ch', 'avectris.com', 'ckw.ch']
+		domains: ['axpo.com', 'axpo.ch', 'avectris.com', 'ckw.ch'],
+		logo: 'logos/AXPO.png'
 	});
 
 	Groups.upsert({
 		_id: VONTOBEL,
 	}, {
 		label: 'Bank Vontobel',
-		domains: ['vontobel.com', 'vontobel.ch']
+		domains: ['vontobel.com', 'vontobel.ch'],
+		logo: 'logos/VONTOBEL.png'
 	});
 
 	Competitions.upsert({
@@ -41,7 +44,7 @@ Meteor.startup(function () {
 	});
 
 	var countryContents = Assets.getText('countries.csv').split(/\r\n|\n/);
-	console.log('updating countries: ' + countryContents.length);
+	console.info('updating countries: ' + countryContents.length);
 	countryContents.forEach(function (entry) {
 		var fields = entry.split(';');
 		Actors.upsert({
@@ -100,41 +103,41 @@ Meteor.startup(function () {
 	loadMatches(EURO2016);
 	loadMatches(EURO2016TEST);
 
-	var vangosUser = Accounts.findUserByEmail('vangos@lazygalaxy.com');
-	if (vangosUser) {
-		UserInfo.upsert({
-			_id: vangosUser._id
-		}, {
-			$set: {
-				adminGroups: [AXPO, VONTOBEL],
-				adminCompetitions: [EURO2016, EURO2016TEST]
-			}
-		});
-	}
-
-	var olafUser = Accounts.findUserByEmail('olaf.stehr@axpo.com');
-	if (olafUser) {
-		UserInfo.upsert({
-			_id: olafUser._id
-		}, {
-			$set: {
-				adminGroups: [AXPO],
-				adminCompetitions: [EURO2016TEST]
-			}
-		});
-	}
-
-	var andreasUser = Accounts.findUserByEmail('andreas.muenst@axpo.com');
-	if (andreasUser) {
-		UserInfo.update({
-			_id: andreasUser._id
-		}, {
-			$set: {
-				adminGroups: [AXPO],
-				adminCompetitions: [EURO2016TEST]
-			}
-		});
-	}
+	//	var vangosUser = Accounts.findUserByEmail('vangos@lazygalaxy.com');
+	//	if (vangosUser) {
+	//		UserInfo.upsert({
+	//			_id: vangosUser._id
+	//		}, {
+	//			$set: {
+	//				adminGroups: [AXPO, VONTOBEL],
+	//				adminCompetitions: [EURO2016, EURO2016TEST]
+	//			}
+	//		});
+	//	}
+	//
+	//	var olafUser = Accounts.findUserByEmail('olaf.stehr@axpo.com');
+	//	if (olafUser) {
+	//		UserInfo.upsert({
+	//			_id: olafUser._id
+	//		}, {
+	//			$set: {
+	//				adminGroups: [AXPO],
+	//				adminCompetitions: [EURO2016TEST]
+	//			}
+	//		});
+	//	}
+	//
+	//	var andreasUser = Accounts.findUserByEmail('andreas.muenst@axpo.com');
+	//	if (andreasUser) {
+	//		UserInfo.update({
+	//			_id: andreasUser._id
+	//		}, {
+	//			$set: {
+	//				adminGroups: [AXPO],
+	//				adminCompetitions: [EURO2016TEST]
+	//			}
+	//		});
+	//	}
 });
 
 var loadMatches = function (competitionLabel) {
@@ -142,7 +145,7 @@ var loadMatches = function (competitionLabel) {
 	var startMoment;
 	var endMoment;
 
-	console.log('updating ' + competitionLabel + ' matches: ' + euro2016MatchContents.length);
+	console.info('updating ' + competitionLabel + ' matches: ' + euro2016MatchContents.length);
 	euro2016MatchContents.forEach(function (entry) {
 		var fields = entry.split(';');
 
@@ -191,7 +194,7 @@ var loadMatches = function (competitionLabel) {
 	});
 
 	var euro2016QuestionContents = Assets.getText(competitionLabel + '_questions.csv').split(/\r\n|\n/);
-	console.log('updating ' + competitionLabel + ' questions: ' + euro2016QuestionContents.length);
+	console.info('updating ' + competitionLabel + ' questions: ' + euro2016QuestionContents.length);
 	euro2016QuestionContents.forEach(function (entry) {
 		var fields = entry.split(';');
 		var theDate = moment(fields[1] + ' +0000', "YYYYMMDD HH:mm Z").toDate();

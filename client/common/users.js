@@ -27,6 +27,10 @@ Template.registerHelper('getCurrentUser', function () {
 	return getCurrentUser();
 });
 
+Template.registerHelper('getCurrentUsername', function () {
+	return getCurrentUser().username;
+});
+
 Template.registerHelper('getUserAvatar', function (id) {
 	return getUser(id).profile.avatar;
 });

@@ -183,7 +183,7 @@ var getQuestionInfo = function (question, prediction, result = undefined) {
 }
 
 upsertPointInfoByPrediction = function (predictionId) {
-	console.info('prediction change ' + predictionId);
+	//console.info('prediction change ' + predictionId);
 	var points = getPointInfoByPrediction(predictionId);
 	points.forEach(function (point) {
 		Points.upsert({
@@ -193,7 +193,7 @@ upsertPointInfoByPrediction = function (predictionId) {
 }
 
 upsertPointInfoByResult = function (resultId) {
-	console.info('result change ' + resultId);
+	//console.info('result change ' + resultId);
 	var points = getPointInfoByResult(resultId);
 	points.forEach(function (point) {
 		Points.upsert({
@@ -203,7 +203,7 @@ upsertPointInfoByResult = function (resultId) {
 }
 
 upsertPointInfoByCompetition = function (competitionId) {
-	console.info('competition change ' + competitionId);
+	//console.info('competition change ' + competitionId);
 	var points = getPointInfoByCompetition(competitionId);
 	points.forEach(function (point) {
 		Points.upsert({

@@ -4,10 +4,7 @@ Router.configure({
 	loadingTemplate: 'loading'
 });
 
-//var counter = 0;
 var getRoute = function (route, loginRequired = true) {
-	//console.info('load: ' + counter++);
-
 	if (!Meteor.userId()) {
 		if (loginRequired) {
 			return 'login';
@@ -108,16 +105,16 @@ Router.route('/rankings', {
 	}
 });
 
-Router.route('/resultAdmin', {
+Router.route('/results', {
 	waitOn: function () {
 		return [Meteor.subscribe("actors"), Meteor.subscribe("competitions"), Meteor.subscribe("userinfo"), Meteor.subscribe("matches"), Meteor.subscribe("questions"), Meteor.subscribe("results")];
 	},
 	action: function () {
-		this.render(getRoute('resultAdmin'));
+		this.render(getRoute('results'));
 	}
 });
 
-Router.route('/userAdmin', {
+Router.route('/groups', {
 	waitOn: function () {
 		return [Meteor.subscribe("competitions"), Meteor.subscribe("userinfo"), Meteor.subscribe("groups")];
 	},
@@ -126,6 +123,37 @@ Router.route('/userAdmin', {
 			setSelectedGroup(true);
 			setSelectedCompetition(false);
 		}
-		this.render(getRoute('userAdmin'));
+		this.render(getRoute('groups'));
+	}
+});
+
+Router.route('/groups/:groupcode', {
+	waitOn: function () {
+		return [Meteor.subscribe("competitions"), Meteor.subscribe("userinfo"), Meteor.subscribe("groups")];
+	},
+	action: function () {
+		var code = this.params.groupcode;
+		var isAdmin = this.params.query.admin == 't';
+		if (getCurrentUser()) {
+			Meteor.call('joinGroup', code, isAdmin, function (error, result) {
+				if (error) {
+					toastr.error(error.reason);
+				} else if (result) {
+					//resubscription is required to acquire
+					Meteor.subscribe("groups");
+					var group = result;
+					toastr.success('You have joined the group ' + group.label + '.', 'Join Group');
+					Session.set('groupid', group._id);
+					if (isAdmin) {
+						Router.go('/' + getRoute('groups'));
+					} else {
+						Router.go('/' + getRoute('rankings'));
+					}
+				}
+			});
+		} else {
+			toastr.success('Please login to join a group!');
+			Router.go('/');
+		}
 	}
 });

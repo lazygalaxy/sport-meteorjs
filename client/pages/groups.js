@@ -1,3 +1,23 @@
+Template.groups.events({
+	"change .group-label": function (event) {
+		event.preventDefault();
+		var doc = {};
+		doc['label'] = event.target.value;
+
+		var selectedGroup = Session.get('selectedGroup');
+
+		Meteor.call('upsertGroup', selectedGroup._id, doc, function (error, result) {
+			if (error) {
+				toastr.error(error.reason);
+			} else if (result) {
+				setSelectedGroup(true, selectedGroup._id, true);
+				toastr.success(result, 'Group Saved');
+
+			}
+		});
+	}
+});
+
 Template.userRow.events({
 	"change .paid-checkbox": function (event) {
 		event.preventDefault();
@@ -25,7 +45,7 @@ var getGroupUsers = function () {
 	}).fetch();
 }
 
-Template.userAdmin.helpers({
+Template.groups.helpers({
 	getGroupUsers: function () {
 		return getGroupUsers();
 	},
@@ -39,7 +59,13 @@ Template.userAdmin.helpers({
 	}
 });
 
-Template.userAdmin.rendered = function () {
+Template.inviteUsers.helpers({
+	getJoinGroupURL: function (code) {
+		return Meteor.absoluteUrl('groups/' + code)
+	}
+});
+
+Template.groups.rendered = function () {
 	// Initialize dataTables
 	$('.dataTables-adminusers').DataTable();
 };

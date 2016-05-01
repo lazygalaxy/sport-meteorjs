@@ -1,20 +1,20 @@
 <template name="changeUsername">
-    <div class="modal fade" id="changeUsername" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content text-center">
-                <div class="modal-header">
-                    <h4 class="modal-title">Change Username</h4>
-                    <small class="font-bold">Please supply a new username you would like to update it to.</small>
-                </div>
-                <div class="modal-body">
-                    <form role="form">
-                        <div class="form-group">
-                            <input type="text" id="username" placeholder="New Username" class="form-control" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-user"></i>&nbsp;Change Username</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="modal fade" id="changeUsername" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content text-center">
+				<div class="modal-header">
+					<h4 class="modal-title">Change Username</h4>
+					<small class="font-bold">Please supply a new username you would like to update it to.</small>
+				</div>
+				<div class="modal-body">
+					<form role="form">
+						<div class="form-group">
+							<input type="text" id="username" placeholder="New Username" class="form-control" value="{{getCurrentUsername}}" required>
+						</div>
+						<button type="submit" class="btn btn-primary"><i class="fa fa-user"></i>&nbsp;Change Username</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 </template>

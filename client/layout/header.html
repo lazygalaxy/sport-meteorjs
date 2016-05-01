@@ -16,18 +16,10 @@
 				<ul class="nav navbar-nav">
 					<li><a href="{{pathFor route='predictions'}}"><i class="fa fa-magic"></i>&nbsp;Predictions</a></li>
 					<li><a href="{{pathFor route='rankings'}}"><i class="fa fa-trophy"></i>&nbsp;Rankings</a></li>
-					{{#if getCurrentUser.adminGroups}} {{#if getCurrentUser.adminCompetitions}}
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-pencil"></i>&nbsp;Admin<span class="caret"></span></a>
-						<ul class="dropdown-menu">
-							{{#if getCurrentUser.adminGroups}}
-							<li><a href="{{pathFor route='userAdmin'}}"><i class="fa fa-users"></i>&nbsp;Users</a></li>
-							{{/if}} {{#if getCurrentUser.adminCompetitions}}
-							<li><a href="{{pathFor route='resultAdmin'}}"><i class="fa fa-table"></i>&nbsp;Results</a></li>
-							{{/if}}
-						</ul>
-					</li>
-					{{/if}} {{/if}}
+					{{#if gtLength0 getAdminGroups}}
+					<li><a href="{{pathFor route='groups'}}"><i class="fa fa-users"></i>&nbsp;Groups</a></li>
+					{{/if}} {{#if getCurrentUser.adminCompetitions}}
+					<li><a href="{{pathFor route='results'}}"><i class="fa fa-table"></i>&nbsp;Results</a></li>{{/if}}
 				</ul>
 				<ul class="navbar-nav navbar-right">
 					<li class="dropdown" style="padding: 6px;">
@@ -36,6 +28,10 @@
 							<li><a href="#" data-target="#changeAvatar" data-toggle="modal"><i class="fa fa-camera"></i>&nbsp;Change Avatar</a></li>
 							<li><a href="#" data-target="#changeUsername" data-toggle="modal"><i class="fa fa-user"></i>&nbsp;Change Username</a></li>
 							<li><a href="#" data-target="#changePassword" data-toggle="modal"><i class="fa fa-key"></i>&nbsp;Change Password</a></li>
+							<li role="separator" class="divider"></li>
+							<li><a href="#" data-target="#createGroup" data-toggle="modal"><i class="fa fa-group"></i>&nbsp;Create Group</a></li>
+							<li><a href="#" data-target="#joinGroup" data-toggle="modal"><i class="fa fa-user-plus"></i>&nbsp;Join Group</a></li>
+							<li role="separator" class="divider"></li>
 							<li><a href="#" class="logout"><i class="fa fa-sign-out"></i>&nbsp;Logout</a></li>
 						</ul>
 					</li>
@@ -57,5 +53,5 @@
 			</div>
 		</div>
 	</nav>
-	{{#if getCurrentUser}} {{> changeAvatar}} {{> changeUsername}} {{> changePassword}}{{/if}}
+	{{#if getCurrentUser}} {{> changeAvatar}} {{> changeUsername}} {{> changePassword}} {{> createGroup}} {{> joinGroup}}{{/if}}
 </template>

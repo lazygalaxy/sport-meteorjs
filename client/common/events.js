@@ -1,5 +1,5 @@
 //TODO: this repetition of events should be avoided
-Template.userAdmin.events({
+Template.groups.events({
 	"click .group-selection li": function (event) {
 		event.preventDefault();
 		setSelectedGroup(false, event.target.id);

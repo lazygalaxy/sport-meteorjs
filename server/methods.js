@@ -98,6 +98,53 @@ Meteor.startup(function () {
 				}
 			}
 		},
+		'upsertGroup': function (groupId, doc) {
+			if (doc.label) {
+				doc.label = doc.label.trim();
+				if (doc.label.length < 5) {
+					throw new Meteor.Error(500, 'Group label should be at least 5 character in length.');
+				}
+			}
+
+			var group = Groups.findOne({
+				_id: groupId
+			});
+
+			Groups.upsert({
+				_id: groupId
+			}, {
+				$set: doc
+			});
+
+			return 'The group has successfully been updated.';
+		},
+		'joinGroup': function (code, isAdmin) {
+			var group = Groups.findOne({
+				code: code
+			});
+
+			if (group) {
+				UserInfo.upsert({
+					_id: Meteor.user()._id,
+				}, {
+					$addToSet: {
+						groups: group._id,
+					}
+				});
+				if (isAdmin) {
+					UserInfo.upsert({
+						_id: Meteor.user()._id,
+					}, {
+						$addToSet: {
+							adminGroups: group._id
+						}
+					});
+				}
+				return group;
+			} else {
+				throw new Meteor.Error(500, 'The group code ' + code + ' is invalid.');
+			}
+		},
 		'changeUsername': function (username) {
 			Accounts.setUsername(Meteor.user()._id, username);
 		},

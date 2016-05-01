@@ -6,16 +6,23 @@ Template.registerHelper('getSelectedGroup', function () {
 	return Session.get('selectedGroup');
 });
 
+getAdminGroups = function () {
+	if (getCurrentUser().adminGroups) {
+		return Groups.find({
+			_id: {
+				$in: getCurrentUser().adminGroups
+			}
+		}, {
+			sort: {
+				label: 1
+			}
+		}).fetch();
+	}
+	return [];
+}
+
 Template.registerHelper('getAdminGroups', function () {
-	return Groups.find({
-		_id: {
-			$in: getCurrentUser().adminGroups
-		}
-	}, {
-		sort: {
-			label: 1
-		}
-	}).fetch();
+	return getAdminGroups();
 });
 
 getGroup = function (id) {
@@ -32,7 +39,13 @@ getGroups = function () {
 	}).fetch();
 }
 
-setSelectedGroup = function (checkAdmin, id = null) {
+setSelectedGroup = function (checkAdmin, id = null, force = false) {
+	//small hack to set the groupid to a specific value
+	if (!id && Session.get('groupid')) {
+		id = Session.get('groupid');
+		Session.set('groupid', undefined);
+	}
+
 	var oldGroupId;
 	if (Session.get('selectedGroup')) {
 		oldGroupId = Session.get('selectedGroup')._id;
@@ -49,7 +62,7 @@ setSelectedGroup = function (checkAdmin, id = null) {
 		newGroupId = currentUser.adminGroups[0];
 	}
 
-	if (newGroupId && newGroupId != oldGroupId && getGroup(newGroupId)) {
+	if (newGroupId && (!force || newGroupId != oldGroupId) && getGroup(newGroupId)) {
 		// if there is valid newGrouId
 		Session.set('selectedGroup', getGroup(newGroupId));
 
