@@ -17,14 +17,15 @@ Template.points.helpers({
 			point.result = 'Pending';
 			point.prediction = 'N/A';
 
-			var result = Results.findOne({
-				_id: point.resultId
-			});
-
 			var prediction = undefined;
+			var result = undefined;
 			if (point.endDate < new Date()) {
 				prediction = Predictions.findOne({
 					_id: point.predictionId
+				});
+
+				var result = Results.findOne({
+					_id: point.resultId
 				});
 			}
 
