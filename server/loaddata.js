@@ -1,7 +1,7 @@
 Meteor.startup(function () {
 	const GLOBAL = 'GLOBAL';
 	const AXPO = 'AXPO';
-	const VONTOBEL = 'VONTOBEL';
+	//const VONTOBEL = 'VONTOBEL';
 
 	const EURO2016 = 'EURO2016';
 	const EURO2016TEST = 'EURO2016TEST';
@@ -23,13 +23,13 @@ Meteor.startup(function () {
 		logo: 'logos/AXPO.png'
 	});
 
-	Groups.upsert({
-		_id: VONTOBEL,
-	}, {
-		label: 'Bank Vontobel',
-		domains: ['vontobel.com', 'vontobel.ch'],
-		logo: 'logos/VONTOBEL.png'
-	});
+	//	Groups.upsert({
+	//		_id: VONTOBEL,
+	//	}, {
+	//		label: 'Bank Vontobel',
+	//		domains: ['vontobel.com', 'vontobel.ch'],
+	//		logo: 'logos/VONTOBEL.png'
+	//	});
 
 	Competitions.upsert({
 		_id: EURO2016,
