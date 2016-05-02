@@ -80,11 +80,12 @@ Router.route('/predictions', predictions);
 
 Router.route('/points', {
 	waitOn: function () {
-		return [Meteor.subscribe("competitions"), Meteor.subscribe("userinfo"), Meteor.subscribe("matches"), Meteor.subscribe("predictions"), Meteor.subscribe("questions"), Meteor.subscribe("results")];
+		return [Meteor.subscribe("competitions"), Meteor.subscribe("userinfo"), Meteor.subscribe("groups"), Meteor.subscribe("matches"), Meteor.subscribe("predictions"), Meteor.subscribe("questions"), Meteor.subscribe("results")];
 	},
 	action: function () {
 		if (getCurrentUser()) {
 			setSelectedUser();
+			setSelectedGroup(false);
 			setSelectedCompetition(false);
 		}
 		this.render(getRoute('points'));

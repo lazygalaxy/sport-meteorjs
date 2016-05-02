@@ -21,9 +21,12 @@ Template.points.helpers({
 				_id: point.resultId
 			});
 
-			var prediction = Predictions.findOne({
-				_id: point.predictionId
-			});
+			var prediction = undefined;
+			if (point.endDate < new Date()) {
+				prediction = Predictions.findOne({
+					_id: point.predictionId
+				});
+			}
 
 			if (point.questionId) {
 				point.question = Questions.findOne({

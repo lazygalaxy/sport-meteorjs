@@ -7,6 +7,7 @@ Meteor.startup(function () {
 		return Competitions.find({});
 	});
 
+	//users should have no knowledge of the groups they do not belong to
 	Meteor.publish("groups", function () {
 		var userInfo = UserInfo.findOne({
 			_id: this.userId
@@ -37,6 +38,7 @@ Meteor.startup(function () {
 		return Matches.find({});
 	});
 
+	//TODO: do not publish to client predictions of events that will happen in the future
 	Meteor.publish("points", function () {
 		return Points.find({});
 	});

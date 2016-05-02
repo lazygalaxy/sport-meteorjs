@@ -141,9 +141,8 @@ var getMatchInfo = function (match, prediction, result = undefined) {
 				info.points = 1;
 			}
 		}
-		info.predictionId = prediction._id;
 	}
-
+	info.predictionId = prediction._id;
 	info.predictionDate = prediction.date;
 
 	return info;
@@ -174,9 +173,10 @@ var getQuestionInfo = function (question, prediction, result = undefined) {
 				info.points = question.points;
 			}
 		}
-		info.predictionId = prediction._id;
+
 	}
 
+	info.predictionId = prediction._id;
 	info.predictionDate = prediction.date;
 
 	return info;
