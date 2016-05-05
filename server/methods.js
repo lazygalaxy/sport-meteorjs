@@ -104,6 +104,21 @@ Meteor.startup(function () {
 				if (doc.label.length < 5) {
 					throw new Meteor.Error(500, 'Group label should be at least 5 character in length.');
 				}
+
+				var group = Groups.findOne({
+					label: {
+						$regex: new RegExp("^" + doc.label, "i")
+					}
+				});
+				var axpoGroup = Groups.findOne({
+					label: {
+						$regex: new RegExp("^AXPO", "i")
+					}
+				});
+
+				if (group || axpoGroup) {
+					throw new Meteor.Error(500, 'There is already a group with the name ' + doc.label + '.');
+				}
 			}
 
 			var group = Groups.findOne({
