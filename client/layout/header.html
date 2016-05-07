@@ -18,8 +18,7 @@
 					<li><a href="{{pathFor route='rankings'}}"><i class="fa fa-trophy"></i>&nbsp;Rankings</a></li>
 					{{#if gtLength0 getAdminGroups}}
 					<li><a href="{{pathFor route='groups'}}"><i class="fa fa-users"></i>&nbsp;Groups</a></li>
-					{{/if}} {{#if getCurrentUser.adminCompetitions}}
-					<li><a href="{{pathFor route='results'}}"><i class="fa fa-table"></i>&nbsp;Results</a></li>{{/if}}
+					{{/if}}
 				</ul>
 				<ul class="navbar-nav navbar-right">
 					<li class="dropdown" style="padding: 6px;">
@@ -32,11 +31,15 @@
 							<li><a href="#" data-target="#createGroup" data-toggle="modal"><i class="fa fa-group"></i>&nbsp;Create Group</a></li>
 							<li><a href="#" data-target="#joinGroup" data-toggle="modal"><i class="fa fa-user-plus"></i>&nbsp;Join Group</a></li>
 							<li role="separator" class="divider"></li>
+							{{#if getCurrentUser.adminCompetitions}}
+							<li><a href="{{pathFor route='results'}}"><i class="fa fa-table"></i>&nbsp;Results</a></li>
+							<li role="separator" class="divider"></li>
+							{{/if}}
 							<li><a href="#" class="logout"><i class="fa fa-sign-out"></i>&nbsp;Logout</a></li>
 						</ul>
 					</li>
 					<li>
-						<button class="btn btn-success navbar-btn back-button"><i class="fa fa-backward"></i>&nbsp;Back</button>
+						<button class="btn btn-success navbar-btn back-button"><i class="fa fa-backward"></i>&nbsp;</button>
 					</li>
 				</ul>
 				{{else}}
