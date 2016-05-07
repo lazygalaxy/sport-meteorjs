@@ -1,10 +1,10 @@
 body {
-    padding-top: 65px;
-    padding-bottom: 35px;
+	padding-top: 65px;
+	padding-bottom: 35px;
 }
 
 .scrollable-menu {
-    height: auto;
-    max-height: 200px;
-    overflow-x: hidden;
+	height: auto;
+	max-height: 200px;
+	overflow-x: hidden;
 }
