@@ -107,20 +107,14 @@ Meteor.startup(function () {
 
 				var group = Groups.findOne({
 					label: {
-						$regex: new RegExp("^" + doc.label, "i")
+						$regex: new RegExp(doc.label, "i")
 					}
 				});
-				var axpoGroup = Groups.findOne({
-					label: {
-						$regex: new RegExp("^AXPO", "i")
-					}
-				});
-
 				if (group) {
-					throw new Meteor.Error(500, 'There is already a group with the name ' + doc.label + '.');
+					throw new Meteor.Error(500, 'A group already exists with a name conflicting with ' + doc.label + '.');
 				}
 
-				if (axpoGroup) {
+				if (doc.label.toUpperCase().indexOf('AXPO') > -1) {
 					throw new Meteor.Error(500, 'The group Axpo is reserved and new groups names can include this term.');
 				}
 			}
