@@ -9,7 +9,7 @@ Template.rankings.helpers({
 });
 
 Template.rankings.events({
-	"click .user-selection a": function (event) {
+	"click .user-selection": function (event) {
 		setSelectedUser(event.target.id);
 	}
 });

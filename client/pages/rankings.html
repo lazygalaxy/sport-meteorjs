@@ -21,6 +21,7 @@
 							<th>Paid (Date)</th>
 							{{/if}}
 							<th>Points</th>
+							<th>Details</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -53,7 +54,10 @@
 		{{#if isSelectedPaid}}
 		<td>Yes ({{paidDate}})</td>
 		{{/if}}
-		<td class="user-selection"><a id="{{id}}" href="{{pathFor route='points'}}">{{points}}</a></td>
+		<td>{{points}}</td>
+		<td>
+			<a id="{{id}}" href="{{pathFor route='points'}}" class="btn btn-warning user-selection"><i id="{{id}}" class="fa fa-info-circle"></i></a>
+		</td>
 	</tr>
 </template>
 

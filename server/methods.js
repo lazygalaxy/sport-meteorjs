@@ -116,8 +116,12 @@ Meteor.startup(function () {
 					}
 				});
 
-				if (group || axpoGroup) {
+				if (group) {
 					throw new Meteor.Error(500, 'There is already a group with the name ' + doc.label + '.');
+				}
+
+				if (axpoGroup) {
+					throw new Meteor.Error(500, 'The group Axpo is reserved and new groups names can include this term.');
 				}
 			}
 
