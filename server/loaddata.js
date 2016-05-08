@@ -182,6 +182,7 @@ var loadMatches = function (competitionLabel) {
 				awayTeam: awayTeamObj,
 				round: fields[4],
 				description: fields[5],
+				pointMultiplier: fields[6]
 			});
 		} else {
 			if (!homeTeamObj) {

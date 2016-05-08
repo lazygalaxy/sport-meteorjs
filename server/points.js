@@ -134,11 +134,11 @@ var getMatchInfo = function (match, prediction, result = undefined) {
 		if (prediction && result) {
 			//calculate the actual points
 			if (result.homeScore == prediction.homeScore && result.awayScore == prediction.awayScore) {
-				info.points = 3;
+				info.points = 5 * match.pointMultiplier;
 			} else if ((result.homeScore - result.awayScore) == (prediction.homeScore - prediction.awayScore)) {
-				info.points = 2;
+				info.points = 4 * match.pointMultiplier;
 			} else if ((result.homeScore > result.awayScore && prediction.awayScore > prediction.awayScore) || (result.homeScore < result.awayScore && prediction.awayScore < prediction.awayScore)) {
-				info.points = 1;
+				info.points = 3 * match.pointMultiplier;
 			}
 		}
 	}
