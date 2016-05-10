@@ -62,9 +62,13 @@ Template.registerHelper('hasPaid', function (id) {
 	return hasPaid(id);
 });
 
-Template.registerHelper('paidButtonVisible', function () {
-	var user = getCurrentUser();
+paidButtonVisible= function() {
+var user = getCurrentUser();
 	return (hasPaid(user._id) || (user.hasOwnProperty('adminGroups') && (user.adminGroups.indexOf(Session.get('selectedGroup')._id) > -1)));
+}
+
+Template.registerHelper('paidButtonVisible', function () {
+	return paidButtonVisible();
 });
 
 getPaidDate = function (id) {

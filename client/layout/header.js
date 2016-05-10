@@ -33,3 +33,9 @@ Template.header.events({
 		history.back();
 	}
 });
+
+Template.userMenu.events({
+	'click .userMenuSelect': function (event) {
+		$('#userMenu').modal('hide');
+	}
+});

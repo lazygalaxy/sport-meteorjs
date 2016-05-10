@@ -15,13 +15,19 @@ Template.rankings.events({
 });
 
 setSelectedPaid = function (id = null) {
+
 	if (id) {
 		Session.set('selectedPaid', getActor(id));
 	}
 
 	if (!Session.get('selectedPaid')) {
-		Session.set('selectedPaid', getActor('OTHER_ALL'));
+		if (paidButtonVisible()) {
+			Session.set('selectedPaid', getActor('OTHER_PAID'));
+		} else {
+			Session.set('selectedPaid', getActor('OTHER_ALL'));
+		}
 	}
+	console.info('setting paid! ' + paidButtonVisible() + ' ' + id + ' ' + Session.get('selectedPaid').label);
 }
 
 Template.registerHelper('getSelectedPaid', function () {

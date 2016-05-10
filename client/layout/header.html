@@ -14,31 +14,15 @@
 			<div id="navbar" class="navbar-collapse collapse">
 				{{#if getCurrentUser}}
 				<ul class="nav navbar-nav">
-					<li><a class="active" href="{{pathFor route='predictions'}}"><i class="fa fa-magic"></i>&nbsp;Predictions</a></li>
+					<li><a href="{{pathFor route='predictions'}}"><i class="fa fa-magic"></i>&nbsp;Predictions</a></li>
 					<li><a href="{{pathFor route='rankings'}}"><i class="fa fa-trophy"></i>&nbsp;Rankings</a></li>
 					{{#if gtLength0 getAdminGroups}}
 					<li><a href="{{pathFor route='groups'}}"><i class="fa fa-users"></i>&nbsp;Groups</a></li>
 					{{/if}}
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" style="padding:1px 10px 1px 0px;">
-							<img src="{{getUserAvatar getCurrentUser._id}}" class="profile-image img-circle" style="height:48px;"> {{getCurrentUser.username}}<b class="caret"></b>
-						</a>
-						<ul class="dropdown-menu">
-							<li><a href="#" data-target="#changeAvatar" data-toggle="modal"><i class="fa fa-camera"></i>&nbsp;Change Avatar</a></li>
-							<li><a href="#" data-target="#changeUsername" data-toggle="modal"><i class="fa fa-user"></i>&nbsp;Change Username</a></li>
-							<li><a href="#" data-target="#changePassword" data-toggle="modal"><i class="fa fa-key"></i>&nbsp;Change Password</a></li>
-							<li role="separator" class="divider"></li>
-							<li><a href="#" data-target="#createGroup" data-toggle="modal"><i class="fa fa-group"></i>&nbsp;Create Group</a></li>
-							<li><a href="#" data-target="#joinGroup" data-toggle="modal"><i class="fa fa-user-plus"></i>&nbsp;Join Group</a></li>
-							<li role="separator" class="divider"></li>
-							{{#if getCurrentUser.adminCompetitions}}
-							<li><a href="{{pathFor route='results'}}"><i class="fa fa-table"></i>&nbsp;Results</a></li>
-							<li role="separator" class="divider"></li>
-							{{/if}}
-							<li><a href="#" class="logout"><i class="fa fa-sign-out"></i>&nbsp;Logout</a></li>
-						</ul>
+					<li>
+						<a href="#" data-target="#userMenu" data-toggle="modal" style="padding:1px 10px 1px 0px;"><img src="{{getUserAvatar getCurrentUser._id}}" class="profile-image img-circle" style="height:48px;"> {{getCurrentUser.username}}</a>
 					</li>
 					<li>
 						<button class="btn btn-success navbar-btn back-button"><i class="fa fa-backward"></i>&nbsp;Back</button>
@@ -47,10 +31,10 @@
 				{{else}}
 				<form id="login-form" class="navbar-form navbar-right">
 					<div class="form-group">
-						<input type="text" id="username" placeholder="Username or Email" class="form-control" required>
+						<input type="text" id="username" placeholder="Username or Email" class="form-control" style="width:180px;" required>
 					</div>
 					<div class="form-group">
-						<input type="password" id="password" placeholder="Password" class="form-control" required>
+						<input type="password" id="password" placeholder="Password" class="form-control" style="width:180px;" required>
 					</div>
 					<button type="submit" class="btn btn-success" style="width:90px;"><i class=" fa fa-sign-in"></i>&nbsp;Log In</button>
 				</form>
@@ -58,5 +42,35 @@
 			</div>
 		</div>
 	</nav>
-	{{#if getCurrentUser}} {{> changeAvatar}} {{> changeUsername}} {{> changePassword}} {{> createGroup}} {{> joinGroup}}{{/if}}
+	{{#if getCurrentUser}} {{> changeAvatar}} {{> changeUsername}} {{> changePassword}} {{> createGroup}} {{> joinGroup}} {{> userMenu}}{{/if}}
+</template>
+
+<template name="userMenu">
+	<div class="modal fade" id="userMenu" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content text-center">
+				<div class="modal-header">
+					<h4 class="modal-title"><img src="{{getUserAvatar getCurrentUser._id}}" class="profile-image img-circle" style="height:48px;"> {{getCurrentUser.username}}</h4>
+				</div>
+				<div class="modal-body">
+					<a href="#" data-target="#changeAvatar" data-toggle="modal" class="userMenuSelect"><i class="fa fa-camera"></i>&nbsp;Change Avatar</a>
+					<br>
+					<a href="#" data-target="#changeUsername" data-toggle="modal" class="userMenuSelect"><i class="fa fa-user"></i>&nbsp;Change Username</a>
+					<br>
+					<a href="#" data-target="#changePassword" data-toggle="modal" class="userMenuSelect"><i class="fa fa-key"></i>&nbsp;Change Password</a>
+					<br>
+					<br>
+					<a href="#" data-target="#createGroup" data-toggle="modal" class="userMenuSelect"><i class="fa fa-group"></i>&nbsp;Create Group</a>
+					<br>
+					<a href="#" data-target="#joinGroup" data-toggle="modal" class="userMenuSelect"><i class="fa fa-user-plus"></i>&nbsp;Join Group</a>
+					<br> {{#if getCurrentUser.adminCompetitions}}
+					<br>
+					<a href="{{pathFor route='results'}}" class="userMenuSelect"><i class="fa fa-table"></i>&nbsp;Results</a>
+					<br> {{/if}}
+					<br>
+					<a href="#" class="logout userMenuSelect"><i class="fa fa-sign-out"></i>&nbsp;Logout</a>
+				</div>
+			</div>
+		</div>
+	</div>
 </template>

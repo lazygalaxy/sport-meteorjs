@@ -13,12 +13,12 @@ Template.groups.events({
 Template.rankings.events({
 	"click .group-selection": function (event) {
 		event.preventDefault();
-		setSelectedPaid('OTHER_ALL');
+		setSelectedPaid();
 		setSelectedGroup(false, event.target.id);
 	},
 	"click .competition-selection": function (event) {
 		event.preventDefault();
-		setSelectedPaid('OTHER_ALL');
+		setSelectedPaid();
 		setSelectedCompetition(false, event.target.id);
 	},
 	"click .paid-selection": function (event) {
