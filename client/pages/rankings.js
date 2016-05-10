@@ -27,7 +27,6 @@ setSelectedPaid = function (id = null) {
 			Session.set('selectedPaid', getActor('OTHER_ALL'));
 		}
 	}
-	console.info('setting paid! ' + paidButtonVisible() + ' ' + id + ' ' + Session.get('selectedPaid').label);
 }
 
 Template.registerHelper('getSelectedPaid', function () {
