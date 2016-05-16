@@ -9,6 +9,9 @@ body {
 	overflow-x: hidden;
 }
 
-.navbar-collapse.in {
-	overflow-y: visible;
+.navbar-inverse .navbar-nav > .active > a,
+.navbar-inverse .navbar-nav > .active > a:hover,
+.navbar-inverse .navbar-nav > .active > a:focus {
+	color: #000000;
+	background: #EEEEEE;
 }

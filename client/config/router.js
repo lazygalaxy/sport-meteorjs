@@ -4,6 +4,11 @@ Router.configure({
 	loadingTemplate: 'loading'
 });
 
+Router.onBeforeAction(function () {
+	Session.set('selectedMenu', undefined);
+	this.next()
+});
+
 var getRoute = function (route, loginRequired = true) {
 	if (!Meteor.userId()) {
 		if (loginRequired) {
@@ -70,6 +75,7 @@ var predictions = {
 		return [Meteor.subscribe("actors"), Meteor.subscribe("competitions"), Meteor.subscribe("userinfo"), Meteor.subscribe("matches"), Meteor.subscribe("predictions"), Meteor.subscribe("questions")];
 	},
 	action: function () {
+		Session.set('selectedMenu', 'predictions');
 		this.render(getRoute('predictions'));
 	}
 }
@@ -102,6 +108,7 @@ Router.route('/rankings', {
 			setSelectedCompetition(false);
 			setSelectedPaid();
 		}
+		Session.set('selectedMenu', 'rankings');
 		this.render(getRoute('rankings'));
 	}
 });
@@ -124,6 +131,7 @@ Router.route('/groups', {
 			setSelectedGroup(true);
 			setSelectedCompetition(false);
 		}
+		Session.set('selectedMenu', 'groups');
 		this.render(getRoute('groups'));
 	}
 });

@@ -32,3 +32,24 @@ Template.registerHelper('exists', function (value) {
 	}
 	return false;
 });
+
+Template.registerHelper('predictionsActive', function () {
+	if (Session.get('selectedMenu') == 'predictions') {
+		return 'active';
+	}
+	return 'inactive';
+});
+
+Template.registerHelper('rankingsActive', function () {
+	if (Session.get('selectedMenu') == 'rankings') {
+		return 'active';
+	}
+	return 'inactive';
+});
+
+Template.registerHelper('groupsActive', function () {
+	if (Session.get('selectedMenu') == 'groups') {
+		return 'active';
+	}
+	return 'inactive';
+});
