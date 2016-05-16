@@ -137,7 +137,7 @@ var getMatchInfo = function (match, prediction, result = undefined) {
 				info.points = 5 * match.pointMultiplier;
 			} else if ((result.homeScore - result.awayScore) == (prediction.homeScore - prediction.awayScore)) {
 				info.points = 4 * match.pointMultiplier;
-			} else if ((result.homeScore > result.awayScore && prediction.awayScore > prediction.awayScore) || (result.homeScore < result.awayScore && prediction.awayScore < prediction.awayScore)) {
+			} else if ((result.homeScore > result.awayScore && prediction.homeScore > prediction.awayScore) || (result.homeScore < result.awayScore && prediction.homeScore < prediction.awayScore)) {
 				info.points = 3 * match.pointMultiplier;
 			}
 		}
