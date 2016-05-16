@@ -7,20 +7,25 @@
 			<div class="panel-heading">
 				{{#with getSelectedGroup}}
 				<div class="form-inline">
-					<div class="form-group">
-						<label for="grouplabel">Label</label>
-						<input type="text" id="grouplabel" class="form-control group-label" value="{{label}}" required>
-					</div>
+					<form role="form">
+						<div class="form-group">
+							<label for="grouplabel">Label</label>
+							<input type="text" id="grouplabel" class="form-control" value="{{label}}" required>
+						</div>
+						&nbsp;
+						<button type="submit" class="btn btn-success label-submit" style="width:150px;"> <i class="fa fa-save">
+						</i>&nbsp;Save Label&nbsp;</button>
+					</form>
 					{{#if code}}
+					<br>
 					<div class="form-group">
 						<label for="groupcode">Code</label>
 						<input type="text" id="groupcode" class="form-control" value="{{code}}" readonly>
 					</div>
 					&nbsp;
-					<button class="btn btn-success" data-target="#inviteUsers" data-toggle="modal" style="width:150px;"> <i class="fa fa-envelope">
-						</i>&nbsp;Invite Users
-					</button>
+					<button class="btn btn-success" data-target="#inviteUsers" data-toggle="modal" style="width:150px;"> <i class="fa fa-envelope"></i>&nbsp;Invite Users</button>
 					{{> inviteUsers}} {{/if}}
+
 				</div>
 				{{/with}}
 			</div>

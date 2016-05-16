@@ -1,8 +1,9 @@
 Template.groups.events({
-	"change .group-label": function (event) {
+	"submit form": function (event) {
 		event.preventDefault();
+
 		var doc = {};
-		doc['label'] = event.target.value;
+		doc['label'] = $('[id=grouplabel]').val();
 
 		var selectedGroup = Session.get('selectedGroup');
 
