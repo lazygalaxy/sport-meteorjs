@@ -164,8 +164,9 @@ var getQuestionInfo = function (question, prediction, result = undefined) {
 
 		if (prediction && result) {
 			if (question.optionType == 'INTEGER') {
-				if (Math.abs(result.answer - prediction.answer) <= question.threshold) {
-					info.points = question.points;
+				var possiblePoints = question.points - Math.abs(result.answer - prediction.answer);
+				if (possiblePoints >= 0) {
+					info.points = possiblePoints;
 				} else {
 					info.points = 0;
 				}

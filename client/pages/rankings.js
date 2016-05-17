@@ -15,12 +15,9 @@ Template.rankings.events({
 });
 
 setSelectedPaid = function (id = null) {
-
 	if (id) {
 		Session.set('selectedPaid', getActor(id));
-	}
-
-	if (!Session.get('selectedPaid')) {
+	} else {
 		if (paidButtonVisible()) {
 			Session.set('selectedPaid', getActor('OTHER_PAID'));
 		} else {
