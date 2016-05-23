@@ -4,7 +4,7 @@ Meteor.startup(function () {
 	//const VONTOBEL = 'VONTOBEL';
 
 	const EURO2016 = 'EURO2016';
-	const EURO2016TEST = 'EURO2016TEST';
+	//const EURO2016TEST = 'EURO2016TEST';
 
 	//TODO: these group upserts could form part of a .csv files
 	Groups.upsert({
@@ -37,11 +37,11 @@ Meteor.startup(function () {
 		label: 'Euro2016'
 	});
 
-	Competitions.upsert({
-		_id: EURO2016TEST,
-	}, {
-		label: 'Euro2016 (Test)'
-	});
+	//	Competitions.upsert({
+	//		_id: EURO2016TEST,
+	//	}, {
+	//		label: 'Euro2016 (Test)'
+	//	});
 
 	var countryContents = Assets.getText('countries.csv').split(/\r\n|\n/);
 	console.info('updating countries: ' + countryContents.length);
@@ -101,7 +101,7 @@ Meteor.startup(function () {
 	});
 
 	loadMatches(EURO2016);
-	loadMatches(EURO2016TEST);
+	//loadMatches(EURO2016TEST);
 
 	//	var vangosUser = Accounts.findUserByEmail('vangos@lazygalaxy.com');
 	//	if (vangosUser) {
