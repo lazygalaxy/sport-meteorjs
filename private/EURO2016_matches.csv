@@ -34,18 +34,18 @@ _GF3;20160618 16:00;ISL;HUN;Group F;Group F - Match 3;1
 _GF4;20160618 19:00;PRT;AUT;Group F;Group F - Match 4;1
 _GF5;20160622 16:00;ISL;AUT;Group F;Group F - Match 5;1
 _GF6;20160622 16:00;HUN;PRT;Group F;Group F - Match 6;1
-_PQ1;20160625 13:00;XYZ;XYZ;Pre-Quarter Finals;Runner-up Group A vs Runner-up C;2
-_PQ2;20160625 19:00;XYZ;XYZ;Pre-Quarter Finals;Winner D vs Third-place B/E/F;2
-_PQ3;20160625 16:00;XYZ;XYZ;Pre-Quarter Finals;Winner B vs Third-place A/C/D;2
-_PQ4;20160626 19:00;XYZ;XYZ;Pre-Quarter Finals;Winner F vs Runner-up E;2
-_PQ5;20160626 16:00;XYZ;XYZ;Pre-Quarter Finals;Winner C vs Third-place A/B/F;2
-_PQ6;20160626 13:00;XYZ;XYZ;Pre-Quarter Finals;Winner A vs Third-place C/D/E;2
-_PQ7;20160627 16:00;XYZ;XYZ;Pre-Quarter Finals;Winner E vs Runner-up D;2
-_PQ8;20160627 19:00;XYZ;XYZ;Pre-Quarter Finals;Runner-up B vs Runner-up F;2
-_QF1;20160630 19:00;XYZ;XYZ;Quarter Finals;Winner PQF1 vs Winner PQF2;2
-_QF2;20160701 19:00;XYZ;XYZ;Quarter Finals;Winner PQF3 vs Winner PQF4;2
-_QF3;20160702 19:00;XYZ;XYZ;Quarter Finals;Winner PQF5 vs Winner PQF6;2
-_QF4;20160703 19:00;XYZ;XYZ;Quarter Finals;Winner PQF7 vs Winner PQF8;2
+_PQ1;20160625 13:00;CHE;POL;Pre-Quarter Finals;Runner-up Group A vs Runner-up C;2
+_PQ2;20160625 19:00;HRV;PRT;Pre-Quarter Finals;Winner D vs Third-place B/E/F;2
+_PQ3;20160625 16:00;WAL;NIR;Pre-Quarter Finals;Winner B vs Third-place A/C/D;2
+_PQ4;20160626 19:00;HUN;BEL;Pre-Quarter Finals;Winner F vs Runner-up E;2
+_PQ5;20160626 16:00;DEU;SVK;Pre-Quarter Finals;Winner C vs Third-place A/B/F;2
+_PQ6;20160626 13:00;FRA;IRL;Pre-Quarter Finals;Winner A vs Third-place C/D/E;2
+_PQ7;20160627 16:00;ITA;ESP;Pre-Quarter Finals;Winner E vs Runner-up D;2
+_PQ8;20160627 19:00;ENG;ISL;Pre-Quarter Finals;Runner-up B vs Runner-up F;2
+_QF1;20160630 19:00;POL;PRT;Quarter Finals;Winner PQF1 vs Winner PQF2;2
+_QF2;20160701 19:00;WAL;BEL;Quarter Finals;Winner PQF3 vs Winner PQF4;2
+_QF3;20160702 19:00;DEU;ITA;Quarter Finals;Winner PQF5 vs Winner PQF6;2
+_QF4;20160703 19:00;FRA;ISL;Quarter Finals;Winner PQF7 vs Winner PQF8;2
 _SF1;20160706 19:00;XYZ;XYZ;Semi Finals;Winner QF1 vs Winner QF2;2
 _SF2;20160707 19:00;XYZ;XYZ;Semi Finals;Winner QF3 vs Winner QF4;2
 _FIN;20160710 19:00;XYZ;XYZ;Final;Winner SF1 vs Winner SF2;2

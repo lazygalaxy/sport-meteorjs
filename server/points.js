@@ -170,7 +170,7 @@ var getQuestionInfo = function (question, prediction, result = undefined) {
 				} else {
 					info.points = 0;
 				}
-			} else if (result.answer == prediction.answer) {
+			} else if (result.answer.indexOf(prediction.answer) > -1) {
 				info.points = question.points;
 			}
 		}
